@@ -64,9 +64,12 @@ class HealthMonitor:
         if any("disconnect" in log.lower() for log in recent):
             return HealthStatus.DISCONNECTED
 
-        if bot.start_time:
-            elapsed = (datetime.now() - bot.start_time).total_seconds()
-            if elapsed > 300 and bot.metrics.xp_per_hour == 0 and bot.metrics.total_xp_gained == 0:
-                return HealthStatus.STUCK
+        # STUCK detection disabled until XP is actually parsed in log_aggregator._parse_log_line.
+        # Currently total_xp_gained is never set, so every bot would be flagged STUCK after 5 min
+        # and restart in a loop (handle_stuck restarts immediately with no cooldown).
+        # if bot.start_time:
+        #     elapsed = (datetime.now() - bot.start_time).total_seconds()
+        #     if elapsed > 300 and bot.metrics.xp_per_hour == 0 and bot.metrics.total_xp_gained == 0:
+        #         return HealthStatus.STUCK
 
         return HealthStatus.HEALTHY

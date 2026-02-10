@@ -25,9 +25,16 @@ class RecoverySystem:
             bot.add_log("Restarted after crash", "RECOVERY")
 
     def handle_stuck(self, bot: "BotInstance") -> None:
-        """Restart bot that appears stuck (e.g. no XP for long time)."""
-        bot.add_log("Stuck detected, restarting", "RECOVERY")
-        self.controller.restart_bot(bot.bot_id)
+        """Restart bot that appears stuck (e.g. no XP for long time). Respects cooldown and max attempts."""
+        bot.add_log("Stuck detected, scheduling restart", "RECOVERY")
+        if not bot.should_restart():
+            bot.add_log("Stuck restart skipped (cooldown or max attempts)", "RECOVERY")
+            return
+        cooldown = self.controller.settings.get("restart_cooldown", 60)
+        time.sleep(cooldown)
+        if bot.should_restart():
+            self.controller.restart_bot(bot.bot_id)
+            bot.add_log("Restarted after stuck", "RECOVERY")
 
     def recover_all(self) -> int:
         """Attempt to restart all crashed/error bots that should_restart()."""
