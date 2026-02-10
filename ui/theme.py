@@ -38,6 +38,7 @@ STATUS_RUN = "RUN"
 STATUS_IDLE = "IDLE"
 STATUS_ERR = "ERR"
 STATUS_CRASH = "CRASH"
+STATUS_DISCO = "DISCO"
 STATUS_STOP = "STOP"
 FOOTER_KEYS = "Commands: [S]tart | [P]ause | [R]estart | [K]ill | [L]ogs | [Q]uit (Ctrl+C)"
 MSG_STARTING_ROSTER = "Starting bot roster..."
@@ -66,6 +67,7 @@ def style_status(bot_status) -> str:
         BotStatus.PAUSED: (RS_WARN, "PAUSE"),
         BotStatus.ERROR: (RS_DANGER, STATUS_ERR),
         BotStatus.CRASHED: (RS_DANGER, STATUS_CRASH),
+        BotStatus.DISCONNECTED: (RS_WARN, STATUS_DISCO),
         BotStatus.STOPPED: (f"dim {RS_BROWN}", STATUS_STOP),
     }
     style, label = labels.get(bot_status, ("dim", "???"))

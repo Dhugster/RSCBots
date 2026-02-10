@@ -62,8 +62,8 @@ class BotController:
             return yaml.safe_load(f) or {"bots": []}
 
     def _load_settings(self) -> dict:
-        """Load system settings."""
-        settings_path = self.config_path.parent / "settings.yaml"
+        """Load system settings from config/settings.yaml (next to bots.yaml)."""
+        settings_path = (self.config_path.parent.resolve() / "settings.yaml")
         if not settings_path.exists():
             return self._get_default_settings()
         with open(settings_path, "r", encoding="utf-8") as f:
@@ -187,10 +187,11 @@ class BotController:
         jar_path = Path(self.settings["idlersc_jar_path"])
         if not jar_path.is_absolute():
             jar_path = self.root / jar_path
+        jar_path = jar_path.resolve()
         cmd = [
             self.settings["java_path"],
             "-jar",
-            str(jar_path.resolve()),
+            str(jar_path),
             "--auto-start",
             "--auto-login",
             "--username",
@@ -204,8 +205,8 @@ class BotController:
             cmd.extend(["--script-arguments", ",".join(bot.script_args)])
         if not self.settings.get("enable_graphics", False):
             cmd.append("--disable-gfx")
-        if not self.settings.get("show_side_panel", False):
-            cmd.append("--hide-side-panel")
+        if self.settings.get("show_side_panel", False):
+            cmd.append("--sidebar")
         return cmd
 
     def start_bot(self, bot_id: str) -> bool:
@@ -218,7 +219,15 @@ class BotController:
             bot.add_log("Already running", "CONTROLLER")
             return False
 
+        # Reload settings from disk so idlersc_jar_path is always current (no server restart needed)
+        self.settings = self._load_settings()
+
         cmd = self._build_java_command(bot)
+        jar_path = Path(cmd[2])
+        if not jar_path.exists():
+            bot.add_log(f"JAR not found: {jar_path} — set idlersc_jar_path in config/settings.yaml and try again", "CONTROLLER")
+            return False
+        bot.add_log(f"Using JAR: {jar_path}", "CONTROLLER")
         log_dir = Path(self.settings["log_directory"])
         if not log_dir.is_absolute():
             log_dir = self.root / log_dir
@@ -461,4 +470,7 @@ class BotController:
                 1 for b in self.bots.values() if b.status == BotStatus.CRASHED
             ),
             "error": sum(1 for b in self.bots.values() if b.status == BotStatus.ERROR),
+            "disconnected": sum(
+                1 for b in self.bots.values() if b.status == BotStatus.DISCONNECTED
+            ),
         }

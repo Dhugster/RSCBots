@@ -14,6 +14,7 @@ class BotStatus(Enum):
     PAUSED = "paused"
     ERROR = "error"
     CRASHED = "crashed"
+    DISCONNECTED = "disconnected"
     STOPPED = "stopped"
 
 class HealthStatus(Enum):
