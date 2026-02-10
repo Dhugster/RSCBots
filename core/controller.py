@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime
 
+import psutil
+
 from .bot_instance import BotInstance, BotStatus
 from .health_monitor import HealthMonitor
 from .log_aggregator import LogAggregator
@@ -19,6 +21,7 @@ class BotController:
     def __init__(self, config_path: str = "config/bots.yaml") -> None:
         self.config_path = Path(config_path).resolve()
         self.root = self.config_path.parent.parent
+        self.state_path = self.root / "logs" / "bot_state.json"
         self.config = self._load_config()
         self.settings = self._load_settings()
 
@@ -28,6 +31,28 @@ class BotController:
         self.recovery_system = RecoverySystem(self)
 
         self._load_bots_from_config()
+        # #region agent log
+        try:
+            import json
+            _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+            _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:BotController.__init__", "message": "init", "data": {"config_path": str(self.config_path), "root": str(self.root), "bots_count": len(self.bots), "config_has_bots": len(self.config.get("bots", []))}, "hypothesisId": "H1"}) + "\n")
+            _f.close()
+        except Exception:
+            pass
+        # #endregion
+
+        # Load any persisted PID state for cross-process control
+        for bot_id, pid in self._load_pid_state().items():
+            bot = self.bots.get(bot_id)
+            if not bot:
+                continue
+            # Only keep PID if process is still alive
+            try:
+                p = psutil.Process(pid)
+                if p.is_running():
+                    bot.external_pid = pid
+            except Exception:
+                continue
 
     def _load_config(self) -> dict:
         """Load bot configurations from YAML."""
@@ -57,6 +82,22 @@ class BotController:
             "show_side_panel": False,
         }
 
+    def get_task_presets(self) -> List[dict]:
+        """Load task presets from config/task_presets.yaml. Returns list of {name, script, args}."""
+        path = self.config_path.parent / "task_presets.yaml"
+        if not path.exists():
+            return []
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                data = yaml.safe_load(f) or {}
+            presets = data.get("task_presets", [])
+            return [
+                {"name": p.get("name", ""), "script": p.get("script", ""), "args": p.get("args", [])}
+                for p in presets
+            ]
+        except Exception:
+            return []
+
     def _load_bots_from_config(self) -> None:
         """Load all bots from configuration file."""
         for bot_config in self.config.get("bots", []):
@@ -70,18 +111,72 @@ class BotController:
             account_name=config["account"],
             username=config["username"],
             password=config["password"],
-            script_name=config["script"],
+            script_name=config.get("script") or "",
             script_args=config.get("args", []),
             auto_restart=config.get("auto_restart", True),
             max_runtime_hours=config.get("max_runtime"),
             health_check_interval=config.get("health_check_interval", 30),
         )
 
+    def _load_pid_state(self) -> Dict[str, int]:
+        """Load persisted bot PID state from disk."""
+        if not self.state_path.exists():
+            return {}
+        try:
+            import json
+
+            with open(self.state_path, "r", encoding="utf-8") as f:
+                data = json.load(f) or {}
+            # Expect mapping bot_id -> pid (int)
+            return {k: int(v) for k, v in data.items()}
+        except Exception:
+            return {}
+
+    def _save_pid_state(self, state: Dict[str, int]) -> None:
+        """Persist bot PID state to disk."""
+        try:
+            import json
+
+            self.state_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(self.state_path, "w", encoding="utf-8") as f:
+                json.dump(state, f)
+        except Exception:
+            pass
+
     def add_bot(self, bot_config: dict) -> BotInstance:
         """Add a new bot to the controller."""
         bot = self._create_bot_from_config(bot_config)
         self.bots[bot.bot_id] = bot
         return bot
+
+    def remove_bot(self, bot_id: str) -> bool:
+        """Remove a bot from the controller (e.g. for UI delete). Returns True if removed."""
+        if bot_id not in self.bots:
+            return False
+        if self.bots[bot_id].is_running:
+            self.stop_bot(bot_id)
+        del self.bots[bot_id]
+        return True
+
+    def save_bots_to_config(self) -> None:
+        """Persist current controller.bots to config file (bots.yaml)."""
+        bots_list = []
+        for bot in self.bots.values():
+            bots_list.append({
+                "id": bot.bot_id,
+                "account": bot.account_name,
+                "username": bot.username,
+                "password": bot.password,
+                "script": bot.script_name,
+                "args": bot.script_args,
+                "auto_restart": bot.auto_restart,
+                "max_runtime": bot.max_runtime_hours,
+                "health_check_interval": bot.health_check_interval,
+            })
+        self.config["bots"] = bots_list
+        self.config_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(self.config_path, "w", encoding="utf-8") as f:
+            yaml.dump(self.config, f, default_flow_style=False, allow_unicode=True)
 
     def get_bot(self, bot_id: str) -> Optional[BotInstance]:
         """Get a bot by ID."""
@@ -129,6 +224,15 @@ class BotController:
             log_dir = self.root / log_dir
         log_dir.mkdir(parents=True, exist_ok=True)
 
+        # #region agent log
+        try:
+            import json
+            _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+            _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:start_bot.entry", "message": "start_bot", "data": {"bot_id": bot_id, "cmd_len": len(cmd)}, "hypothesisId": "H2"}) + "\n")
+            _f.close()
+        except Exception:
+            pass
+        # #endregion
         try:
             bot.add_log(f"Starting: {' '.join(cmd)}", "CONTROLLER")
             creationflags = 0
@@ -157,8 +261,32 @@ class BotController:
             if not self.health_monitor.running:
                 self.health_monitor.start_monitoring()
 
+            # Persist PID for cross-process control
+            state = self._load_pid_state()
+            if getattr(bot.process, "pid", None) is not None:
+                state[bot_id] = int(bot.process.pid)
+                self._save_pid_state(state)
+
+            # #region agent log
+            try:
+                import json
+                _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:start_bot.success", "message": "start_bot ok", "data": {"bot_id": bot_id, "pid": getattr(bot.process, "pid", None)}, "hypothesisId": "H2"}) + "\n")
+                _f.close()
+            except Exception:
+                pass
+            # #endregion
             return True
         except Exception as e:
+            # #region agent log
+            try:
+                import json
+                _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:start_bot.except", "message": "start_bot failed", "data": {"bot_id": bot_id, "error_type": type(e).__name__, "error_str": str(e)[:200]}, "hypothesisId": "H2"}) + "\n")
+                _f.close()
+            except Exception:
+                pass
+            # #endregion
             bot.add_log(f"Failed to start: {e}", "CONTROLLER")
             bot.status = BotStatus.ERROR
             return False
@@ -170,6 +298,48 @@ class BotController:
             raise ValueError(f"Bot not found: {bot_id}")
 
         if not bot.is_running:
+            # If we have an external PID from a previous invocation, attempt to stop that process.
+            external_pid = getattr(bot, "external_pid", None)
+            if external_pid:
+                try:
+                    p = psutil.Process(external_pid)
+                    p.terminate()
+                    try:
+                        p.wait(timeout=10)
+                    except Exception:
+                        p.kill()
+                    bot.stop_time = datetime.now()
+                    bot.status = BotStatus.STOPPED
+                    bot.external_pid = None
+                    # Remove from persisted state
+                    state = self._load_pid_state()
+                    if bot_id in state:
+                        state.pop(bot_id, None)
+                        self._save_pid_state(state)
+                    # #region agent log
+                    try:
+                        import json
+                        _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                        _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:stop_bot.external_pid", "message": "stop_bot external kill", "data": {"bot_id": bot_id, "external_pid": external_pid}, "hypothesisId": "H2"}) + "\n")
+                        _f.close()
+                    except Exception:
+                        pass
+                    # #endregion
+                    bot.add_log("Stopped external process", "CONTROLLER")
+                    return True
+                except Exception:
+                    # fall back to prior behavior / log not running
+                    pass
+
+            # #region agent log
+            try:
+                import json
+                _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:stop_bot.not_running", "message": "stop_bot skip", "data": {"bot_id": bot_id, "status": str(bot.status)}, "hypothesisId": "H2"}) + "\n")
+                _f.close()
+            except Exception:
+                pass
+            # #endregion
             bot.add_log("Not running", "CONTROLLER")
             return False
 
@@ -190,9 +360,23 @@ class BotController:
             bot.update_runtime()
             bot.status = BotStatus.STOPPED
             bot.process = None
+            # Clear any persisted PID
+            state = self._load_pid_state()
+            if bot_id in state:
+                state.pop(bot_id, None)
+                self._save_pid_state(state)
             bot.add_log("Stopped", "CONTROLLER")
             return True
         except Exception as e:
+            # #region agent log
+            try:
+                import json
+                _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "controller.py:stop_bot.except", "message": "stop_bot failed", "data": {"bot_id": bot_id, "error_type": type(e).__name__, "error_str": str(e)[:200]}, "hypothesisId": "H2"}) + "\n")
+                _f.close()
+            except Exception:
+                pass
+            # #endregion
             bot.add_log(f"Error stopping: {e}", "CONTROLLER")
             return False
 

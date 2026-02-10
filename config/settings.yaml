@@ -1,7 +1,10 @@
 # IdleRSC bot manager settings
 
+# UI theme: runescape (default), minimal (future)
+theme: runescape
+
 # Java and IdleRSC configuration
-idlersc_jar_path: "./IdleRSC.jar"
+idlersc_jar_path: "C:/Users/Owner/Desktop/IdleRSC.jar"
 java_path: "java"
 
 # Logging

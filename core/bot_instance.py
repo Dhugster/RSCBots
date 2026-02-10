@@ -55,6 +55,8 @@ class BotInstance:
 
     # Runtime state
     process: Optional[Popen] = None
+    # PID for processes started in a previous CLI invocation; used for cross-process control
+    external_pid: Optional[int] = None
     status: BotStatus = BotStatus.IDLE
     start_time: Optional[datetime] = None
     stop_time: Optional[datetime] = None

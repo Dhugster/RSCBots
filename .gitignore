@@ -5,3 +5,6 @@ __pycache__/
 .venv/
 venv/
 .env
+# Do not commit credentials or local state
+config/bots.yaml
+config/launcher_assignments.json

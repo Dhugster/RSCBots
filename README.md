@@ -1,13 +1,20 @@
-# IdleRSC Bot Management System
+# IdleRSC Manager
 
-Python CLI/TUI for managing multiple IdleRSC (OpenRSC Coleslaw) bot instances: start/stop, health monitoring, log aggregation, and auto-recovery.
+**IdleRSC Dashboard** – A persistent Dashboard for managing multiple [IdleRSC](https://gitlab.com/openrsc/idlersc) (Coleslaw/Uranium) bots: add and edit accounts, assign scripts or presets, start/stop bots, and view logs in one place.
+
+This project is **unofficial and community-made**. It is not part of the official IdleRSC project. Credit to the [IdleRSC team](https://gitlab.com/openrsc/idlersc) for the client and game integration.
+
+---
 
 ## Prerequisites
 
 - **Python 3.10+**
 - **Java 8** on PATH (for IdleRSC)
-- **IdleRSC.jar** (path set in `config/settings.yaml`)
-- For Coleslaw: run `java -jar IdleRSC.jar --init-cache coleslaw` once
+- **IdleRSC.jar** – e.g. on Desktop or a path you set in config
+
+For Coleslaw: run `java -jar IdleRSC.jar --init-cache coleslaw` once before using the manager.
+
+---
 
 ## Install
 
@@ -15,17 +22,36 @@ Python CLI/TUI for managing multiple IdleRSC (OpenRSC Coleslaw) bot instances: s
 cd idlersc_manager
 python -m venv .venv
 .venv\Scripts\activate   # Windows
+# source .venv/bin/activate   # Linux/macOS
 pip install -r requirements.txt
 ```
 
+---
+
 ## Configuration
 
-- **config/settings.yaml** – Set `idlersc_jar_path` and `java_path` (and optionally `log_directory`, health/restart settings).
-- **config/bots.yaml** – Define bots (id, account, username, password, script, args). Use your own credentials.
+- **config/settings.yaml** – `idlersc_jar_path` (e.g. `C:/Users/You/Desktop/IdleRSC.jar`), `java_path`, and optional log/health settings.
+- **config/bots.yaml** – Your bot accounts (id, account, username, password, script, args). Copy from `config/bots.yaml.example` and fill in your own credentials. **Do not commit this file** (it holds passwords).
+- **config/task_presets.yaml** – Named presets (e.g. Fishing, Mining) for quick script assignment in the Dashboard.
+
+---
 
 ## Usage
 
-Run from the project root (`idlersc_manager`):
+**Primary:** Run with no arguments to open the Dashboard (IdleRSC-style flow):
+
+```bash
+python bot_manager.py
+```
+
+In the Dashboard:
+
+- **Setup view** – Add/edit/delete accounts, toggle selection, apply task presets, press **[P]** to start selected bots, **[L]** to switch to Live view.
+- **Live view** – Bot status table and log panel; **[S]** back to Setup, **[Q]** Quit.
+
+The Dashboard stays open while IdleRSC JAR clients run in separate windows.
+
+**CLI subcommands** (for scripting and power users):
 
 ```bash
 python bot_manager.py status
@@ -35,25 +61,32 @@ python bot_manager.py stop <bot_id>
 python bot_manager.py stop-all
 python bot_manager.py restart <bot_id>
 python bot_manager.py logs --bot <bot_id> --tail 50
-python bot_manager.py dashboard
+python bot_manager.py dashboard    # same as running with no args
+python bot_manager.py launch       # same as dashboard (unified flow)
 python bot_manager.py recover
 ```
 
-Add a bot and optionally start it:
+Add a bot via CLI:
 
 ```bash
 python bot_manager.py add-bot --account myacc --username user --password pass --script MiningBot --args iron,al_kharid --auto-start
 ```
 
-Swarm mode (multiple bots, same script):
-
-```bash
-python bot_manager.py swarm --script FishingBot --args lobster,karamja --count 5
-```
+---
 
 ## Layout
 
-- `core/` – BotInstance, BotController, HealthMonitor, LogAggregator, RecoverySystem
-- `ui/` – Click CLI, Rich TUI dashboard
-- `config/` – bots.yaml, settings.yaml
-- `logs/` – Per-bot log files (created at runtime)
+- **core/** – BotInstance, BotController, HealthMonitor, LogAggregator, RecoverySystem; controller loads/saves `bots.yaml` and task presets.
+- **ui/** – Click CLI, unified Dashboard (Setup + Live), theme and widgets.
+- **config/** – settings.yaml, bots.yaml (or bots.yaml.example), task_presets.yaml.
+- **logs/** – Per-bot log files and bot state (created at runtime).
+
+---
+
+## License
+
+GPL v3 – same as IdleRSC where applicable. See [LICENSE](LICENSE).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to run from source, add presets, and report issues.

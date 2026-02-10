@@ -1,0 +1,12 @@
+# Task presets for quick script assignment in the Dashboard.
+# Use "Apply preset to selected" in Setup view to set script + args for multiple bots.
+task_presets:
+  - name: "Fishing"
+    script: "FishingBot"
+    args: ["lobster", "karamja"]
+  - name: "Harvest"
+    script: "HarvestBot"
+    args: []
+  - name: "Mining"
+    script: "MiningBot"
+    args: ["iron", "al_kharid", "powermine"]

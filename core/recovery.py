@@ -31,10 +31,28 @@ class RecoverySystem:
 
     def recover_all(self) -> int:
         """Attempt to restart all crashed/error bots that should_restart()."""
+        # #region agent log
+        try:
+            import json
+            _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+            _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "recovery.py:recover_all.entry", "message": "recover_all", "data": {"total_bots": len(self.controller.bots), "bot_ids": list(self.controller.bots.keys())[:20]}, "hypothesisId": "H5"}) + "\n")
+            _f.close()
+        except Exception:
+            pass
+        # #endregion
         recovered = 0
         for bot_id, bot in list(self.controller.bots.items()):
             if bot.status.value not in ("crashed", "error"):
                 continue
+            # #region agent log
+            try:
+                import json
+                _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+                _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "recovery.py:recover_all.candidate", "message": "recover candidate", "data": {"bot_id": bot_id, "status_value": bot.status.value, "should_restart": bot.should_restart()}, "hypothesisId": "H5"}) + "\n")
+                _f.close()
+            except Exception:
+                pass
+            # #endregion
             if bot.should_restart():
                 if self.controller.restart_bot(bot_id):
                     recovered += 1

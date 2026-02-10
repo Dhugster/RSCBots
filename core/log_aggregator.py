@@ -17,6 +17,15 @@ class LogAggregator:
     def start_log_capture(self, bot_id: str) -> None:
         """Start capturing stdout/stderr for a bot; append to in-memory logs and optional file."""
         bot = self.controller.get_bot(bot_id)
+        # #region agent log
+        try:
+            import json
+            _f = __import__("builtins").open(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log", "a", encoding="utf-8")
+            _f.write(json.dumps({"timestamp": __import__("time").time() * 1000, "location": "log_aggregator.py:start_log_capture", "message": "start_log_capture", "data": {"bot_id": bot_id, "has_bot": bot is not None, "has_process": getattr(bot, "process", None) is not None if bot else False}, "hypothesisId": "H3"}) + "\n")
+            _f.close()
+        except Exception:
+            pass
+        # #endregion
         if not bot or not bot.process:
             return
 

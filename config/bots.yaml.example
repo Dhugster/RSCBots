@@ -1,0 +1,19 @@
+# Bot configurations - copy to bots.yaml and replace with your account credentials.
+# Do not commit bots.yaml (it contains passwords).
+bots:
+  - id: miner_001
+    account: my_miner
+    username: my_username
+    password: your_password_here
+    script: MiningBot
+    args: ["iron", "al_kharid", "powermine"]
+    auto_restart: true
+    max_runtime: 4
+
+  - id: fisher_001
+    account: my_fisher
+    username: my_username2
+    password: your_password_here
+    script: FishingBot
+    args: ["lobster", "karamja"]
+    auto_restart: true
