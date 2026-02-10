@@ -1,0 +1,22 @@
+# IdleRSC bot manager settings
+
+# Java and IdleRSC configuration
+idlersc_jar_path: "./IdleRSC.jar"
+java_path: "java"
+
+# Logging
+log_directory: "./logs"
+log_level: "INFO"
+
+# Health monitoring
+health_check_interval: 30
+restart_cooldown: 60
+max_restart_attempts: 3
+
+# Bot display settings
+enable_graphics: false
+show_side_panel: false
+
+# Performance
+max_concurrent_bots: 10
+process_priority: "normal"  # low, normal, high

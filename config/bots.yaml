@@ -1,0 +1,27 @@
+# Bot configurations - replace credentials for your accounts
+bots:
+  - id: miner_001
+    account: coleslaw_miner_1
+    username: miner1
+    password: changeme
+    script: MiningBot
+    args: ["iron", "al_kharid", "powermine"]
+    auto_restart: true
+    max_runtime: 4
+
+  - id: combat_001
+    account: coleslaw_combat_1
+    username: warrior1
+    password: changeme
+    script: CombatBot
+    args: ["moss_giants", "catacombs"]
+    auto_restart: true
+    max_runtime: 6
+
+  - id: fisher_001
+    account: coleslaw_fisher_1
+    username: fisher1
+    password: changeme
+    script: FishingBot
+    args: ["lobster", "karamja"]
+    auto_restart: true
