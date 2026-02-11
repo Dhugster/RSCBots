@@ -65,19 +65,34 @@ Then open **http://127.0.0.1:8000** (the script may open it for you). You get a 
 
 **Note:** Always use `python -m uvicorn` (not `uvicorn` alone) so the correct Python and its packages are used. If you use a venv, activate it first in that terminal (e.g. `.venv\Scripts\activate` on Windows).
 
+### XP/hour and metrics
+
+The manager computes **XP/hr** and **total XP gained** from the bot process **stdout**. Any line that looks like an XP amount is parsed (e.g. "15 xp", "xp: 100", "gained 50 experience", "received 25 XP"). If your client does not print such lines to stdout, XP will stay at 0; in that case you can have a script or plugin write XP lines to the bot’s log file, or rely on the client’s in-window display.
+
 ### Map: live bot positions (world map game layers)
 
-The Map tab can show live bot icons on the **world map game layers** (Surface / 1st / 2nd / Dungeon). The map overlay uses the same coordinate space as `@2003scape/rsc-world-map`:
+The Map tab shows live bot icons on the **world map game layers** (Surface / 1st / 2nd / Dungeon). If the RSC World Map library fails to load, a static surface image is shown and markers still render. **Each bot that should appear on the map must be started from the Dashboard** (or via the API); the manager only tracks and shows positions for bots it started. Positions can be supplied in three ways:
 
-- **Coordinates**: `tile_x`, `tile_y` are **map pixel** coordinates in **0..2448** (X) and **0..2736** (Y).
-- **Layer**: `layer` is one of `surface`, `floor1`, `floor2`, `dungeon`.
-- **Game coords**: To send the client’s displayed coords (e.g. "Coords: 161 607"), use `"coordinate_system": "game_tile"`; the API converts to map pixels using the same convention as the rsc-world-map overlay.
+1. **Stdout** – If the bot process prints lines like `Coords: 161 607` or `Coords: 547, 558` to stdout, the manager parses them and converts to map pixels. Some clients (e.g. Coleslaw) show coords in the UI but do not print them to stdout; in that case use (2) or (3).
+2. **POST API** – Any script or client can POST position (game tiles or map pixels) to the manager.
+3. **Position file** – Set `position_file_path` in `config/settings.yaml` to a JSON file path. The manager reads it every few seconds and updates the map. Your script or client writes the file in this format (game tile coords):
 
-To feed live positions from a script/client, POST to:
+   ```json
+   {"miner_001": {"tile_x": 161, "tile_y": 607, "layer": "surface"}, "miner_002": {"tile_x": 200, "tile_y": 600, "layer": "surface"}}
+   ```
+
+   Keys are bot IDs; each value can use `tile_x`/`tile_y` (or `x`/`y`) and optional `layer` (`surface`, `floor1`, `floor2`, `dungeon`). Coords are **game tiles** (e.g. as shown in the client); the manager converts them to map pixels.
+
+**Coordinate contract for the API:**
+
+- **Map pixels**: `tile_x`, `tile_y` in **0..2448** (X) and **0..2736** (Y).
+- **Game tiles**: send `"coordinate_system": "game_tile"` and use the client’s coords (e.g. 161, 607); the API converts to map pixels.
+
+**Examples (POST):**
 
 - `POST /api/bots/{bot_id}/position` with JSON body:
   - Map pixels: `{"tile_x":1234,"tile_y":567,"layer":"surface"}`
-  - Game tiles (e.g. from client): `{"tile_x":161,"tile_y":607,"layer":"surface","coordinate_system":"game_tile"}`
+  - Game tiles: `{"tile_x":161,"tile_y":607,"layer":"surface","coordinate_system":"game_tile"}`
 
 ---
 

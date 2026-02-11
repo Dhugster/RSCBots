@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from .controller import BotController
     from .bot_instance import BotInstance
 
-from .map_coords import game_tile_to_map_pixel
+from .map_coords import MAP_W, MAP_H, game_tile_to_map_pixel
 
 
 class LogAggregator:
@@ -97,19 +97,21 @@ class LogAggregator:
         """Parse log line for metrics (XP, items, profit). Updates BotMetrics."""
         line_lower = line.lower()
         xp_updated = False
-        # XP: "gained N xp", "+N xp", "N xp", "gained N experience", "N experience", "experience gained"
-        if "xp" in line_lower or "experience" in line_lower:
-            if "gained" in line_lower or "+" in line or "experience" in line_lower:
-                m = re.search(
-                    r"(\d+)\s*(?:xp|experience)|(?:xp|experience)[:\s]*(\d+)|gained\s+(\d+)|[\+](\d+)\s*(?:xp|experience)?",
-                    line_lower,
-                    re.I,
-                )
-                if m:
-                    n = int(next((g for g in m.groups() if g), "0"))
-                    if n > 0:
-                        bot.metrics.total_xp_gained += n
-                        xp_updated = True
+        # XP: accept any line that looks like an XP amount (broad patterns, first match only to avoid double-count)
+        _xp_patterns = [
+            r"(\d+)\s*(?:xp|experience)(?:\s*(?:gained|received|points?))?\b",
+            r"(?:xp|experience)[:\s]*(\d+)",
+            r"(?:gained|received|get|\+)\s*(\d+)(?:\s*(?:xp|experience))?",
+            r"\b(\d+)\s*(?:xp|experience)\b",
+        ]
+        for pat in _xp_patterns:
+            m = re.search(pat, line_lower, re.I)
+            if m:
+                n = int(m.group(1))
+                if n > 0:
+                    bot.metrics.total_xp_gained += n
+                    xp_updated = True
+                break
         if xp_updated and bot.start_time and bot.is_running:
             rt = int((datetime.now() - bot.start_time).total_seconds())
             bot.metrics.update_xp_rate(rt)
@@ -136,8 +138,8 @@ class LogAggregator:
         is_game_tile_format = False
         m = None
         
-        # First, check for client "Coords: X Y" format (game tiles) - this is the primary format from RSC client
-        coord_match = re.search(r"coords?\s*:\s*(\d{1,4})\s+(\d{1,4})", line_lower, re.I)
+        # First, check for client "Coords: X Y" or "Coords: X, Y" format (game tiles) - primary format from RSC client
+        coord_match = re.search(r"coords?\s*:\s*(\d{1,4})\s*[,]?\s*(\d{1,4})", line_lower, re.I)
         if coord_match:
             m = coord_match
             is_game_tile_format = True
@@ -161,10 +163,16 @@ class LogAggregator:
                 elif "floor" in line_lower or "upstairs" in line_lower:
                     layer = "floor2" if ("2" in line or "second" in line_lower) else "floor1"
                 
-                # Convert game tiles to map pixels if this is the client "Coords:" format
+                # Coords may be game tiles (e.g. 161, 607) or map pixels (0..2448, 0..2736).
+                # Game tile range: x in 0..816, y in 0..912 (map size/3). If larger, client sent map pixels.
                 if is_game_tile_format:
-                    map_x, map_y = game_tile_to_map_pixel(x, y, layer)
-                    x, y = map_x, map_y
+                    if x > MAP_W // 3 or y > MAP_H // 3:
+                        # Already map pixels; clamp only
+                        x = max(0, min(MAP_W - 1, x))
+                        y = max(0, min(MAP_H - 1, y))
+                    else:
+                        map_x, map_y = game_tile_to_map_pixel(x, y, layer)
+                        x, y = map_x, map_y
                 
                 # #region agent log
                 try:

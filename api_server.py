@@ -2,6 +2,7 @@
 IdleRSC Manager – HTTP API for the web dashboard.
 Run: uvicorn api_server:app --reload --host 0.0.0.0 --port 8000
 """
+import math
 import zipfile
 from pathlib import Path
 
@@ -106,6 +107,9 @@ class BotUpdate(BaseModel):
     script_args: list[str] | None = None
 
 
+class BotRename(BaseModel):
+    new_bot_id: str
+
 class Preset(BaseModel):
     name: str
     script: str
@@ -184,6 +188,27 @@ def delete_bot(bot_id: str):
     return {"ok": True}
 
 
+@app.post("/api/bots/{bot_id}/rename")
+def rename_bot(bot_id: str, body: BotRename):
+    """Rename a bot. Bot must be stopped. new_bot_id must be unique."""
+    new_id = (body.new_bot_id or "").strip()
+    if not new_id:
+        raise HTTPException(status_code=400, detail="new_bot_id is required")
+    c = get_controller()
+    if not c.get_bot(bot_id):
+        raise HTTPException(status_code=404, detail="Bot not found")
+    if not c.rename_bot(bot_id, new_id):
+        if c.get_bot(new_id):
+            raise HTTPException(status_code=400, detail="A bot with that name already exists")
+        if c.get_bot(bot_id) and c.get_bot(bot_id).is_running:
+            raise HTTPException(status_code=400, detail="Stop the bot before renaming")
+        raise HTTPException(status_code=400, detail="Rename failed")
+    entry = _position_store.pop(bot_id, None)
+    if entry is not None:
+        _position_store[new_id] = entry
+    return {"ok": True, "bot": _bot_to_summary(c.get_bot(new_id))}
+
+
 @app.post("/api/bots/{bot_id}/start")
 def start_bot(bot_id: str):
     c = get_controller()
@@ -227,28 +252,34 @@ def get_bot_positions():
     _sync_process_exits(c)
     # Return only positions for bots that are currently running; remove stale entries from store
     running_ids = {bid for bid, b in c.bots.items() if b.is_running}
+    # #region agent log
+    _write_debug_log({"location": "api_server:get_bot_positions.after_sync", "message": "running_ids after sync", "data": {"running_ids": list(running_ids), "bot_statuses": {bid: getattr(b, "status", str(b)) for bid, b in c.bots.items()}}, "hypothesisId": "H5", "timestamp": __import__("time").time() * 1000})
+    # #endregion
     for bid in list(_position_store):
         if bid not in running_ids:
             _position_store.pop(bid, None)
     out = {bid: _position_store[bid] for bid in _position_store if bid in running_ids}
-    # Fallback: running bots with no position (no POST and no log parse) get a default so they appear on the map
-    _DEFAULT_MAP_CENTER = (1200, 1200)  # surface, RSC map 2448x2736
+    # Fallback: running bots with no position get a spread-out default so each has a distinct marker
+    _DEFAULT_MAP_CENTER = (1200, 1368)  # surface, RSC map 2448x2736
     _MAP_W, _MAP_H = 2448, 2736
-    for bid in running_ids:
-        if bid not in out:
-            h = sum(ord(c) for c in bid) % 400
-            x = _DEFAULT_MAP_CENTER[0] + (h % 201) - 100
-            y = _DEFAULT_MAP_CENTER[1] + ((h * 7) % 201) - 100
-            # Clamp to map pixel bounds.
-            x = max(0, min(_MAP_W - 1, x))
-            y = max(0, min(_MAP_H - 1, y))
-            out[bid] = {
-                "tile_x": x,
-                "tile_y": y,
-                "layer": "surface",
-            }
+    used_fallback: list = []
+    fallback_running = [b for b in running_ids if b not in out]
+    for i, bid in enumerate(fallback_running):
+        used_fallback.append(bid)
+        # Spread in a circle around center so multiple bots don't stack on one dot
+        angle = (i * 137.5) % 360  # golden angle for even spread
+        r = 80 + (sum(ord(c) for c in bid) % 40)
+        x = int(_DEFAULT_MAP_CENTER[0] + r * math.cos(math.radians(angle)))
+        y = int(_DEFAULT_MAP_CENTER[1] + r * math.sin(math.radians(angle)))
+        x = max(0, min(_MAP_W - 1, x))
+        y = max(0, min(_MAP_H - 1, y))
+        out[bid] = {
+            "tile_x": x,
+            "tile_y": y,
+            "layer": "surface",
+        }
     # #region agent log
-    _write_debug_log({"location": "api_server:get_bot_positions.return", "message": "positions response", "data": {"running_ids": list(running_ids), "returned_keys": list(out.keys()), "returned_count": len(out)}, "hypothesisId": "H1_H2", "timestamp": __import__("time").time() * 1000})
+    _write_debug_log({"location": "api_server:get_bot_positions.return", "message": "positions response", "data": {"running_ids": list(running_ids), "returned_keys": list(out.keys()), "returned_count": len(out), "used_fallback": used_fallback}, "hypothesisId": "H1_H2", "timestamp": __import__("time").time() * 1000})
     # #endregion
     return out
 

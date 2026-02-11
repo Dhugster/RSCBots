@@ -55,6 +55,12 @@ class BotController:
             except Exception:
                 continue
 
+        # Optional: position file watcher for live map (game tile coords in JSON)
+        from .position_file_watcher import start_position_file_watcher
+        pos_file = self.settings.get("position_file_path")
+        if pos_file:
+            start_position_file_watcher(self, pos_file, interval_seconds=2.5)
+
     def _load_config(self) -> dict:
         """Load bot configurations from YAML."""
         if not self.config_path.exists():
@@ -81,6 +87,7 @@ class BotController:
             "max_restart_attempts": 3,
             "enable_graphics": False,
             "show_side_panel": False,
+            "position_file_path": None,
         }
 
     def get_task_presets(self) -> List[dict]:
@@ -157,6 +164,24 @@ class BotController:
         if self.bots[bot_id].is_running:
             self.stop_bot(bot_id)
         del self.bots[bot_id]
+        return True
+
+    def rename_bot(self, old_id: str, new_id: str) -> bool:
+        """Rename a bot. Bot must be stopped. Returns True if renamed. new_id must be unique and non-empty."""
+        new_id = (new_id or "").strip()
+        if not new_id or old_id not in self.bots:
+            return False
+        if new_id == old_id:
+            return True
+        if new_id in self.bots:
+            return False
+        bot = self.bots[old_id]
+        if bot.is_running:
+            return False
+        bot.bot_id = new_id
+        del self.bots[old_id]
+        self.bots[new_id] = bot
+        self.save_bots_to_config()
         return True
 
     def save_bots_to_config(self) -> None:

@@ -17,7 +17,8 @@ def game_tile_to_map_pixel(gx: int, gy: int, layer: str) -> tuple[int, int]:
         Tuple of (map_pixel_x, map_pixel_y) in range 0..2448, 0..2736
     """
     plane = {"surface": 0, "floor1": 1, "floor2": 2, "dungeon": 3}.get(layer, 0)
-    # Same formula as @2003scape/rsc-world-map entity-canvas
+    # Same formula as @2003scape/rsc-world-map src/entity-canvas.js (addObjects):
+    # x = imageWidth - (gx*TILE_SIZE) - 2; y = gy*TILE_SIZE - 1; then for plane>0 subtract plane offset
     px = MAP_W - (gx * TILE_SIZE) - 2
     py = gy * TILE_SIZE - 1
     if plane != 0:
