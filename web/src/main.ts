@@ -417,6 +417,59 @@ async function loadPositions(): Promise<Positions> {
   return positions
 }
 
+/** Stable distinct color per bot for map markers (by bot_id). */
+function botMarkerColor(botId: string): string {
+  let h = 0
+  for (let i = 0; i < botId.length; i++) h = ((h << 5) - h + botId.charCodeAt(i)) | 0
+  const hue = ((h % 360) + 360) % 360
+  return `hsl(${hue}, 72%, 52%)`
+}
+
+/** Create a live bot marker element with per-bot color and pulse animation. */
+function createMapMarker(botId: string, pos: Position, opts: { left: string; top: string; display?: string; onClick: () => void; title: string }) {
+  const bot = bots.find(b => b.bot_id === botId)
+  const marker = document.createElement('div')
+  marker.className = 'map-marker map-marker--alive'
+  marker.dataset.botId = botId
+  marker.dataset.layer = pos.layer
+  marker.dataset.initial = (bot?.username || botId).charAt(0).toUpperCase()
+  marker.style.backgroundColor = botMarkerColor(botId)
+  marker.style.left = opts.left
+  marker.style.top = opts.top
+  if (opts.display !== undefined) marker.style.display = opts.display
+  marker.style.pointerEvents = 'auto'
+  marker.title = opts.title
+  marker.textContent = '' // initial shown via ::before from data-initial
+  marker.onclick = (e) => { e.stopPropagation(); opts.onClick() }
+  return marker
+}
+
+/** Convert stored coords to rsc-world-map pixel space (0..2448 x 0..2736). */
+function toRscMapPixels(pos: Position): { x: number; y: number; source: 'map_pixel' | 'scaled_4032' | 'clamped' } {
+  const w = RSC_MAP_IMAGE_SIZE.w
+  const h = RSC_MAP_IMAGE_SIZE.h
+
+  let x = pos.tile_x
+  let y = pos.tile_y
+  let source: 'map_pixel' | 'scaled_4032' | 'clamped' = 'map_pixel'
+
+  // Heuristic: legacy reporters sometimes send 0..4032 “world tile” coords.
+  if (x > w || y > h) {
+    if (x >= 0 && y >= 0 && x <= 4032 && y <= 4032) {
+      x = (x / 4032) * w
+      y = (y / 4032) * h
+      source = 'scaled_4032'
+    } else {
+      source = 'clamped'
+    }
+  }
+
+  // Clamp to overlay bounds.
+  x = Math.max(0, Math.min(w - 1, x))
+  y = Math.max(0, Math.min(h - 1, y))
+  return { x, y, source }
+}
+
 // --- Map view ---
 const MAP_LAYERS = [
   { id: 'surface', label: 'Surface', file: '/maps/surface.png' },
@@ -660,24 +713,18 @@ function renderMapView() {
           pointerEvents: 'none',
         })
         rscMapDiv.appendChild(rscOverlay)
-        const scaleX = RSC_MAP_IMAGE_SIZE.w / 4032
-        const scaleY = RSC_MAP_IMAGE_SIZE.h / 4032
+        // #region agent log
+        debugLog('main.ts:renderMapView.rsc_markers', 'creating RSC overlay markers', { mapMode: 'game', positionsCount: Object.keys(positions).length, positionKeys: Object.keys(positions) }, 'H3_H5')
+        // #endregion
         Object.entries(positions).forEach(([bid, pos]) => {
-          const bot = bots.find(b => b.bot_id === bid)
-          const marker = document.createElement('div')
-          marker.className = 'map-marker'
-          marker.dataset.botId = bid
-          marker.dataset.layer = pos.layer
-          marker.style.pointerEvents = 'auto'
-          marker.style.left = `${pos.tile_x * scaleX}px`
-          marker.style.top = `${pos.tile_y * scaleY}px`
-          marker.style.display = pos.layer === currentLayer ? '' : 'none'
-          marker.title = bot?.username || bid
-          marker.textContent = bot?.username || bid
-          marker.onclick = (e) => {
-            e.stopPropagation()
-            renderMapPopup(el, bot || undefined)
-          }
+          const p = toRscMapPixels(pos)
+          const marker = createMapMarker(bid, pos, {
+            left: `${p.x}px`,
+            top: `${p.y}px`,
+            display: pos.layer === currentLayer ? '' : 'none',
+            onClick: () => renderMapPopup(el, bots.find(b => b.bot_id === bid) || undefined),
+            title: bots.find(b => b.bot_id === bid)?.username || bid,
+          })
           rscOverlay!.appendChild(marker)
         })
         const planeWrap = rscMapDiv.querySelector('[style*="position"]') as HTMLElement | null
@@ -787,22 +834,15 @@ function renderMapView() {
   const effectiveLayer = wikiCategoryToGameLayer(wikiCategoryId)
   Object.entries(positions).forEach(([bid, pos]) => {
     if (pos.layer !== effectiveLayer) return
-    const bot = bots.find(b => b.bot_id === bid)
-    const marker = document.createElement('div')
-    marker.className = 'map-marker'
-    marker.dataset.botId = bid
-    marker.dataset.layer = pos.layer
-    marker.dataset.wikiLayer = '1'
     const mx = 100 + (pos.tile_x % 700) * scale
     const my = 80 + (pos.tile_y % 500) * scale
-    marker.style.left = `${mx}px`
-    marker.style.top = `${my}px`
-    marker.title = bot?.username || bid
-    marker.textContent = bot?.username || bid
-    marker.onclick = (e) => {
-      e.stopPropagation()
-      renderMapPopup(el, bot || undefined)
-    }
+    const marker = createMapMarker(bid, pos, {
+      left: `${mx}px`,
+      top: `${my}px`,
+      onClick: () => renderMapPopup(el, bots.find(b => b.bot_id === bid) || undefined),
+      title: bots.find(b => b.bot_id === bid)?.username || bid,
+    })
+    marker.dataset.wikiLayer = '1'
     mapContainer.appendChild(marker)
   })
   }
@@ -1113,7 +1153,7 @@ async function init() {
         lastMapBotsJson = botsJson
         lastMapPositionsJson = posJson
         renderMapView()
-      }, 8000) as unknown as number
+      }, 3000) as unknown as number
     } else if (route === 'analytics') {
       loadBots().then(() => renderAnalyticsView())
       mapPollTimer = window.setInterval(async () => {

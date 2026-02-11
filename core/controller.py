@@ -4,7 +4,7 @@ import subprocess
 import time
 import yaml
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 from datetime import datetime
 
 import psutil
@@ -29,6 +29,7 @@ class BotController:
         self.health_monitor = HealthMonitor(self)
         self.log_aggregator = LogAggregator(self)
         self.recovery_system = RecoverySystem(self)
+        self._position_listeners: List[Callable[[str, int, int, str], None]] = []
 
         self._load_bots_from_config()
         # #region agent log
@@ -181,6 +182,18 @@ class BotController:
     def get_bot(self, bot_id: str) -> Optional[BotInstance]:
         """Get a bot by ID."""
         return self.bots.get(bot_id)
+
+    def add_position_listener(self, callback: Callable[[str, int, int, str], None]) -> None:
+        """Register a callback(bot_id, tile_x, tile_y, layer) for position updates (e.g. from logs or API)."""
+        self._position_listeners.append(callback)
+
+    def notify_position(self, bot_id: str, tile_x: int, tile_y: int, layer: str = "surface") -> None:
+        """Notify listeners of a bot position update (called by log aggregator or API)."""
+        for cb in self._position_listeners:
+            try:
+                cb(bot_id, tile_x, tile_y, layer)
+            except Exception:
+                pass
 
     def _build_java_command(self, bot: BotInstance) -> List[str]:
         """Build the java -jar IdleRSC.jar command."""

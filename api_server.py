@@ -17,6 +17,8 @@ import sys
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from datetime import datetime
+
 from core.controller import BotController
 from core.bot_instance import BotStatus
 
@@ -52,7 +54,24 @@ def get_controller() -> BotController:
     global _controller
     if _controller is None:
         _controller = BotController(str(ROOT / "config" / "bots.yaml"))
+        # Register position listener so log-parsed or client-reported positions update the map store
+        def _on_position(bot_id: str, tile_x: int, tile_y: int, layer: str) -> None:
+            _position_store[bot_id] = {"tile_x": tile_x, "tile_y": tile_y, "layer": layer}
+        _controller.add_position_listener(_on_position)
     return _controller
+
+
+def _sync_process_exits(c: BotController) -> None:
+    """If any bot process has exited (closed/crashed), set status to CRASHED and clear from position store."""
+    for bot_id, bot in list(c.bots.items()):
+        if bot.process is not None and bot.process.poll() is not None:
+            # #region agent log
+            _write_debug_log({"location": "api_server:_sync_process_exits", "message": "process exited, marking crashed and clearing position", "data": {"bot_id": bot_id}, "hypothesisId": "H2", "timestamp": __import__("time").time() * 1000})
+            # #endregion
+            bot.stop_time = datetime.now()
+            bot.status = BotStatus.CRASHED
+            bot.process = None
+            _position_store.pop(bot_id, None)
 
 
 # --- Pydantic models (no password in responses) ---
@@ -112,6 +131,7 @@ def _bot_to_summary(bot) -> BotSummary:
 @app.get("/api/bots")
 def list_bots():
     c = get_controller()
+    _sync_process_exits(c)  # update status to crashed/stopped when process has exited
     for b in c.bots.values():
         if getattr(b, "update_runtime", None):
             b.update_runtime()  # refresh runtime and xp_per_hour for dashboard
@@ -199,36 +219,79 @@ def debug_log(payload: dict):
 
 @app.get("/api/bots/positions")
 def get_bot_positions():
-    """Return all known bot positions for map markers and layer grouping."""
+    """Return bot positions for map markers; only running bots. Stale entries cleared when process has exited."""
     # #region agent log
-    _write_debug_log({
-        "location": "api_server:get_bot_positions",
-        "message": "positions requested",
-        "data": {"positionsCount": len(_position_store), "keys": list(_position_store.keys())},
-        "hypothesisId": "H3",
-        "timestamp": __import__("time").time() * 1000,
-    })
+    _write_debug_log({"location": "api_server:get_bot_positions.entry", "message": "positions requested", "data": {"store_keys": list(_position_store.keys()), "store_count": len(_position_store)}, "hypothesisId": "H1", "timestamp": __import__("time").time() * 1000})
     # #endregion
-    return dict(_position_store)
+    c = get_controller()
+    _sync_process_exits(c)
+    # Return only positions for bots that are currently running; remove stale entries from store
+    running_ids = {bid for bid, b in c.bots.items() if b.is_running}
+    for bid in list(_position_store):
+        if bid not in running_ids:
+            _position_store.pop(bid, None)
+    out = {bid: _position_store[bid] for bid in _position_store if bid in running_ids}
+    # Fallback: running bots with no position (no POST and no log parse) get a default so they appear on the map
+    _DEFAULT_MAP_CENTER = (1200, 1200)  # surface, RSC map 2448x2736
+    _MAP_W, _MAP_H = 2448, 2736
+    for bid in running_ids:
+        if bid not in out:
+            h = sum(ord(c) for c in bid) % 400
+            x = _DEFAULT_MAP_CENTER[0] + (h % 201) - 100
+            y = _DEFAULT_MAP_CENTER[1] + ((h * 7) % 201) - 100
+            # Clamp to map pixel bounds.
+            x = max(0, min(_MAP_W - 1, x))
+            y = max(0, min(_MAP_H - 1, y))
+            out[bid] = {
+                "tile_x": x,
+                "tile_y": y,
+                "layer": "surface",
+            }
+    # #region agent log
+    _write_debug_log({"location": "api_server:get_bot_positions.return", "message": "positions response", "data": {"running_ids": list(running_ids), "returned_keys": list(out.keys()), "returned_count": len(out)}, "hypothesisId": "H1_H2", "timestamp": __import__("time").time() * 1000})
+    # #endregion
+    return out
+
+
+# rsc-world-map uses 2448x2736; game coords use TILE_SIZE=3 and X flip (see entity-canvas)
+from core.map_coords import MAP_W as _MAP_W, MAP_H as _MAP_H, game_tile_to_map_pixel
 
 
 class PositionUpdate(BaseModel):
     tile_x: int | None = None
     tile_y: int | None = None
+    # Map pixel coordinates for rsc-world-map overlay (X: 0..2448, Y: 0..2736).
+    # If coordinate_system is "game_tile", tile_x/tile_y are game coords (e.g. client "Coords: 161 607") and are converted to map pixels.
     layer: str | None = None  # surface | floor1 | floor2 | dungeon
+    coordinate_system: str | None = None  # "map_pixel" (default) | "game_tile"
 
 
 @app.post("/api/bots/{bot_id}/position")
 def update_bot_position(bot_id: str, body: PositionUpdate):
-    """Update position for a bot (called by game server poller or client reporter)."""
+    """Update position for a bot.
+
+    Coordinate contract:
+    - tile_x, tile_y: either map pixels (0..2448, 0..2736) or game tiles if coordinate_system="game_tile"
+    - layer: surface | floor1 | floor2 | dungeon
+    - coordinate_system: "map_pixel" (default) or "game_tile" (client coords like "161 607" -> converted to map pixels)
+    """
+    # #region agent log
+    _write_debug_log({"location": "api_server:update_bot_position", "message": "POST position", "data": {"bot_id": bot_id, "tile_x": body.tile_x, "tile_y": body.tile_y, "layer": body.layer}, "hypothesisId": "H4", "timestamp": __import__("time").time() * 1000})
+    # #endregion
     c = get_controller()
     if c.get_bot(bot_id) is None:
         raise HTTPException(status_code=404, detail="Bot not found")
     entry = _position_store.get(bot_id) or {}
-    if body.tile_x is not None:
-        entry["tile_x"] = body.tile_x
-    if body.tile_y is not None:
-        entry["tile_y"] = body.tile_y
+    layer = (body.layer or "surface") or entry.get("layer", "surface")
+
+    tile_x, tile_y = body.tile_x, body.tile_y
+    if tile_x is not None and tile_y is not None and (body.coordinate_system or "").strip().lower() == "game_tile":
+        tile_x, tile_y = game_tile_to_map_pixel(tile_x, tile_y, layer)
+
+    if tile_x is not None:
+        entry["tile_x"] = max(0, min(_MAP_W - 1, tile_x))
+    if tile_y is not None:
+        entry["tile_y"] = max(0, min(_MAP_H - 1, tile_y))
     if body.layer is not None:
         entry["layer"] = body.layer
     _position_store[bot_id] = entry

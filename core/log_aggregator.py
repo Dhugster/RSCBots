@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from .controller import BotController
     from .bot_instance import BotInstance
 
+from .map_coords import game_tile_to_map_pixel
+
 
 class LogAggregator:
     def __init__(self, controller: "BotController") -> None:
@@ -128,6 +130,55 @@ class LogAggregator:
                         bot.metrics.profit += n
                 except ValueError:
                     pass
+
+        # Position for map: parse client "Coords: 161 607" format (game tiles) and convert to map pixels
+        # Also supports: "position: 1234, 5678", "at 1234 5678", "tile 1234 5678", "x:1234 y:5678"
+        is_game_tile_format = False
+        m = None
+        
+        # First, check for client "Coords: X Y" format (game tiles) - this is the primary format from RSC client
+        coord_match = re.search(r"coords?\s*:\s*(\d{1,4})\s+(\d{1,4})", line_lower, re.I)
+        if coord_match:
+            m = coord_match
+            is_game_tile_format = True
+        
+        # Fallback to other position formats (assume map pixels or legacy formats)
+        if not m and any(k in line_lower for k in ("position", "tile", "location", " at ")):
+            m = re.search(
+                r"(?:position|tile|location|at)[:\s]*[\(\[]?\s*(\d{2,5})\s*[,)\]\s]+\s*(\d{2,5})",
+                line_lower,
+                re.I,
+            )
+            if not m:
+                m = re.search(r"[xX][:\s]*(\d{2,5})\s*[yY][:\s]*(\d{2,5})", line_lower)
+        
+        if m:
+            try:
+                x, y = int(m.group(1)), int(m.group(2))
+                layer = "surface"
+                if "dungeon" in line_lower or "underground" in line_lower:
+                    layer = "dungeon"
+                elif "floor" in line_lower or "upstairs" in line_lower:
+                    layer = "floor2" if ("2" in line or "second" in line_lower) else "floor1"
+                
+                # Convert game tiles to map pixels if this is the client "Coords:" format
+                if is_game_tile_format:
+                    map_x, map_y = game_tile_to_map_pixel(x, y, layer)
+                    x, y = map_x, map_y
+                
+                # #region agent log
+                try:
+                    import time
+                    _path = __import__("pathlib").Path(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log")
+                    _path.parent.mkdir(parents=True, exist_ok=True)
+                    with open(_path, "a", encoding="utf-8") as _f:
+                        _f.write(__import__("json").dumps({"location": "log_aggregator:notify_position", "message": "position from log line", "data": {"bot_id": bot.bot_id, "x": x, "y": y, "layer": layer, "was_game_tile": is_game_tile_format}, "hypothesisId": "H4", "timestamp": time.time() * 1000}) + "\n")
+                except Exception:
+                    pass
+                # #endregion
+                self.controller.notify_position(bot.bot_id, x, y, layer)
+            except (ValueError, IndexError):
+                pass
 
     def get_aggregated_logs(self, filters: Optional[dict] = None) -> list[str]:
         """Get logs from all bots, optionally filtered by bot_id."""

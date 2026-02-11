@@ -65,6 +65,20 @@ Then open **http://127.0.0.1:8000** (the script may open it for you). You get a 
 
 **Note:** Always use `python -m uvicorn` (not `uvicorn` alone) so the correct Python and its packages are used. If you use a venv, activate it first in that terminal (e.g. `.venv\Scripts\activate` on Windows).
 
+### Map: live bot positions (world map game layers)
+
+The Map tab can show live bot icons on the **world map game layers** (Surface / 1st / 2nd / Dungeon). The map overlay uses the same coordinate space as `@2003scape/rsc-world-map`:
+
+- **Coordinates**: `tile_x`, `tile_y` are **map pixel** coordinates in **0..2448** (X) and **0..2736** (Y).
+- **Layer**: `layer` is one of `surface`, `floor1`, `floor2`, `dungeon`.
+- **Game coords**: To send the client’s displayed coords (e.g. "Coords: 161 607"), use `"coordinate_system": "game_tile"`; the API converts to map pixels using the same convention as the rsc-world-map overlay.
+
+To feed live positions from a script/client, POST to:
+
+- `POST /api/bots/{bot_id}/position` with JSON body:
+  - Map pixels: `{"tile_x":1234,"tile_y":567,"layer":"surface"}`
+  - Game tiles (e.g. from client): `{"tile_x":161,"tile_y":607,"layer":"surface","coordinate_system":"game_tile"}`
+
 ---
 
 ### Terminal TUI
