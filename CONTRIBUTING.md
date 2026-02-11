@@ -4,16 +4,31 @@ Thanks for your interest in contributing. This project is an unofficial dashboar
 
 ## Running from source
 
+### Requirements
+
+- **Python 3.10+** and **pip**
+- **Node.js 18+** and **npm** (for the web dashboard)
+- **Java 8** (for IdleRSC client)
+
+### Setup
+
 1. Clone the repo and enter the project directory.
-2. Create a virtual environment and install dependencies:
+2. Create a virtual environment and install Python dependencies:
    ```bash
    python -m venv .venv
    .venv\Scripts\activate   # Windows
    pip install -r requirements.txt
    ```
-3. Copy `config/bots.yaml.example` to `config/bots.yaml` and add your own account details (do not commit `bots.yaml`).
-4. Set `idlersc_jar_path` in `config/settings.yaml` to your IdleRSC.jar path.
-5. Run the Dashboard: `python bot_manager.py`
+3. Build the web dashboard (TypeScript + Vite):
+   ```bash
+   cd web
+   npm ci
+   npm run build   # tsc && vite build
+   cd ..
+   ```
+4. Copy `config/bots.yaml.example` to `config/bots.yaml` and add your own account details (do not commit `bots.yaml`).
+5. Set `idlersc_jar_path` in `config/settings.yaml` to your IdleRSC.jar path.
+6. Run the Dashboard: `python bot_manager.py` (TUI) or use `run_app.bat` / `run_app.sh` (web).
 
 ## Adding a task preset
 

@@ -34,6 +34,7 @@ class BotMetrics:
     deaths: int = 0
     trades_completed: int = 0
     total_xp_gained: int = 0
+    profit: int = 0  # gold/coins earned (gp)
 
     def update_xp_rate(self, runtime_seconds: int) -> None:
         """Calculate XP/hr based on runtime."""

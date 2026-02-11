@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#1a1a2e"/>
+  <text x="400" y="300" text-anchor="middle" fill="#8a8278" font-size="18">Dungeon (placeholder)</text>
+  <text x="400" y="330" text-anchor="middle" fill="#6a7268" font-size="12">Replace with real RSC map in public/maps/</text>
+</svg>

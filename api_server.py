@@ -30,6 +30,9 @@ app.add_middleware(
 
 _controller: BotController | None = None
 
+# In-memory position store for map markers: bot_id -> { tile_x, tile_y, layer }
+_position_store: dict[str, dict] = {}
+
 
 def get_controller() -> BotController:
     global _controller
@@ -50,6 +53,8 @@ class BotSummary(BaseModel):
     runtime_formatted: str
     xp_per_hour: float
     items_collected: int
+    total_xp_gained: int = 0
+    profit: int = 0
 
 
 class BotCreate(BaseModel):
@@ -85,6 +90,8 @@ def _bot_to_summary(bot) -> BotSummary:
         runtime_formatted=bot.runtime_formatted,
         xp_per_hour=bot.metrics.xp_per_hour,
         items_collected=bot.metrics.items_collected,
+        total_xp_gained=bot.metrics.total_xp_gained,
+        profit=getattr(bot.metrics, "profit", 0),
     )
 
 
@@ -164,6 +171,35 @@ def stop_bot(bot_id: str):
         return {"ok": True, "bot": _bot_to_summary(c.get_bot(bot_id))}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+@app.get("/api/bots/positions")
+def get_bot_positions():
+    """Return all known bot positions for map markers and layer grouping."""
+    return dict(_position_store)
+
+
+class PositionUpdate(BaseModel):
+    tile_x: int | None = None
+    tile_y: int | None = None
+    layer: str | None = None  # surface | floor1 | floor2 | dungeon
+
+
+@app.post("/api/bots/{bot_id}/position")
+def update_bot_position(bot_id: str, body: PositionUpdate):
+    """Update position for a bot (called by game server poller or client reporter)."""
+    c = get_controller()
+    if c.get_bot(bot_id) is None:
+        raise HTTPException(status_code=404, detail="Bot not found")
+    entry = _position_store.get(bot_id) or {}
+    if body.tile_x is not None:
+        entry["tile_x"] = body.tile_x
+    if body.tile_y is not None:
+        entry["tile_y"] = body.tile_y
+    if body.layer is not None:
+        entry["layer"] = body.layer
+    _position_store[bot_id] = entry
+    return {"ok": True, "position": entry}
 
 
 @app.post("/api/stop-all")
@@ -274,6 +310,37 @@ def apply_preset(body: ApplyPresetBody):
             updated.append(_bot_to_summary(bot))
     c.save_bots_to_config()
     return {"updated": updated}
+
+
+@app.get("/api/analytics/summary")
+def get_analytics_summary():
+    """Aggregates: total XP/hr, items, profit; per-script breakdown."""
+    c = get_controller()
+    total_xp_per_hour = 0.0
+    total_items = 0
+    total_profit = 0
+    by_script: dict[str, dict] = {}
+    for bot in c.bots.values():
+        xp = bot.metrics.xp_per_hour
+        items = bot.metrics.items_collected
+        profit = getattr(bot.metrics, "profit", 0)
+        total_xp_per_hour += xp
+        total_items += items
+        total_profit += profit
+        name = bot.script_name or "(none)"
+        if name not in by_script:
+            by_script[name] = {"bot_ids": [], "count": 0, "xp_per_hour": 0.0, "items_collected": 0, "profit": 0}
+        by_script[name]["bot_ids"].append(bot.bot_id)
+        by_script[name]["count"] += 1
+        by_script[name]["xp_per_hour"] += xp
+        by_script[name]["items_collected"] += items
+        by_script[name]["profit"] += profit
+    return {
+        "total_xp_per_hour": total_xp_per_hour,
+        "total_items_collected": total_items,
+        "total_profit": total_profit,
+        "by_script": by_script,
+    }
 
 
 # Serve built frontend when present (standalone)

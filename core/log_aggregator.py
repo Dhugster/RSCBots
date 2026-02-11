@@ -1,5 +1,7 @@
 """Log aggregation for bot stdout/stderr."""
+import re
 import threading
+from datetime import datetime
 from pathlib import Path
 from typing import TYPE_CHECKING, Optional
 
@@ -90,12 +92,32 @@ class LogAggregator:
         self._log_threads[bot_id] = (t_out, t_err)
 
     def _parse_log_line(self, bot: "BotInstance", line: str) -> None:
-        """Parse log line for metrics (XP, items). Stub for future parsing."""
+        """Parse log line for metrics (XP, items, profit). Updates BotMetrics."""
         line_lower = line.lower()
-        if "gained" in line_lower and "xp" in line_lower:
-            pass
-        if "collected" in line_lower:
-            pass
+        # XP: e.g. "gained 50 xp", "+50 xp", "50 xp gained"
+        if "xp" in line_lower and ("gained" in line_lower or "+" in line):
+            m = re.search(r"(\d+)\s*xp|xp[:\s]*(\d+)", line_lower, re.I)
+            if m:
+                n = int(m.group(1) or m.group(2) or 0)
+                if n > 0:
+                    bot.metrics.total_xp_gained += n
+                    if bot.start_time and bot.is_running:
+                        rt = int((datetime.now() - bot.start_time).total_seconds())
+                        bot.metrics.update_xp_rate(rt)
+        # Items: "collected", "picked up", "loot"
+        if any(k in line_lower for k in ("collected", "picked up", "loot", "picked up")):
+            bot.metrics.items_collected += 1
+        # Profit: "coins", "gold", "gp", "profit" with a number
+        if any(k in line_lower for k in ("coins", "gold", "gp", "profit")):
+            m = re.search(r"(\d[\d,]*)\s*(?:gp|gold|coins?)|(?:gp|gold|coins?)[:\s]*(\d[\d,]*)", line_lower)
+            if m:
+                raw = (m.group(1) or m.group(2) or "0").replace(",", "")
+                try:
+                    n = int(raw)
+                    if n > 0:
+                        bot.metrics.profit += n
+                except ValueError:
+                    pass
 
     def get_aggregated_logs(self, filters: Optional[dict] = None) -> list[str]:
         """Get logs from all bots, optionally filtered by bot_id."""

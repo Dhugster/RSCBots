@@ -11,6 +11,7 @@ This project is **unofficial and community-made**. It is not part of the officia
 - **Python 3.10+**
 - **Java 8** on PATH (for IdleRSC)
 - **IdleRSC.jar** – e.g. on Desktop or a path you set in config
+- **Node.js 18+** (for building the web dashboard; build uses `tsc` and Vite)
 
 For Coleslaw: run `java -jar IdleRSC.jar --init-cache coleslaw` once before using the manager.
 
@@ -24,6 +25,15 @@ python -m venv .venv
 .venv\Scripts\activate   # Windows
 # source .venv/bin/activate   # Linux/macOS
 pip install -r requirements.txt
+```
+
+To build the web dashboard (required for the standalone web app):
+
+```bash
+cd web
+npm ci
+npm run build   # runs tsc && vite build
+cd ..
 ```
 
 ---
@@ -48,8 +58,10 @@ One command builds the web UI and starts the API; open the URL in your browser:
 Then open **http://127.0.0.1:8000** (the script may open it for you). You get a graphical dashboard: bot cards (start/stop, delete), presets, logs, and an “Add account” form.
 
 **Dev mode (API + frontend separate):**
-- Terminal 1: `uvicorn api_server:app --reload --host 127.0.0.1 --port 8000`
+- Terminal 1: `python -m uvicorn api_server:app --reload --host 127.0.0.1 --port 8000`
 - Terminal 2: `cd web && npm run dev` → open http://localhost:5173 (Vite proxies `/api` to the API)
+
+**Note:** Always use `python -m uvicorn` (not `uvicorn` alone) so the correct Python and its packages are used. If you use a venv, activate it first in that terminal (e.g. `.venv\Scripts\activate` on Windows).
 
 ---
 
@@ -88,6 +100,23 @@ Add a bot via CLI:
 ```bash
 python bot_manager.py add-bot --account myacc --username user --password pass --script MiningBot --args iron,al_kharid --auto-start
 ```
+
+---
+
+## Troubleshooting
+
+### "Uvicorn is not recognized" or "No module named 'uvicorn'"
+
+This usually means the terminal is using a different Python than the one where you installed dependencies (e.g. system Python instead of your project venv after a restart).
+
+- **Use the run script:** `run_app.bat` (Windows) or `./run_app.sh` (Linux/macOS) automatically use `.venv` if it exists, so running it from the project root should work.
+- **If you start the server yourself:** Activate the venv in that terminal first, then run:
+  ```bash
+  .venv\Scripts\activate   # Windows
+  # source .venv/bin/activate   # Linux/macOS
+  python -m uvicorn api_server:app --host 127.0.0.1 --port 8000
+  ```
+- **Or install deps into the Python you're using:** `pip install -r requirements.txt`, then `python -m uvicorn api_server:app --host 127.0.0.1 --port 8000`.
 
 ---
 

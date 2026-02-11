@@ -12,15 +12,29 @@ type Bot = {
   runtime_formatted: string
   xp_per_hour: number
   items_collected: number
+  total_xp_gained?: number
+  profit?: number
+}
+
+type Position = { tile_x: number; tile_y: number; layer: string }
+type Positions = Record<string, Position>
+
+type AnalyticsSummary = {
+  total_xp_per_hour: number
+  total_items_collected: number
+  total_profit: number
+  by_script: Record<string, { bot_ids: string[]; count: number; xp_per_hour: number; items_collected: number; profit: number }>
 }
 
 type Preset = { name: string; script: string; args: string[] }
 
 let bots: Bot[] = []
+let positions: Positions = {}
 let presets: Preset[] = []
 let scriptsList: string[] = []
 let selectedIds = new Set<string>()
 let logViewCleared = false
+let mapPollTimer: number | null = null
 
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
   const r = await fetch(API + path, { ...opts, headers: { 'Content-Type': 'application/json', ...opts?.headers } })
@@ -130,6 +144,7 @@ function render() {
   root.innerHTML = ''
   const el = document.createElement('div')
   el.className = 'dashboard'
+  renderNav(el)
 
   const header = document.createElement('header')
   header.className = 'header'
@@ -336,6 +351,314 @@ function escapeHtml(s: string): string {
   return div.innerHTML
 }
 
+function getRoute(): 'dashboard' | 'map' | 'analytics' {
+  const h = window.location.hash.replace(/^#\/?/, '') || 'dashboard'
+  if (h === 'map') return 'map'
+  if (h === 'analytics') return 'analytics'
+  return 'dashboard'
+}
+
+function renderNav(container: HTMLElement) {
+  const nav = document.createElement('nav')
+  nav.className = 'top-nav'
+  const r = getRoute()
+  nav.innerHTML = `
+    <a href="#/" class="nav-link ${r === 'dashboard' ? 'active' : ''}">Dashboard</a>
+    <a href="#/map" class="nav-link ${r === 'map' ? 'active' : ''}">Map</a>
+    <a href="#/analytics" class="nav-link ${r === 'analytics' ? 'active' : ''}">Analytics</a>
+  `
+  container.appendChild(nav)
+}
+
+async function loadPositions(): Promise<Positions> {
+  try {
+    positions = await api<Positions>('/bots/positions')
+  } catch {
+    positions = {}
+  }
+  return positions
+}
+
+// --- Map view ---
+const MAP_LAYERS = [
+  { id: 'surface', label: 'Surface', file: '/maps/surface.svg' },
+  { id: 'floor1', label: '1st Floor', file: '/maps/floor1.svg' },
+  { id: 'floor2', label: '2nd Floor', file: '/maps/floor2.svg' },
+  { id: 'dungeon', label: 'Dungeon', file: '/maps/dungeon.svg' },
+]
+
+function renderMapView() {
+  const root = document.querySelector<HTMLDivElement>('#app')!
+  root.innerHTML = ''
+  const el = document.createElement('div')
+  el.className = 'map-page'
+  renderNav(el)
+
+  let currentLayer = 'surface'
+  const runningBots = bots.filter(b => b.status === 'running')
+  const byLayer: Record<string, Bot[]> = { surface: [], floor1: [], floor2: [], dungeon: [] }
+  for (const b of runningBots) {
+    const pos = positions[b.bot_id]
+    const layer = (pos?.layer || 'surface') as keyof typeof byLayer
+    if (byLayer[layer]) byLayer[layer].push(b)
+    else byLayer.surface.push(b)
+  }
+
+  const totalsXp = runningBots.reduce((s, b) => s + (b.xp_per_hour || 0), 0)
+  const totalsItems = runningBots.reduce((s, b) => s + (b.items_collected || 0), 0)
+  const totalsProfit = runningBots.reduce((s, b) => s + ((b as Bot).profit ?? 0), 0)
+
+  const header = document.createElement('header')
+  header.className = 'map-header'
+  header.innerHTML = `
+    <h1>World Map</h1>
+    <a href="#/analytics" class="map-totals">Total: ${formatXp(totalsXp)}/hr | ${totalsItems} items | ${formatProfit(totalsProfit)} gp</a>
+  `
+  el.appendChild(header)
+
+  const mapWrap = document.createElement('div')
+  mapWrap.className = 'map-wrap'
+  const mapContainer = document.createElement('div')
+  mapContainer.className = 'map-container'
+  const mapImg = document.createElement('img')
+  mapImg.alt = 'Map'
+  mapImg.className = 'map-image'
+  function setLayer(layer: string) {
+    currentLayer = layer
+    const spec = MAP_LAYERS.find(l => l.id === layer) || MAP_LAYERS[0]
+    mapImg.src = spec.file
+    mapContainer.querySelectorAll('.layer-btn').forEach((btn) => {
+      (btn as HTMLElement).classList.toggle('active', (btn as HTMLElement).dataset.layer === layer)
+    })
+    mapContainer.querySelectorAll('.map-marker').forEach((m) => {
+      const layerMatch = (m as HTMLElement).dataset.layer === layer
+      ;(m as HTMLElement).style.display = layerMatch ? '' : 'none'
+    })
+  }
+  setLayer('surface')
+  mapContainer.appendChild(mapImg)
+
+  const layerBtns = document.createElement('div')
+  layerBtns.className = 'layer-btns'
+  MAP_LAYERS.forEach((l) => {
+    const count = byLayer[l.id as keyof typeof byLayer]?.length ?? 0
+    const btn = document.createElement('button')
+    btn.type = 'button'
+    btn.className = 'layer-btn'
+    btn.dataset.layer = l.id
+    btn.textContent = count > 0 ? `${l.label} (${count})` : l.label
+    if (l.id === currentLayer) btn.classList.add('active')
+    btn.onclick = () => setLayer(l.id)
+    layerBtns.appendChild(btn)
+  })
+  mapContainer.appendChild(layerBtns)
+
+  const tileInfo = document.createElement('div')
+  tileInfo.className = 'map-tile-info'
+  tileInfo.textContent = 'Tile: —'
+  mapContainer.appendChild(tileInfo)
+
+  // Markers (placeholder positions if no position store: use index for demo)
+  const scale = 0.4
+  Object.entries(positions).forEach(([bid, pos]) => {
+    if (pos.layer !== currentLayer) return
+    const bot = bots.find(b => b.bot_id === bid)
+    const mx = 100 + (pos.tile_x % 700) * scale
+    const my = 80 + (pos.tile_y % 500) * scale
+    const marker = document.createElement('div')
+    marker.className = 'map-marker'
+    marker.dataset.botId = bid
+    marker.dataset.layer = pos.layer
+    marker.style.left = `${mx}px`
+    marker.style.top = `${my}px`
+    marker.title = bot?.username || bid
+    marker.textContent = bot?.username || bid
+    marker.onclick = (e) => {
+      e.stopPropagation()
+      renderMapPopup(el, bot || undefined)
+    }
+    mapContainer.appendChild(marker)
+  })
+
+  mapWrap.appendChild(mapContainer)
+
+  const sidebar = document.createElement('aside')
+  sidebar.className = 'map-sidebar'
+  sidebar.innerHTML = '<h3>World Map</h3><div class="sidebar-tabs"><span class="tab active">Players</span></div>'
+  const playerList = document.createElement('div')
+  playerList.className = 'player-list'
+  const groups = [
+    { label: 'SURFACE', layer: 'surface' },
+    { label: 'DUNGEON', layer: 'dungeon' },
+    { label: '1ST FLOOR', layer: 'floor1' },
+    { label: '2ND FLOOR', layer: 'floor2' },
+  ]
+  groups.forEach(({ label, layer }) => {
+    const list = byLayer[layer as keyof typeof byLayer] || []
+    if (list.length === 0) return
+    const heading = document.createElement('div')
+    heading.className = 'player-group-label'
+    heading.textContent = `${label} (${list.length})`
+    playerList.appendChild(heading)
+    list.forEach((b) => {
+      const row = document.createElement('div')
+      row.className = 'player-row'
+      row.dataset.botId = b.bot_id
+      const tag = layer === 'surface' ? 'Sfc' : layer === 'dungeon' ? 'Dng' : layer === 'floor1' ? 'F1' : 'F2'
+      row.innerHTML = `
+        <span class="player-dot running"></span>
+        <span class="player-name">${escapeHtml(b.username)}</span>
+        <span class="player-xp">${formatXp(b.xp_per_hour || 0)}/h</span>
+        <span class="player-script">${escapeHtml(b.script_name || '—')}</span>
+        <span class="player-tag">${tag}</span>
+      `
+      row.onclick = () => renderMapPopup(el, b)
+      playerList.appendChild(row)
+    })
+  })
+  if (playerList.children.length === 0) {
+    playerList.innerHTML = '<p class="dim">No running bots. Start bots from Dashboard.</p>'
+  }
+  sidebar.appendChild(playerList)
+  mapWrap.appendChild(sidebar)
+  el.appendChild(mapWrap)
+
+  root.appendChild(el)
+}
+
+function renderMapPopup(parent: HTMLElement, bot: Bot | undefined) {
+  parent.querySelectorAll('.map-popup').forEach((p) => p.remove())
+  if (!bot) return
+  const pos = positions[bot.bot_id]
+  const popup = document.createElement('div')
+  popup.className = 'map-popup'
+  popup.innerHTML = `
+    <div class="map-popup-inner">
+      <h4>${escapeHtml(bot.username)}</h4>
+      <p><strong>Position</strong> ${pos ? `(${pos.tile_x}, ${pos.tile_y}) [${pos.layer}]` : '—'}</p>
+      <p><strong>Script</strong> ${escapeHtml(bot.script_name || '—')}</p>
+      <p><strong>Status</strong> ${escapeHtml(bot.status)}</p>
+      <p><strong>XP/hr</strong> ${formatXp(bot.xp_per_hour || 0)}</p>
+      <p><strong>Items</strong> ${bot.items_collected ?? 0}</p>
+      <p><strong>Profit</strong> ${formatProfit((bot as Bot).profit ?? 0)} gp</p>
+      <p><strong>Skills</strong> —</p>
+      <p><strong>Inventory</strong> —</p>
+      <button type="button" class="btn btn-ghost btn-sm popup-close">Close</button>
+    </div>
+  `
+  popup.querySelector('.popup-close')?.addEventListener('click', () => popup.remove())
+  parent.appendChild(popup)
+}
+
+function formatXp(n: number): string {
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K'
+  return String(Math.round(n))
+}
+
+function formatProfit(n: number): string {
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K'
+  return String(n)
+}
+
+// --- Analytics view ---
+function renderAnalyticsView() {
+  const root = document.querySelector<HTMLDivElement>('#app')!
+  root.innerHTML = ''
+  const el = document.createElement('div')
+  el.className = 'analytics-page'
+  renderNav(el)
+
+  let summary: AnalyticsSummary = {
+    total_xp_per_hour: 0,
+    total_items_collected: 0,
+    total_profit: 0,
+    by_script: {},
+  }
+  api<AnalyticsSummary>('/analytics/summary').then((s) => { summary = s; renderAnalyticsContent(el, summary) }).catch(() => {})
+
+  const header = document.createElement('header')
+  header.className = 'analytics-header'
+  header.innerHTML = '<h1>Analytics</h1>'
+  el.appendChild(header)
+
+  const content = document.createElement('main')
+  content.className = 'analytics-content'
+  content.id = 'analytics-content'
+  el.appendChild(content)
+  renderAnalyticsContent(el, summary)
+  root.appendChild(el)
+}
+
+function renderAnalyticsContent(container: HTMLElement, summary: AnalyticsSummary) {
+  const content = container.querySelector('#analytics-content')
+  if (!content) return
+  content.innerHTML = ''
+  const cards = document.createElement('div')
+  cards.className = 'analytics-cards'
+  cards.innerHTML = `
+    <div class="card"><span class="card-value">${formatXp(summary.total_xp_per_hour)}</span><span class="card-label">Total XP/hr</span></div>
+    <div class="card"><span class="card-value">${summary.total_items_collected}</span><span class="card-label">Items collected</span></div>
+    <div class="card"><span class="card-value">${formatProfit(summary.total_profit)}</span><span class="card-label">Profit (gp)</span></div>
+  `
+  content.appendChild(cards)
+
+  const perBot = document.createElement('section')
+  perBot.className = 'analytics-section'
+  perBot.innerHTML = '<h2>Per bot</h2>'
+  const botTable = document.createElement('table')
+  botTable.className = 'analytics-table'
+  botTable.innerHTML = `
+    <thead><tr>
+      <th>Bot</th><th>Script</th><th>Status</th><th>Runtime</th>
+      <th>XP/hr</th><th>Total XP</th><th>Items</th><th>Profit</th>
+    </tr></thead>
+    <tbody></tbody>
+  `
+  const tbody = botTable.querySelector('tbody')!
+  bots.forEach((b) => {
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td>${escapeHtml(b.bot_id)}</td>
+      <td>${escapeHtml(b.script_name || '—')}</td>
+      <td><span style="color:${statusColor(b.status)}">${escapeHtml(b.status)}</span></td>
+      <td>${escapeHtml(b.runtime_formatted)}</td>
+      <td>${formatXp(b.xp_per_hour || 0)}</td>
+      <td>${(b as Bot).total_xp_gained ?? 0}</td>
+      <td>${b.items_collected ?? 0}</td>
+      <td>${formatProfit((b as Bot).profit ?? 0)}</td>
+    `
+    tbody.appendChild(tr)
+  })
+  perBot.appendChild(botTable)
+  content.appendChild(perBot)
+
+  const perScript = document.createElement('section')
+  perScript.className = 'analytics-section'
+  perScript.innerHTML = '<h2>Per script</h2>'
+  const scriptTable = document.createElement('table')
+  scriptTable.className = 'analytics-table'
+  scriptTable.innerHTML = `
+    <thead><tr>
+      <th>Script</th><th>Bots</th><th>XP/hr</th><th>Items</th><th>Profit</th>
+    </tr></thead>
+    <tbody></tbody>
+  `
+  const stbody = scriptTable.querySelector('tbody')!
+  Object.entries(summary.by_script).forEach(([name, data]) => {
+    const tr = document.createElement('tr')
+    tr.innerHTML = `
+      <td>${escapeHtml(name)}</td>
+      <td>${data.count}</td>
+      <td>${formatXp(data.xp_per_hour)}</td>
+      <td>${data.items_collected}</td>
+      <td>${formatProfit(data.profit)}</td>
+    `
+    stbody.appendChild(tr)
+  })
+  perScript.appendChild(scriptTable)
+  content.appendChild(perScript)
+}
+
 async function init() {
   try {
     await loadScripts()
@@ -350,8 +673,42 @@ async function init() {
         <p><small>${escapeHtml((e as Error).message)}</small></p>
       </div>
     `
+    return
   }
+
+  function renderCurrent() {
+    const route = getRoute()
+    if (mapPollTimer != null) {
+      clearInterval(mapPollTimer)
+      mapPollTimer = null
+    }
+    if (route === 'dashboard') {
+      render()
+    } else if (route === 'map') {
+      loadPositions().then(() => renderMapView())
+      mapPollTimer = window.setInterval(async () => {
+        await loadBots()
+        await loadPositions()
+        if (getRoute() === 'map') renderMapView()
+      }, 8000) as unknown as number
+    } else if (route === 'analytics') {
+      renderAnalyticsView()
+      mapPollTimer = window.setInterval(async () => {
+        await loadBots()
+        if (getRoute() === 'analytics') {
+          const summary = await api<AnalyticsSummary>('/analytics/summary').catch(() => ({
+            total_xp_per_hour: 0, total_items_collected: 0, total_profit: 0, by_script: {}
+          }))
+          const container = document.querySelector<HTMLElement>('.analytics-page')
+          if (container) renderAnalyticsContent(container, summary)
+        }
+      }, 8000) as unknown as number
+    }
+  }
+
+  window.addEventListener('hashchange', renderCurrent)
+  renderCurrent()
 }
 
 init()
-setInterval(() => loadBots(), 15000)
+setInterval(() => { if (getRoute() === 'dashboard') loadBots(); }, 15000)
