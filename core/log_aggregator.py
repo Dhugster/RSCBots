@@ -116,7 +116,10 @@ class LogAggregator:
             bot.metrics.items_collected += 1
         # Profit: "coins", "gold", "gp", "profit" with a number
         if any(k in line_lower for k in ("coins", "gold", "gp", "profit")):
-            m = re.search(r"(\d[\d,]*)\s*(?:gp|gold|coins?)|(?:gp|gold|coins?)[:\s]*(\d[\d,]*)", line_lower)
+            m = re.search(
+                r"(\d[\d,]*)\s*(?:gp|gold|coins?)|(?:gp|gold|coins?|profit)[:\s]*(\d[\d,]*)",
+                line_lower,
+            )
             if m:
                 raw = (m.group(1) or m.group(2) or "0").replace(",", "")
                 try:

@@ -1,0 +1,4176 @@
+{
+  "generated": "2026-02-11T04:25:54.751Z",
+  "source": "https://classic.runescape.wiki",
+  "categories": {
+    "world": [
+      {
+        "id": "world-map-2017",
+        "displayName": "World Map (2017)",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/World_Map_%282017%29.png?847ac",
+            "width": 2304,
+            "height": 2443,
+            "subLabel": null,
+            "filename": "World_Map_(2017).png"
+          }
+        ]
+      },
+      {
+        "id": "map-early-january-2001",
+        "displayName": "Map-Early-January-2001",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map-Early-January-2001.gif?bd17d",
+            "width": 569,
+            "height": 852,
+            "subLabel": null,
+            "filename": "Map-Early-January-2001.gif"
+          }
+        ]
+      },
+      {
+        "id": "map-february-2001",
+        "displayName": "Map-February-2001",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map-February-2001.gif?109de",
+            "width": 570,
+            "height": 856,
+            "subLabel": null,
+            "filename": "Map-February-2001.gif"
+          }
+        ]
+      },
+      {
+        "id": "map1",
+        "displayName": "Map1",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map1.gif?bd040",
+            "width": 855,
+            "height": 855,
+            "subLabel": "Map 1",
+            "filename": "Map1.gif"
+          }
+        ]
+      },
+      {
+        "id": "map10",
+        "displayName": "Map10",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map10.gif?963a7",
+            "width": 1872,
+            "height": 864,
+            "subLabel": "Map 10",
+            "filename": "Map10.gif"
+          }
+        ]
+      },
+      {
+        "id": "map11",
+        "displayName": "Map11",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map11.gif?31833",
+            "width": 2152,
+            "height": 1007,
+            "subLabel": "Map 11",
+            "filename": "Map11.gif"
+          }
+        ]
+      },
+      {
+        "id": "map2",
+        "displayName": "Map2",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map2.gif?e90ee",
+            "width": 855,
+            "height": 855,
+            "subLabel": "Map 2",
+            "filename": "Map2.gif"
+          }
+        ]
+      },
+      {
+        "id": "map5",
+        "displayName": "Map5",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map5.gif?945f3",
+            "width": 855,
+            "height": 975,
+            "subLabel": "Map 5",
+            "filename": "Map5.gif"
+          }
+        ]
+      },
+      {
+        "id": "map6",
+        "displayName": "Map6",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map6.gif?95f8c",
+            "width": 855,
+            "height": 975,
+            "subLabel": "Map 6",
+            "filename": "Map6.gif"
+          }
+        ]
+      },
+      {
+        "id": "map7",
+        "displayName": "Map7",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map7.gif?c18a3",
+            "width": 1440,
+            "height": 864,
+            "subLabel": "Map 7",
+            "filename": "Map7.gif"
+          }
+        ]
+      },
+      {
+        "id": "map8",
+        "displayName": "Map8",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map8.gif?330be",
+            "width": 1729,
+            "height": 864,
+            "subLabel": "Map 8",
+            "filename": "Map8.gif"
+          }
+        ]
+      },
+      {
+        "id": "map9",
+        "displayName": "Map9",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map9.gif?d4060",
+            "width": 1729,
+            "height": 864,
+            "subLabel": "Map 9",
+            "filename": "Map9.gif"
+          }
+        ]
+      },
+      {
+        "id": "mapkey-init",
+        "displayName": "Mapkey init",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey_init.gif?8a68a",
+            "width": 569,
+            "height": 86,
+            "subLabel": null,
+            "filename": "Mapkey_init.gif"
+          }
+        ]
+      },
+      {
+        "id": "mapkey2",
+        "displayName": "Mapkey2",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey2.gif?cd339",
+            "width": 569,
+            "height": 103,
+            "subLabel": null,
+            "filename": "Mapkey2.gif"
+          }
+        ]
+      },
+      {
+        "id": "mapkey3",
+        "displayName": "Mapkey3",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey3.gif?1ac54",
+            "width": 855,
+            "height": 103,
+            "subLabel": null,
+            "filename": "Mapkey3.gif"
+          }
+        ]
+      },
+      {
+        "id": "mapkey5",
+        "displayName": "Mapkey5",
+        "type": "world",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey5.gif?e7a7a",
+            "width": 408,
+            "height": 284,
+            "subLabel": null,
+            "filename": "Mapkey5.gif"
+          }
+        ]
+      }
+    ],
+    "dungeons": [
+      {
+        "id": "ardougne-sewers",
+        "displayName": "Ardougne sewers",
+        "type": "dungeons",
+        "mapCount": 4,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_1.png?7df78",
+            "width": 458,
+            "height": 554,
+            "subLabel": "Map 1",
+            "filename": "Ardougne_sewers_map_1.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_2.png?19e40",
+            "width": 314,
+            "height": 302,
+            "subLabel": "Map 2",
+            "filename": "Ardougne_sewers_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_3.png?163f9",
+            "width": 302,
+            "height": 226,
+            "subLabel": "Map 3",
+            "filename": "Ardougne_sewers_map_3.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne_sewers_entrances_map.png?519c5",
+            "width": 570,
+            "height": 417,
+            "subLabel": "Entrances",
+            "filename": "Ardougne_sewers_entrances_map.png"
+          }
+        ]
+      },
+      {
+        "id": "asgarnia-ice-dungeon",
+        "displayName": "Asgarnia Ice dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Asgarnia_Ice_dungeon_map.png?4c53e",
+            "width": 203,
+            "height": 229,
+            "subLabel": null,
+            "filename": "Asgarnia_Ice_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "deep-wilderness-dungeon",
+        "displayName": "Deep Wilderness dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Deep_Wilderness_dungeon_map.png?2a0dd",
+            "width": 210,
+            "height": 286,
+            "subLabel": null,
+            "filename": "Deep_Wilderness_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "digsite-dungeon",
+        "displayName": "Digsite dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Digsite_dungeon_map.png?6a1fa",
+            "width": 254,
+            "height": 306,
+            "subLabel": null,
+            "filename": "Digsite_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "dwarven-tunnel",
+        "displayName": "Dwarven tunnel",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Dwarven_tunnel_map.png?b9c11",
+            "width": 207,
+            "height": 76,
+            "subLabel": null,
+            "filename": "Dwarven_tunnel_map.png"
+          }
+        ]
+      },
+      {
+        "id": "edgeville-dungeon-wilderness",
+        "displayName": "Edgeville dungeon wilderness",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Edgeville_dungeon_wilderness_map.png?ec862",
+            "width": 205,
+            "height": 277,
+            "subLabel": null,
+            "filename": "Edgeville_dungeon_wilderness_map.png"
+          }
+        ]
+      },
+      {
+        "id": "edgeville-dungeon-incomplete",
+        "displayName": "Edgeville Dungeon-incomplete",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Edgeville_Dungeon-incomplete.png?efe17",
+            "width": 240,
+            "height": 351,
+            "subLabel": null,
+            "filename": "Edgeville_Dungeon-incomplete.png"
+          }
+        ]
+      },
+      {
+        "id": "entrana-dungeon",
+        "displayName": "Entrana dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Entrana_dungeon_map.png?dfa25",
+            "width": 296,
+            "height": 418,
+            "subLabel": null,
+            "filename": "Entrana_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "glarial-s-tomb",
+        "displayName": "Glarial's tomb",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Glarial%27s_tomb_map.png?6a09f",
+            "width": 109,
+            "height": 117,
+            "subLabel": null,
+            "filename": "Glarial's_tomb_map.png"
+          }
+        ]
+      },
+      {
+        "id": "gnome-village-dungeon",
+        "displayName": "Gnome Village Dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Gnome_Village_Dungeon_map.png?80769",
+            "width": 183,
+            "height": 144,
+            "subLabel": null,
+            "filename": "Gnome_Village_Dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "goblin-cave",
+        "displayName": "Goblin Cave",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Goblin_Cave_map.png?dc206",
+            "width": 243,
+            "height": 242,
+            "subLabel": null,
+            "filename": "Goblin_Cave_map.png"
+          }
+        ]
+      },
+      {
+        "id": "grand-tree-dungeon",
+        "displayName": "Grand Tree dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Grand_Tree_dungeon_map.png?c7eb8",
+            "width": 190,
+            "height": 208,
+            "subLabel": null,
+            "filename": "Grand_Tree_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "hazeel-cult-base",
+        "displayName": "Hazeel Cult base",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Hazeel_Cult_base_map.png?1c632",
+            "width": 312,
+            "height": 294,
+            "subLabel": null,
+            "filename": "Hazeel_Cult_base_map.png"
+          }
+        ]
+      },
+      {
+        "id": "ice-queen-maze",
+        "displayName": "Ice Queen Maze",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ice_Queen_Maze_map.png?9b6a1",
+            "width": 374,
+            "height": 282,
+            "subLabel": null,
+            "filename": "Ice_Queen_Maze_map.png"
+          }
+        ]
+      },
+      {
+        "id": "jogre-dungeon",
+        "displayName": "Jogre dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Jogre_dungeon_map.png?e5967",
+            "width": 149,
+            "height": 140,
+            "subLabel": null,
+            "filename": "Jogre_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "karamja-volcano",
+        "displayName": "Karamja Volcano",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Karamja_Volcano_Map.png?5a3cd",
+            "width": 380,
+            "height": 800,
+            "subLabel": null,
+            "filename": "Karamja_Volcano_Map.png"
+          }
+        ]
+      },
+      {
+        "id": "king-black-dragon-lair",
+        "displayName": "King Black Dragon lair",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/King_Black_Dragon_lair_map.png?91d89",
+            "width": 63,
+            "height": 100,
+            "subLabel": null,
+            "filename": "King_Black_Dragon_lair_map.png"
+          }
+        ]
+      },
+      {
+        "id": "lava-maze-dungeon",
+        "displayName": "Lava Maze dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Lava_Maze_dungeon_map.png?390b1",
+            "width": 207,
+            "height": 176,
+            "subLabel": null,
+            "filename": "Lava_Maze_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "legend-s-guild-dungeon",
+        "displayName": "Legend's Guild Dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Legend%27s_Guild_Dungeon.png?c20fe",
+            "width": 339,
+            "height": 344,
+            "subLabel": null,
+            "filename": "Legend's_Guild_Dungeon.png"
+          }
+        ]
+      },
+      {
+        "id": "legends-caverns",
+        "displayName": "Legends caverns",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Legends_caverns_map.png?6d8a4",
+            "width": 406,
+            "height": 436,
+            "subLabel": null,
+            "filename": "Legends_caverns_map.png"
+          }
+        ]
+      },
+      {
+        "id": "mage-arena",
+        "displayName": "Mage Arena",
+        "type": "dungeons",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mage_Arena_Map_2.png?5a15a",
+            "width": 250,
+            "height": 204,
+            "subLabel": "Map 2",
+            "filename": "Mage_Arena_Map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Mage_Arena_Map_3.png?7d060",
+            "width": 91,
+            "height": 151,
+            "subLabel": "Map 3",
+            "filename": "Mage_Arena_Map_3.png"
+          }
+        ]
+      },
+      {
+        "id": "observatory-dungeon",
+        "displayName": "Observatory dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Observatory_dungeon_map.png?1b46b",
+            "width": 380,
+            "height": 220,
+            "subLabel": null,
+            "filename": "Observatory_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "ogre-enclave",
+        "displayName": "Ogre Enclave",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ogre_Enclave_map.png?326f3",
+            "width": 233,
+            "height": 233,
+            "subLabel": null,
+            "filename": "Ogre_Enclave_map.png"
+          }
+        ]
+      },
+      {
+        "id": "pillars-of-zanash-dungeon",
+        "displayName": "Pillars of Zanash dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Pillars_of_Zanash_dungeon_map.png?ba962",
+            "width": 157,
+            "height": 154,
+            "subLabel": null,
+            "filename": "Pillars_of_Zanash_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "skavid-caves",
+        "displayName": "Skavid caves",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Skavid_caves_map.png?ecdc6",
+            "width": 241,
+            "height": 229,
+            "subLabel": null,
+            "filename": "Skavid_caves_map.png"
+          }
+        ]
+      },
+      {
+        "id": "taverley-dungeon",
+        "displayName": "Taverley dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Taverley_dungeon_map.png?10784",
+            "width": 474,
+            "height": 604,
+            "subLabel": null,
+            "filename": "Taverley_dungeon_map.png"
+          }
+        ]
+      },
+      {
+        "id": "temple-of-ikov",
+        "displayName": "Temple of Ikov",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Temple_of_Ikov_map.png?828d9",
+            "width": 429,
+            "height": 456,
+            "subLabel": null,
+            "filename": "Temple_of_Ikov_map.png"
+          }
+        ]
+      },
+      {
+        "id": "underground-pass",
+        "displayName": "Underground Pass",
+        "type": "dungeons",
+        "mapCount": 5,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Underground_Pass_map_1.png?963f3",
+            "width": 389,
+            "height": 214,
+            "subLabel": "Map 1",
+            "filename": "Underground_Pass_map_1.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Underground_Pass_map_2.png?89719",
+            "width": 221,
+            "height": 219,
+            "subLabel": "Map 2",
+            "filename": "Underground_Pass_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Underground_Pass_map_3.png?db606",
+            "width": 218,
+            "height": 174,
+            "subLabel": "Map 3",
+            "filename": "Underground_Pass_map_3.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Underground_Pass_Pit_map.png?d75a4",
+            "width": 243,
+            "height": 477,
+            "subLabel": "Pit",
+            "filename": "Underground_Pass_Pit_map.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Underground_Pass_Platforms_map.png?b738d",
+            "width": 282,
+            "height": 708,
+            "subLabel": "Platforms",
+            "filename": "Underground_Pass_Platforms_map.png"
+          }
+        ]
+      },
+      {
+        "id": "varrock-sewers",
+        "displayName": "Varrock Sewers",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Varrock_Sewers_Map.png?6ee7c",
+            "width": 437,
+            "height": 241,
+            "subLabel": null,
+            "filename": "Varrock_Sewers_Map.png"
+          }
+        ]
+      },
+      {
+        "id": "waterfall-dungeon",
+        "displayName": "Waterfall dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Waterfall_dungeon.png?a60f4",
+            "width": 492,
+            "height": 632,
+            "subLabel": null,
+            "filename": "Waterfall_dungeon.png"
+          }
+        ]
+      },
+      {
+        "id": "wizards-guild",
+        "displayName": "Wizards' Guild",
+        "type": "dungeons",
+        "mapCount": 3,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_basement.png?a1939",
+            "width": 62,
+            "height": 64,
+            "subLabel": "Basement",
+            "filename": "Wizards'_Guild_basement.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_map_2.png?b6429",
+            "width": 65,
+            "height": 63,
+            "subLabel": "Map 2",
+            "filename": "Wizards'_Guild_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_map_3.png?d22eb",
+            "width": 63,
+            "height": 59,
+            "subLabel": "Map 3",
+            "filename": "Wizards'_Guild_map_3.png"
+          }
+        ]
+      },
+      {
+        "id": "yanille-agility-dungeon",
+        "displayName": "Yanille agility dungeon",
+        "type": "dungeons",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Yanille_agility_dungeon_map.png?5d154",
+            "width": 410,
+            "height": 425,
+            "subLabel": null,
+            "filename": "Yanille_agility_dungeon_map.png"
+          }
+        ]
+      }
+    ],
+    "buildings": [
+      {
+        "id": "black-arm-gang-hideout",
+        "displayName": "Black Arm Gang Hideout",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Black_Arm_Gang_Hideout_map_1.png?54234",
+            "width": 156,
+            "height": 151,
+            "subLabel": "Map 1",
+            "filename": "Black_Arm_Gang_Hideout_map_1.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Black_Arm_Gang_Hideout_map_2.png?326dd",
+            "width": 101,
+            "height": 133,
+            "subLabel": "Map 2",
+            "filename": "Black_Arm_Gang_Hideout_map_2.png"
+          }
+        ]
+      },
+      {
+        "id": "draynor-manor",
+        "displayName": "Draynor Manor",
+        "type": "buildings",
+        "mapCount": 3,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Draynor_Manor_basement.png?dc240",
+            "width": 255,
+            "height": 119,
+            "subLabel": "Basement",
+            "filename": "Draynor_Manor_basement.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Draynor_Manor_map_2.png?e9b2e",
+            "width": 135,
+            "height": 79,
+            "subLabel": "Map 2",
+            "filename": "Draynor_Manor_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Draynor_Manor_map_3.png?0b12d",
+            "width": 95,
+            "height": 68,
+            "subLabel": "Map 3",
+            "filename": "Draynor_Manor_map_3.png"
+          }
+        ]
+      },
+      {
+        "id": "fishing-guild",
+        "displayName": "Fishing Guild",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Fishing_Guild_map.png?decd6",
+            "width": 231,
+            "height": 287,
+            "subLabel": null,
+            "filename": "Fishing_Guild_map.png"
+          }
+        ]
+      },
+      {
+        "id": "keep-lefaye",
+        "displayName": "Keep LeFaye",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Keep_LeFaye_map_2.png?369d9",
+            "width": 91,
+            "height": 83,
+            "subLabel": "Map 2",
+            "filename": "Keep_LeFaye_map_2.png"
+          }
+        ]
+      },
+      {
+        "id": "lava-maze",
+        "displayName": "Lava Maze",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Lava_Maze_map.png?38cd4",
+            "width": 332,
+            "height": 280,
+            "subLabel": null,
+            "filename": "Lava_Maze_map.png"
+          }
+        ]
+      },
+      {
+        "id": "legends-guild",
+        "displayName": "Legends' Guild",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Legends%27_Guild_map_2.png?2e912",
+            "width": 145,
+            "height": 147,
+            "subLabel": "Map 2",
+            "filename": "Legends'_Guild_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Legends%27_Guild_map_3.png?c56f0",
+            "width": 140,
+            "height": 134,
+            "subLabel": "Map 3",
+            "filename": "Legends'_Guild_map_3.png"
+          }
+        ]
+      },
+      {
+        "id": "mapmaze",
+        "displayName": "Mapmaze",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapmaze.png?ae99e",
+            "width": 196,
+            "height": 174,
+            "subLabel": null,
+            "filename": "Mapmaze.png"
+          }
+        ]
+      },
+      {
+        "id": "melzar-s-maze",
+        "displayName": "Melzar's Maze",
+        "type": "buildings",
+        "mapCount": 4,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_basement_map.jpg?87146",
+            "width": 310,
+            "height": 350,
+            "subLabel": "Basement",
+            "filename": "Melzar's_Maze_basement_map.jpg"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_first_floor_map.jpg?da6ce",
+            "width": 295,
+            "height": 310,
+            "subLabel": "First floor",
+            "filename": "Melzar's_Maze_first_floor_map.jpg"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_ground_floor_map.png?65fb6",
+            "width": 366,
+            "height": 402,
+            "subLabel": "Ground floor",
+            "filename": "Melzar's_Maze_ground_floor_map.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_second_floor_map.jpg?13e90",
+            "width": 290,
+            "height": 315,
+            "subLabel": "Second floor",
+            "filename": "Melzar's_Maze_second_floor_map.jpg"
+          }
+        ]
+      },
+      {
+        "id": "phoenix-gang-hideout",
+        "displayName": "Phoenix Gang Hideout",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Phoenix_Gang_Hideout_entrance_map.png?1da12",
+            "width": 154,
+            "height": 150,
+            "subLabel": "Entrance",
+            "filename": "Phoenix_Gang_Hideout_entrance_map.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Phoenix_Gang_Hideout_map.png?e9128",
+            "width": 134,
+            "height": 120,
+            "subLabel": "Map",
+            "filename": "Phoenix_Gang_Hideout_map.png"
+          }
+        ]
+      },
+      {
+        "id": "sinclair-mansion",
+        "displayName": "Sinclair Mansion",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Sinclair_Mansion_map_1.png?13a2e",
+            "width": 347,
+            "height": 227,
+            "subLabel": "Map 1",
+            "filename": "Sinclair_Mansion_map_1.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Sinclair_Mansion_map_2.png?df861",
+            "width": 179,
+            "height": 101,
+            "subLabel": "Map 2",
+            "filename": "Sinclair_Mansion_map_2.png"
+          }
+        ]
+      },
+      {
+        "id": "sorcerors-tower",
+        "displayName": "Sorcerors' Tower",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Sorcerors%27_Tower_map_1.png?87444",
+            "width": 61,
+            "height": 56,
+            "subLabel": "Map 1",
+            "filename": "Sorcerors'_Tower_map_1.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Sorcerors%27_Tower_map_2.png?33eef",
+            "width": 63,
+            "height": 66,
+            "subLabel": "Map 2",
+            "filename": "Sorcerors'_Tower_map_2.png"
+          }
+        ]
+      },
+      {
+        "id": "spirit-tree-stronghold",
+        "displayName": "Spirit Tree stronghold",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Spirit_Tree_stronghold_map.png?96717",
+            "width": 156,
+            "height": 152,
+            "subLabel": null,
+            "filename": "Spirit_Tree_stronghold_map.png"
+          }
+        ]
+      },
+      {
+        "id": "the-grand-tree",
+        "displayName": "The Grand Tree",
+        "type": "buildings",
+        "mapCount": 3,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_2.png?d925b",
+            "width": 225,
+            "height": 172,
+            "subLabel": "Map 2",
+            "filename": "The_Grand_Tree_map_2.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_3.png?87f4c",
+            "width": 126,
+            "height": 133,
+            "subLabel": "Map 3",
+            "filename": "The_Grand_Tree_map_3.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_4.png?5b3cc",
+            "width": 78,
+            "height": 89,
+            "subLabel": "Map 4",
+            "filename": "The_Grand_Tree_map_4.png"
+          }
+        ]
+      },
+      {
+        "id": "tree-gnome-stronghold",
+        "displayName": "Tree gnome stronghold",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Tree_gnome_stronghold.png?93ce2",
+            "width": 250,
+            "height": 304,
+            "subLabel": null,
+            "filename": "Tree_gnome_stronghold.png"
+          }
+        ]
+      },
+      {
+        "id": "varrock-palace",
+        "displayName": "Varrock Palace",
+        "type": "buildings",
+        "mapCount": 2,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Varrock_Palace_first_floor_map.png?b109e",
+            "width": 205,
+            "height": 190,
+            "subLabel": "First floor",
+            "filename": "Varrock_Palace_first_floor_map.png"
+          },
+          {
+            "url": "https://classic.runescape.wiki/images/Varrock_Palace_ground_floor_map.png?56005",
+            "width": 194,
+            "height": 275,
+            "subLabel": "Ground floor",
+            "filename": "Varrock_Palace_ground_floor_map.png"
+          }
+        ]
+      },
+      {
+        "id": "wizards-tower",
+        "displayName": "Wizards tower",
+        "type": "buildings",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Wizards_tower.png?1d299",
+            "width": 110,
+            "height": 123,
+            "subLabel": null,
+            "filename": "Wizards_tower.png"
+          }
+        ]
+      }
+    ],
+    "mines": [
+      {
+        "id": "al-kharid-mine",
+        "displayName": "Al-Kharid mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Al-Kharid_mine_map.png?9a8c3",
+            "width": 312,
+            "height": 302,
+            "subLabel": null,
+            "filename": "Al-Kharid_mine_map.png"
+          }
+        ]
+      },
+      {
+        "id": "crandor-mine",
+        "displayName": "Crandor mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Crandor_mine_map.png?a8359",
+            "width": 298,
+            "height": 472,
+            "subLabel": null,
+            "filename": "Crandor_mine_map.png"
+          }
+        ]
+      },
+      {
+        "id": "desert-mining-camp-mine-1",
+        "displayName": "Desert Mining Camp mine 1",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Desert_Mining_Camp_mine_1.png?40b6d",
+            "width": 188,
+            "height": 306,
+            "subLabel": null,
+            "filename": "Desert_Mining_Camp_mine_1.png"
+          }
+        ]
+      },
+      {
+        "id": "desert-mining-camp-mine-2",
+        "displayName": "Desert Mining Camp mine 2",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Desert_Mining_Camp_mine_2.png?c54a6",
+            "width": 296,
+            "height": 302,
+            "subLabel": null,
+            "filename": "Desert_Mining_Camp_mine_2.png"
+          }
+        ]
+      },
+      {
+        "id": "dwarven-mine",
+        "displayName": "Dwarven mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Dwarven_mine.png?e6e55",
+            "width": 849,
+            "height": 806,
+            "subLabel": null,
+            "filename": "Dwarven_mine.png"
+          }
+        ]
+      },
+      {
+        "id": "hobgoblin-mine",
+        "displayName": "Hobgoblin mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Hobgoblin_mine_map.png?72102",
+            "width": 312,
+            "height": 308,
+            "subLabel": null,
+            "filename": "Hobgoblin_mine_map.png"
+          }
+        ]
+      },
+      {
+        "id": "map-of-varrock-west-mine",
+        "displayName": "Map of Varrock west mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map_of_Varrock_west_mine.png?6ca28",
+            "width": 616,
+            "height": 536,
+            "subLabel": null,
+            "filename": "Map_of_Varrock_west_mine.png"
+          }
+        ]
+      },
+      {
+        "id": "mining-guild-map-edited1",
+        "displayName": "Mining Guild Map Edited1",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mining_Guild_Map_Edited1.png?97b33",
+            "width": 178,
+            "height": 103,
+            "subLabel": null,
+            "filename": "Mining_Guild_Map_Edited1.png"
+          }
+        ]
+      },
+      {
+        "id": "rimmingston-mine",
+        "displayName": "Rimmingston.mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Rimmingston.mine.png?a4a52",
+            "width": 780,
+            "height": 810,
+            "subLabel": null,
+            "filename": "Rimmingston.mine.png"
+          }
+        ]
+      },
+      {
+        "id": "tree-gnome-stronghold-mine",
+        "displayName": "Tree Gnome Stronghold mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Tree_Gnome_Stronghold_mine_map.png?38173",
+            "width": 396,
+            "height": 155,
+            "subLabel": null,
+            "filename": "Tree_Gnome_Stronghold_mine_map.png"
+          }
+        ]
+      },
+      {
+        "id": "wilderness-lava-maze-mine",
+        "displayName": "Wilderness Lava Maze mine",
+        "type": "mines",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Wilderness_Lava_Maze_mine_map.png?35aa1",
+            "width": 312,
+            "height": 306,
+            "subLabel": null,
+            "filename": "Wilderness_Lava_Maze_mine_map.png"
+          }
+        ]
+      }
+    ],
+    "regions": [
+      {
+        "id": "1st-and-2nd-plague-sheep-location",
+        "displayName": "1st and 2nd plague sheep location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/1st_and_2nd_plague_sheep_location.png?5b94e",
+            "width": 156,
+            "height": 165,
+            "subLabel": null,
+            "filename": "1st_and_2nd_plague_sheep_location.png"
+          }
+        ]
+      },
+      {
+        "id": "3rd-plague-sheep-location",
+        "displayName": "3rd plague sheep location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/3rd_plague_sheep_location.png?8e928",
+            "width": 156,
+            "height": 162,
+            "subLabel": null,
+            "filename": "3rd_plague_sheep_location.png"
+          }
+        ]
+      },
+      {
+        "id": "4th-plague-sheep-location",
+        "displayName": "4th plague sheep location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/4th_plague_sheep_location.png?d5626",
+            "width": 156,
+            "height": 162,
+            "subLabel": null,
+            "filename": "4th_plague_sheep_location.png"
+          }
+        ]
+      },
+      {
+        "id": "ah-za-rhoon",
+        "displayName": "Ah Za Rhoon",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ah_Za_Rhoon_entrance.png?526df",
+            "width": 155,
+            "height": 153,
+            "subLabel": "Entrance",
+            "filename": "Ah_Za_Rhoon_entrance.png"
+          }
+        ]
+      },
+      {
+        "id": "ardougne-zoo",
+        "displayName": "Ardougne Zoo",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne_Zoo_map.png?59082",
+            "width": 248,
+            "height": 129,
+            "subLabel": null,
+            "filename": "Ardougne_Zoo_map.png"
+          }
+        ]
+      },
+      {
+        "id": "ardougne",
+        "displayName": "Ardougne",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ardougne.png?9dbf0",
+            "width": 576,
+            "height": 212,
+            "subLabel": null,
+            "filename": "Ardougne.png"
+          }
+        ]
+      },
+      {
+        "id": "asgarnia-inaccessible-area",
+        "displayName": "Asgarnia (Inaccessible Area)",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Asgarnia_%28Inaccessible_Area%29.png?16460",
+            "width": 867,
+            "height": 610,
+            "subLabel": null,
+            "filename": "Asgarnia_(Inaccessible_Area).png"
+          }
+        ]
+      },
+      {
+        "id": "backa",
+        "displayName": "Backa",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Backa.jpg?938ca",
+            "width": 1000,
+            "height": 800,
+            "subLabel": null,
+            "filename": "Backa.jpg"
+          }
+        ]
+      },
+      {
+        "id": "bandit-camp",
+        "displayName": "Bandit Camp",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Bandit_Camp.png?6334a",
+            "width": 378,
+            "height": 370,
+            "subLabel": null,
+            "filename": "Bandit_Camp.png"
+          }
+        ]
+      },
+      {
+        "id": "baxtorian-falls",
+        "displayName": "Baxtorian Falls",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Baxtorian_Falls_map.png?a5ee1",
+            "width": 240,
+            "height": 359,
+            "subLabel": null,
+            "filename": "Baxtorian_Falls_map.png"
+          }
+        ]
+      },
+      {
+        "id": "black-knight-s-fortress",
+        "displayName": "Black Knight's Fortress",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Black_Knight%27s_Fortress.png?ff042",
+            "width": 688,
+            "height": 831,
+            "subLabel": null,
+            "filename": "Black_Knight's_Fortress.png"
+          }
+        ]
+      },
+      {
+        "id": "brimhaven-west",
+        "displayName": "Brimhaven west",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Brimhaven_west.png?f7012",
+            "width": 414,
+            "height": 460,
+            "subLabel": null,
+            "filename": "Brimhaven_west.png"
+          }
+        ]
+      },
+      {
+        "id": "brimstails-cave",
+        "displayName": "Brimstails cave",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Brimstails_cave_map.png?17352",
+            "width": 150,
+            "height": 129,
+            "subLabel": null,
+            "filename": "Brimstails_cave_map.png"
+          }
+        ]
+      },
+      {
+        "id": "clues",
+        "displayName": "Clues",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Clues.png?5e1e6",
+            "width": 156,
+            "height": 162,
+            "subLabel": null,
+            "filename": "Clues.png"
+          }
+        ]
+      },
+      {
+        "id": "combat-training-camp",
+        "displayName": "Combat Training Camp -",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Combat_Training_Camp_-_Map.png?d290b",
+            "width": 107,
+            "height": 117,
+            "subLabel": null,
+            "filename": "Combat_Training_Camp_-_Map.png"
+          }
+        ]
+      },
+      {
+        "id": "crandorview",
+        "displayName": "CrandorView",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/CrandorView.png?cda05",
+            "width": 545,
+            "height": 826,
+            "subLabel": null,
+            "filename": "CrandorView.png"
+          }
+        ]
+      },
+      {
+        "id": "deviousmud",
+        "displayName": "DeviousMUD",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/DeviousMUD_Map.jpg?64394",
+            "width": 513,
+            "height": 550,
+            "subLabel": null,
+            "filename": "DeviousMUD_Map.jpg"
+          }
+        ]
+      },
+      {
+        "id": "digsite",
+        "displayName": "Digsite",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Digsite.png?b29d7",
+            "width": 133,
+            "height": 186,
+            "subLabel": null,
+            "filename": "Digsite.png"
+          }
+        ]
+      },
+      {
+        "id": "doric-squestmap",
+        "displayName": "Doric'sQuestMap",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Doric%27sQuestMap.png?14264",
+            "width": 272,
+            "height": 310,
+            "subLabel": null,
+            "filename": "Doric'sQuestMap.png"
+          }
+        ]
+      },
+      {
+        "id": "drain-location",
+        "displayName": "Drain location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Drain_location.png?98b57",
+            "width": 129,
+            "height": 184,
+            "subLabel": null,
+            "filename": "Drain_location.png"
+          }
+        ]
+      },
+      {
+        "id": "edgeville",
+        "displayName": "Edgeville",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Edgeville.png?ef1a0",
+            "width": 1159,
+            "height": 636,
+            "subLabel": null,
+            "filename": "Edgeville.png"
+          }
+        ]
+      },
+      {
+        "id": "falador-park",
+        "displayName": "Falador park",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Falador_park.PNG?9a10d",
+            "width": 1298,
+            "height": 614,
+            "subLabel": null,
+            "filename": "Falador_park.PNG"
+          }
+        ]
+      },
+      {
+        "id": "feldip-hills",
+        "displayName": "Feldip Hills",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Feldip_Hills.png?9f432",
+            "width": 613,
+            "height": 683,
+            "subLabel": null,
+            "filename": "Feldip_Hills.png"
+          }
+        ]
+      },
+      {
+        "id": "freekarjama",
+        "displayName": "Freekarjama",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Freekarjama.png?e2664",
+            "width": 367,
+            "height": 180,
+            "subLabel": null,
+            "filename": "Freekarjama.png"
+          }
+        ]
+      },
+      {
+        "id": "ghost-town",
+        "displayName": "Ghost Town",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ghost_Town_map.png?7ced4",
+            "width": 142,
+            "height": 129,
+            "subLabel": null,
+            "filename": "Ghost_Town_map.png"
+          }
+        ]
+      },
+      {
+        "id": "gnome-ball",
+        "displayName": "Gnome ball",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Gnome_ball_map.png?13d1b",
+            "width": 1288,
+            "height": 512,
+            "subLabel": null,
+            "filename": "Gnome_ball_map.png"
+          }
+        ]
+      },
+      {
+        "id": "gnomelocations",
+        "displayName": "Gnomelocations",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Gnomelocations.png?bd68a",
+            "width": 157,
+            "height": 305,
+            "subLabel": null,
+            "filename": "Gnomelocations.png"
+          }
+        ]
+      },
+      {
+        "id": "goblin-village",
+        "displayName": "Goblin Village",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Goblin_Village_map.png?3fb20",
+            "width": 156,
+            "height": 151,
+            "subLabel": null,
+            "filename": "Goblin_Village_map.png"
+          }
+        ]
+      },
+      {
+        "id": "gorad-s-isle",
+        "displayName": "Gorad's isle",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Gorad%27s_isle.png?4abd7",
+            "width": 109,
+            "height": 116,
+            "subLabel": null,
+            "filename": "Gorad's_isle.png"
+          }
+        ]
+      },
+      {
+        "id": "grew-s-island",
+        "displayName": "Grew's Island",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Grew%27s_Island.png?6c697",
+            "width": 113,
+            "height": 110,
+            "subLabel": null,
+            "filename": "Grew's_Island.png"
+          }
+        ]
+      },
+      {
+        "id": "gu-tanoth",
+        "displayName": "Gu'Tanoth",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Gu%27Tanoth_map.png?6c3e5",
+            "width": 389,
+            "height": 419,
+            "subLabel": null,
+            "filename": "Gu'Tanoth_map.png"
+          }
+        ]
+      },
+      {
+        "id": "ingredientlocationsforcooksquest",
+        "displayName": "IngredientLocationsForCooksQuest",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/IngredientLocationsForCooksQuest.png?58604",
+            "width": 318,
+            "height": 328,
+            "subLabel": null,
+            "filename": "IngredientLocationsForCooksQuest.png"
+          }
+        ]
+      },
+      {
+        "id": "kingdom-of-asgarnia-final",
+        "displayName": "Kingdom of asgarnia final",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Kingdom_of_asgarnia_final.png?69c16",
+            "width": 414,
+            "height": 871,
+            "subLabel": null,
+            "filename": "Kingdom_of_asgarnia_final.png"
+          }
+        ]
+      },
+      {
+        "id": "lumber-mill",
+        "displayName": "Lumber Mill",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Lumber_Mill_map.png?2d1a5",
+            "width": 154,
+            "height": 200,
+            "subLabel": null,
+            "filename": "Lumber_Mill_map.png"
+          }
+        ]
+      },
+      {
+        "id": "lumbridge-swamp",
+        "displayName": "Lumbridge Swamp",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Lumbridge_Swamp_map.png?c7c32",
+            "width": 259,
+            "height": 166,
+            "subLabel": null,
+            "filename": "Lumbridge_Swamp_map.png"
+          }
+        ]
+      },
+      {
+        "id": "lumbridge",
+        "displayName": "Lumbridge",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Lumbridge.png?650c3",
+            "width": 1424,
+            "height": 733,
+            "subLabel": null,
+            "filename": "Lumbridge.png"
+          }
+        ]
+      },
+      {
+        "id": "map-for-fish",
+        "displayName": "Map for fish",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Map_for_fish.png?218df",
+            "width": 959,
+            "height": 472,
+            "subLabel": null,
+            "filename": "Map_for_fish.png"
+          }
+        ]
+      },
+      {
+        "id": "mapkey",
+        "displayName": "Mapkey",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey.gif?f66e5",
+            "width": 311,
+            "height": 359,
+            "subLabel": null,
+            "filename": "Mapkey.gif"
+          }
+        ]
+      },
+      {
+        "id": "mapkey4",
+        "displayName": "Mapkey4",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Mapkey4.gif?539bd",
+            "width": 699,
+            "height": 140,
+            "subLabel": null,
+            "filename": "Mapkey4.gif"
+          }
+        ]
+      },
+      {
+        "id": "morgan-location",
+        "displayName": "Morgan location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Morgan_location.png?bf107",
+            "width": 197,
+            "height": 201,
+            "subLabel": null,
+            "filename": "Morgan_location.png"
+          }
+        ]
+      },
+      {
+        "id": "path-to-jolly-boar-inn",
+        "displayName": "Path to Jolly boar inn",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Path_to_Jolly_boar_inn.png?9c15e",
+            "width": 261,
+            "height": 316,
+            "subLabel": null,
+            "filename": "Path_to_Jolly_boar_inn.png"
+          }
+        ]
+      },
+      {
+        "id": "piratetreasure",
+        "displayName": "Piratetreasure",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Piratetreasure.png?afcc6",
+            "width": 240,
+            "height": 161,
+            "subLabel": null,
+            "filename": "Piratetreasure.png"
+          }
+        ]
+      },
+      {
+        "id": "port-khazard",
+        "displayName": "Port khazard",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Port_khazard.png?a4610",
+            "width": 130,
+            "height": 114,
+            "subLabel": null,
+            "filename": "Port_khazard.png"
+          }
+        ]
+      },
+      {
+        "id": "race",
+        "displayName": "Race",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Race.png?1709b",
+            "width": 885,
+            "height": 565,
+            "subLabel": null,
+            "filename": "Race.png"
+          }
+        ]
+      },
+      {
+        "id": "red-dragon-isle",
+        "displayName": "Red Dragon Isle",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Red_Dragon_Isle_map.png?bbe7f",
+            "width": 525,
+            "height": 409,
+            "subLabel": null,
+            "filename": "Red_Dragon_Isle_map.png"
+          }
+        ]
+      },
+      {
+        "id": "redvine",
+        "displayName": "RedVine",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/RedVine.png?1f625",
+            "width": 158,
+            "height": 153,
+            "subLabel": null,
+            "filename": "RedVine.png"
+          }
+        ]
+      },
+      {
+        "id": "rimmington",
+        "displayName": "Rimmington",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Rimmington.png?1b6ef",
+            "width": 1060,
+            "height": 721,
+            "subLabel": null,
+            "filename": "Rimmington.png"
+          }
+        ]
+      },
+      {
+        "id": "romeo-juliet",
+        "displayName": "Romeo & Juliet",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Romeo_%26_Juliet_map.png?f7f11",
+            "width": 535,
+            "height": 391,
+            "subLabel": null,
+            "filename": "Romeo_&_Juliet_map.png"
+          }
+        ]
+      },
+      {
+        "id": "rs-developers",
+        "displayName": "RS Developers",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/RS_Developers_Map.png?624e2",
+            "width": 2304,
+            "height": 2448,
+            "subLabel": null,
+            "filename": "RS_Developers_Map.png"
+          }
+        ]
+      },
+      {
+        "id": "runescape-overview-lined",
+        "displayName": "RuneScape overview lined",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/RuneScape_overview_lined.gif?03712",
+            "width": 384,
+            "height": 576,
+            "subLabel": null,
+            "filename": "RuneScape_overview_lined.gif"
+          }
+        ]
+      },
+      {
+        "id": "seers-village",
+        "displayName": "Seers' village",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Seers%27_village_map.png?c83c6",
+            "width": 175,
+            "height": 184,
+            "subLabel": null,
+            "filename": "Seers'_village_map.png"
+          }
+        ]
+      },
+      {
+        "id": "sheep-shearer",
+        "displayName": "Sheep shearer",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Sheep_shearer_map.png?94136",
+            "width": 200,
+            "height": 173,
+            "subLabel": null,
+            "filename": "Sheep_shearer_map.png"
+          }
+        ]
+      },
+      {
+        "id": "ship-yard",
+        "displayName": "Ship yard",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Ship_yard_map.png?1dee3",
+            "width": 163,
+            "height": 134,
+            "subLabel": null,
+            "filename": "Ship_yard_map.png"
+          }
+        ]
+      },
+      {
+        "id": "sir-prysin-s-location",
+        "displayName": "Sir Prysin's location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Sir_Prysin%27s_location.png?27fb4",
+            "width": 128,
+            "height": 183,
+            "subLabel": null,
+            "filename": "Sir_Prysin's_location.png"
+          }
+        ]
+      },
+      {
+        "id": "spirit-tree-battle-field",
+        "displayName": "Spirit Tree battle field",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Spirit_Tree_battle_field_map.png?c533a",
+            "width": 156,
+            "height": 152,
+            "subLabel": null,
+            "filename": "Spirit_Tree_battle_field_map.png"
+          }
+        ]
+      },
+      {
+        "id": "spirit-tree-varrock",
+        "displayName": "Spirit Tree varrock",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Spirit_Tree_varrock_map.png?905d6",
+            "width": 156,
+            "height": 152,
+            "subLabel": null,
+            "filename": "Spirit_Tree_varrock_map.png"
+          }
+        ]
+      },
+      {
+        "id": "startq-goblin-diplomacy",
+        "displayName": "Startq goblin diplomacy",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Startq_goblin_diplomacy.png?f3daf",
+            "width": 208,
+            "height": 223,
+            "subLabel": null,
+            "filename": "Startq_goblin_diplomacy.png"
+          }
+        ]
+      },
+      {
+        "id": "tai-bwo-wannai",
+        "displayName": "Tai Bwo Wannai",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Tai_Bwo_Wannai_map.png?0d1ea",
+            "width": 286,
+            "height": 470,
+            "subLabel": null,
+            "filename": "Tai_Bwo_Wannai_map.png"
+          }
+        ]
+      },
+      {
+        "id": "teleport-house-map-ardougne",
+        "displayName": "Teleport House map (Ardougne)",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Teleport_House_map_%28Ardougne%29.png?b66e9",
+            "width": 278,
+            "height": 235,
+            "subLabel": null,
+            "filename": "Teleport_House_map_(Ardougne).png"
+          }
+        ]
+      },
+      {
+        "id": "thurgo-s-location",
+        "displayName": "Thurgo's location",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Thurgo%27s_location.png?0e480",
+            "width": 141,
+            "height": 132,
+            "subLabel": null,
+            "filename": "Thurgo's_location.png"
+          }
+        ]
+      },
+      {
+        "id": "tree-gnome-village",
+        "displayName": "Tree gnome village",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Tree_gnome_village.png?785fc",
+            "width": 152,
+            "height": 150,
+            "subLabel": null,
+            "filename": "Tree_gnome_village.png"
+          }
+        ]
+      },
+      {
+        "id": "urhneymap",
+        "displayName": "UrhneyMap",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/UrhneyMap.png?09594",
+            "width": 153,
+            "height": 152,
+            "subLabel": null,
+            "filename": "UrhneyMap.png"
+          }
+        ]
+      },
+      {
+        "id": "varrock",
+        "displayName": "Varrock",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Varrock.png?28e6b",
+            "width": 1268,
+            "height": 540,
+            "subLabel": null,
+            "filename": "Varrock.png"
+          }
+        ]
+      },
+      {
+        "id": "varrok-square",
+        "displayName": "Varrok square",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Varrok_square.png?f6c2e",
+            "width": 262,
+            "height": 143,
+            "subLabel": null,
+            "filename": "Varrok_square.png"
+          }
+        ]
+      },
+      {
+        "id": "way-to-manhole",
+        "displayName": "Way to manhole",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Way_to_manhole.png?e4a42",
+            "width": 201,
+            "height": 246,
+            "subLabel": null,
+            "filename": "Way_to_manhole.png"
+          }
+        ]
+      },
+      {
+        "id": "west-ardougne",
+        "displayName": "West Ardougne",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/West_Ardougne.png?b46d3",
+            "width": 319,
+            "height": 192,
+            "subLabel": null,
+            "filename": "West_Ardougne.png"
+          }
+        ]
+      },
+      {
+        "id": "wilderness",
+        "displayName": "Wilderness",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Wilderness.png?eeff3",
+            "width": 1320,
+            "height": 1518,
+            "subLabel": null,
+            "filename": "Wilderness.png"
+          }
+        ]
+      },
+      {
+        "id": "woodsenter",
+        "displayName": "WoodsEnter",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/WoodsEnter.png?31c00",
+            "width": 158,
+            "height": 154,
+            "subLabel": null,
+            "filename": "WoodsEnter.png"
+          }
+        ]
+      },
+      {
+        "id": "zanaris",
+        "displayName": "Zanaris",
+        "type": "regions",
+        "mapCount": 1,
+        "maps": [
+          {
+            "url": "https://classic.runescape.wiki/images/Zanaris.png?379e4",
+            "width": 923,
+            "height": 463,
+            "subLabel": null,
+            "filename": "Zanaris.png"
+          }
+        ]
+      }
+    ]
+  },
+  "flatEntries": [
+    {
+      "type": "dungeons",
+      "locationId": "ardougne-sewers",
+      "displayName": "Ardougne sewers",
+      "fileTitle": "File:Ardougne sewers map 1.png",
+      "filename": "Ardougne_sewers_map_1.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_1.png?7df78",
+      "width": 458,
+      "height": 554,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "ardougne-sewers",
+      "displayName": "Ardougne sewers",
+      "fileTitle": "File:Ardougne sewers map 2.png",
+      "filename": "Ardougne_sewers_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_2.png?19e40",
+      "width": 314,
+      "height": 302,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "ardougne-sewers",
+      "displayName": "Ardougne sewers",
+      "fileTitle": "File:Ardougne sewers map 3.png",
+      "filename": "Ardougne_sewers_map_3.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne_sewers_map_3.png?163f9",
+      "width": 302,
+      "height": 226,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "asgarnia-ice-dungeon",
+      "displayName": "Asgarnia Ice dungeon",
+      "fileTitle": "File:Asgarnia Ice dungeon map.png",
+      "filename": "Asgarnia_Ice_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Asgarnia_Ice_dungeon_map.png?4c53e",
+      "width": 203,
+      "height": 229,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "deep-wilderness-dungeon",
+      "displayName": "Deep Wilderness dungeon",
+      "fileTitle": "File:Deep Wilderness dungeon map.png",
+      "filename": "Deep_Wilderness_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Deep_Wilderness_dungeon_map.png?2a0dd",
+      "width": 210,
+      "height": 286,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "digsite-dungeon",
+      "displayName": "Digsite dungeon",
+      "fileTitle": "File:Digsite dungeon map.png",
+      "filename": "Digsite_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Digsite_dungeon_map.png?6a1fa",
+      "width": 254,
+      "height": 306,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "dwarven-tunnel",
+      "displayName": "Dwarven tunnel",
+      "fileTitle": "File:Dwarven tunnel map.png",
+      "filename": "Dwarven_tunnel_map.png",
+      "url": "https://classic.runescape.wiki/images/Dwarven_tunnel_map.png?b9c11",
+      "width": 207,
+      "height": 76,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "edgeville-dungeon-wilderness",
+      "displayName": "Edgeville dungeon wilderness",
+      "fileTitle": "File:Edgeville dungeon wilderness map.png",
+      "filename": "Edgeville_dungeon_wilderness_map.png",
+      "url": "https://classic.runescape.wiki/images/Edgeville_dungeon_wilderness_map.png?ec862",
+      "width": 205,
+      "height": 277,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "edgeville-dungeon-incomplete",
+      "displayName": "Edgeville Dungeon-incomplete",
+      "fileTitle": "File:Edgeville Dungeon-incomplete.png",
+      "filename": "Edgeville_Dungeon-incomplete.png",
+      "url": "https://classic.runescape.wiki/images/Edgeville_Dungeon-incomplete.png?efe17",
+      "width": 240,
+      "height": 351,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "entrana-dungeon",
+      "displayName": "Entrana dungeon",
+      "fileTitle": "File:Entrana dungeon map.png",
+      "filename": "Entrana_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Entrana_dungeon_map.png?dfa25",
+      "width": 296,
+      "height": 418,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "glarial-s-tomb",
+      "displayName": "Glarial's tomb",
+      "fileTitle": "File:Glarial's tomb map.png",
+      "filename": "Glarial's_tomb_map.png",
+      "url": "https://classic.runescape.wiki/images/Glarial%27s_tomb_map.png?6a09f",
+      "width": 109,
+      "height": 117,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "gnome-village-dungeon",
+      "displayName": "Gnome Village Dungeon",
+      "fileTitle": "File:Gnome Village Dungeon map.png",
+      "filename": "Gnome_Village_Dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Gnome_Village_Dungeon_map.png?80769",
+      "width": 183,
+      "height": 144,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "goblin-cave",
+      "displayName": "Goblin Cave",
+      "fileTitle": "File:Goblin Cave map.png",
+      "filename": "Goblin_Cave_map.png",
+      "url": "https://classic.runescape.wiki/images/Goblin_Cave_map.png?dc206",
+      "width": 243,
+      "height": 242,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "grand-tree-dungeon",
+      "displayName": "Grand Tree dungeon",
+      "fileTitle": "File:Grand Tree dungeon map.png",
+      "filename": "Grand_Tree_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Grand_Tree_dungeon_map.png?c7eb8",
+      "width": 190,
+      "height": 208,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "hazeel-cult-base",
+      "displayName": "Hazeel Cult base",
+      "fileTitle": "File:Hazeel Cult base map.png",
+      "filename": "Hazeel_Cult_base_map.png",
+      "url": "https://classic.runescape.wiki/images/Hazeel_Cult_base_map.png?1c632",
+      "width": 312,
+      "height": 294,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "ice-queen-maze",
+      "displayName": "Ice Queen Maze",
+      "fileTitle": "File:Ice Queen Maze map.png",
+      "filename": "Ice_Queen_Maze_map.png",
+      "url": "https://classic.runescape.wiki/images/Ice_Queen_Maze_map.png?9b6a1",
+      "width": 374,
+      "height": 282,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "jogre-dungeon",
+      "displayName": "Jogre dungeon",
+      "fileTitle": "File:Jogre dungeon map.png",
+      "filename": "Jogre_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Jogre_dungeon_map.png?e5967",
+      "width": 149,
+      "height": 140,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "karamja-volcano",
+      "displayName": "Karamja Volcano",
+      "fileTitle": "File:Karamja Volcano Map.png",
+      "filename": "Karamja_Volcano_Map.png",
+      "url": "https://classic.runescape.wiki/images/Karamja_Volcano_Map.png?5a3cd",
+      "width": 380,
+      "height": 800,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "king-black-dragon-lair",
+      "displayName": "King Black Dragon lair",
+      "fileTitle": "File:King Black Dragon lair map.png",
+      "filename": "King_Black_Dragon_lair_map.png",
+      "url": "https://classic.runescape.wiki/images/King_Black_Dragon_lair_map.png?91d89",
+      "width": 63,
+      "height": 100,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "lava-maze-dungeon",
+      "displayName": "Lava Maze dungeon",
+      "fileTitle": "File:Lava Maze dungeon map.png",
+      "filename": "Lava_Maze_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Lava_Maze_dungeon_map.png?390b1",
+      "width": 207,
+      "height": 176,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "legend-s-guild-dungeon",
+      "displayName": "Legend's Guild Dungeon",
+      "fileTitle": "File:Legend's Guild Dungeon.png",
+      "filename": "Legend's_Guild_Dungeon.png",
+      "url": "https://classic.runescape.wiki/images/Legend%27s_Guild_Dungeon.png?c20fe",
+      "width": 339,
+      "height": 344,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "legends-caverns",
+      "displayName": "Legends caverns",
+      "fileTitle": "File:Legends caverns map.png",
+      "filename": "Legends_caverns_map.png",
+      "url": "https://classic.runescape.wiki/images/Legends_caverns_map.png?6d8a4",
+      "width": 406,
+      "height": 436,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "mage-arena",
+      "displayName": "Mage Arena",
+      "fileTitle": "File:Mage Arena Map 2.png",
+      "filename": "Mage_Arena_Map_2.png",
+      "url": "https://classic.runescape.wiki/images/Mage_Arena_Map_2.png?5a15a",
+      "width": 250,
+      "height": 204,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "mage-arena",
+      "displayName": "Mage Arena",
+      "fileTitle": "File:Mage Arena Map 3.png",
+      "filename": "Mage_Arena_Map_3.png",
+      "url": "https://classic.runescape.wiki/images/Mage_Arena_Map_3.png?7d060",
+      "width": 91,
+      "height": 151,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "observatory-dungeon",
+      "displayName": "Observatory dungeon",
+      "fileTitle": "File:Observatory dungeon map.png",
+      "filename": "Observatory_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Observatory_dungeon_map.png?1b46b",
+      "width": 380,
+      "height": 220,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "ogre-enclave",
+      "displayName": "Ogre Enclave",
+      "fileTitle": "File:Ogre Enclave map.png",
+      "filename": "Ogre_Enclave_map.png",
+      "url": "https://classic.runescape.wiki/images/Ogre_Enclave_map.png?326f3",
+      "width": 233,
+      "height": 233,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "pillars-of-zanash-dungeon",
+      "displayName": "Pillars of Zanash dungeon",
+      "fileTitle": "File:Pillars of Zanash dungeon map.png",
+      "filename": "Pillars_of_Zanash_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Pillars_of_Zanash_dungeon_map.png?ba962",
+      "width": 157,
+      "height": 154,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "skavid-caves",
+      "displayName": "Skavid caves",
+      "fileTitle": "File:Skavid caves map.png",
+      "filename": "Skavid_caves_map.png",
+      "url": "https://classic.runescape.wiki/images/Skavid_caves_map.png?ecdc6",
+      "width": 241,
+      "height": 229,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "taverley-dungeon",
+      "displayName": "Taverley dungeon",
+      "fileTitle": "File:Taverley dungeon map.png",
+      "filename": "Taverley_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Taverley_dungeon_map.png?10784",
+      "width": 474,
+      "height": 604,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "temple-of-ikov",
+      "displayName": "Temple of Ikov",
+      "fileTitle": "File:Temple of Ikov map.png",
+      "filename": "Temple_of_Ikov_map.png",
+      "url": "https://classic.runescape.wiki/images/Temple_of_Ikov_map.png?828d9",
+      "width": 429,
+      "height": 456,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "underground-pass",
+      "displayName": "Underground Pass",
+      "fileTitle": "File:Underground Pass map 1.png",
+      "filename": "Underground_Pass_map_1.png",
+      "url": "https://classic.runescape.wiki/images/Underground_Pass_map_1.png?963f3",
+      "width": 389,
+      "height": 214,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "underground-pass",
+      "displayName": "Underground Pass",
+      "fileTitle": "File:Underground Pass map 2.png",
+      "filename": "Underground_Pass_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Underground_Pass_map_2.png?89719",
+      "width": 221,
+      "height": 219,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "underground-pass",
+      "displayName": "Underground Pass",
+      "fileTitle": "File:Underground Pass map 3.png",
+      "filename": "Underground_Pass_map_3.png",
+      "url": "https://classic.runescape.wiki/images/Underground_Pass_map_3.png?db606",
+      "width": 218,
+      "height": 174,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "underground-pass",
+      "displayName": "Underground Pass",
+      "fileTitle": "File:Underground Pass Pit map.png",
+      "filename": "Underground_Pass_Pit_map.png",
+      "url": "https://classic.runescape.wiki/images/Underground_Pass_Pit_map.png?d75a4",
+      "width": 243,
+      "height": 477,
+      "subLabel": "Pit"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "underground-pass",
+      "displayName": "Underground Pass",
+      "fileTitle": "File:Underground Pass Platforms map.png",
+      "filename": "Underground_Pass_Platforms_map.png",
+      "url": "https://classic.runescape.wiki/images/Underground_Pass_Platforms_map.png?b738d",
+      "width": 282,
+      "height": 708,
+      "subLabel": "Platforms"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "varrock-sewers",
+      "displayName": "Varrock Sewers",
+      "fileTitle": "File:Varrock Sewers Map.png",
+      "filename": "Varrock_Sewers_Map.png",
+      "url": "https://classic.runescape.wiki/images/Varrock_Sewers_Map.png?6ee7c",
+      "width": 437,
+      "height": 241,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "waterfall-dungeon",
+      "displayName": "Waterfall dungeon",
+      "fileTitle": "File:Waterfall dungeon.png",
+      "filename": "Waterfall_dungeon.png",
+      "url": "https://classic.runescape.wiki/images/Waterfall_dungeon.png?a60f4",
+      "width": 492,
+      "height": 632,
+      "subLabel": null
+    },
+    {
+      "type": "dungeons",
+      "locationId": "wizards-guild",
+      "displayName": "Wizards' Guild",
+      "fileTitle": "File:Wizards' Guild basement.png",
+      "filename": "Wizards'_Guild_basement.png",
+      "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_basement.png?a1939",
+      "width": 62,
+      "height": 64,
+      "subLabel": "Basement"
+    },
+    {
+      "type": "dungeons",
+      "locationId": "yanille-agility-dungeon",
+      "displayName": "Yanille agility dungeon",
+      "fileTitle": "File:Yanille agility dungeon map.png",
+      "filename": "Yanille_agility_dungeon_map.png",
+      "url": "https://classic.runescape.wiki/images/Yanille_agility_dungeon_map.png?5d154",
+      "width": 410,
+      "height": 425,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "world-map-2017",
+      "displayName": "World Map (2017)",
+      "fileTitle": "File:World Map (2017).png",
+      "filename": "World_Map_(2017).png",
+      "url": "https://classic.runescape.wiki/images/World_Map_%282017%29.png?847ac",
+      "width": 2304,
+      "height": 2443,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "map-early-january-2001",
+      "displayName": "Map-Early-January-2001",
+      "fileTitle": "File:Map-Early-January-2001.gif",
+      "filename": "Map-Early-January-2001.gif",
+      "url": "https://classic.runescape.wiki/images/Map-Early-January-2001.gif?bd17d",
+      "width": 569,
+      "height": 852,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "map-february-2001",
+      "displayName": "Map-February-2001",
+      "fileTitle": "File:Map-February-2001.gif",
+      "filename": "Map-February-2001.gif",
+      "url": "https://classic.runescape.wiki/images/Map-February-2001.gif?109de",
+      "width": 570,
+      "height": 856,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "map1",
+      "displayName": "Map1",
+      "fileTitle": "File:Map1.gif",
+      "filename": "Map1.gif",
+      "url": "https://classic.runescape.wiki/images/Map1.gif?bd040",
+      "width": 855,
+      "height": 855,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "world",
+      "locationId": "map10",
+      "displayName": "Map10",
+      "fileTitle": "File:Map10.gif",
+      "filename": "Map10.gif",
+      "url": "https://classic.runescape.wiki/images/Map10.gif?963a7",
+      "width": 1872,
+      "height": 864,
+      "subLabel": "Map 10"
+    },
+    {
+      "type": "world",
+      "locationId": "map11",
+      "displayName": "Map11",
+      "fileTitle": "File:Map11.gif",
+      "filename": "Map11.gif",
+      "url": "https://classic.runescape.wiki/images/Map11.gif?31833",
+      "width": 2152,
+      "height": 1007,
+      "subLabel": "Map 11"
+    },
+    {
+      "type": "world",
+      "locationId": "map2",
+      "displayName": "Map2",
+      "fileTitle": "File:Map2.gif",
+      "filename": "Map2.gif",
+      "url": "https://classic.runescape.wiki/images/Map2.gif?e90ee",
+      "width": 855,
+      "height": 855,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "world",
+      "locationId": "map5",
+      "displayName": "Map5",
+      "fileTitle": "File:Map5.gif",
+      "filename": "Map5.gif",
+      "url": "https://classic.runescape.wiki/images/Map5.gif?945f3",
+      "width": 855,
+      "height": 975,
+      "subLabel": "Map 5"
+    },
+    {
+      "type": "world",
+      "locationId": "map6",
+      "displayName": "Map6",
+      "fileTitle": "File:Map6.gif",
+      "filename": "Map6.gif",
+      "url": "https://classic.runescape.wiki/images/Map6.gif?95f8c",
+      "width": 855,
+      "height": 975,
+      "subLabel": "Map 6"
+    },
+    {
+      "type": "world",
+      "locationId": "map7",
+      "displayName": "Map7",
+      "fileTitle": "File:Map7.gif",
+      "filename": "Map7.gif",
+      "url": "https://classic.runescape.wiki/images/Map7.gif?c18a3",
+      "width": 1440,
+      "height": 864,
+      "subLabel": "Map 7"
+    },
+    {
+      "type": "world",
+      "locationId": "map8",
+      "displayName": "Map8",
+      "fileTitle": "File:Map8.gif",
+      "filename": "Map8.gif",
+      "url": "https://classic.runescape.wiki/images/Map8.gif?330be",
+      "width": 1729,
+      "height": 864,
+      "subLabel": "Map 8"
+    },
+    {
+      "type": "world",
+      "locationId": "map9",
+      "displayName": "Map9",
+      "fileTitle": "File:Map9.gif",
+      "filename": "Map9.gif",
+      "url": "https://classic.runescape.wiki/images/Map9.gif?d4060",
+      "width": 1729,
+      "height": 864,
+      "subLabel": "Map 9"
+    },
+    {
+      "type": "world",
+      "locationId": "mapkey-init",
+      "displayName": "Mapkey init",
+      "fileTitle": "File:Mapkey init.gif",
+      "filename": "Mapkey_init.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey_init.gif?8a68a",
+      "width": 569,
+      "height": 86,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "mapkey2",
+      "displayName": "Mapkey2",
+      "fileTitle": "File:Mapkey2.gif",
+      "filename": "Mapkey2.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey2.gif?cd339",
+      "width": 569,
+      "height": 103,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "mapkey3",
+      "displayName": "Mapkey3",
+      "fileTitle": "File:Mapkey3.gif",
+      "filename": "Mapkey3.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey3.gif?1ac54",
+      "width": 855,
+      "height": 103,
+      "subLabel": null
+    },
+    {
+      "type": "world",
+      "locationId": "mapkey5",
+      "displayName": "Mapkey5",
+      "fileTitle": "File:Mapkey5.gif",
+      "filename": "Mapkey5.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey5.gif?e7a7a",
+      "width": 408,
+      "height": 284,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "1st-and-2nd-plague-sheep-location",
+      "displayName": "1st and 2nd plague sheep location",
+      "fileTitle": "File:1st and 2nd plague sheep location.png",
+      "filename": "1st_and_2nd_plague_sheep_location.png",
+      "url": "https://classic.runescape.wiki/images/1st_and_2nd_plague_sheep_location.png?5b94e",
+      "width": 156,
+      "height": 165,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "3rd-plague-sheep-location",
+      "displayName": "3rd plague sheep location",
+      "fileTitle": "File:3rd plague sheep location.png",
+      "filename": "3rd_plague_sheep_location.png",
+      "url": "https://classic.runescape.wiki/images/3rd_plague_sheep_location.png?8e928",
+      "width": 156,
+      "height": 162,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "4th-plague-sheep-location",
+      "displayName": "4th plague sheep location",
+      "fileTitle": "File:4th plague sheep location.png",
+      "filename": "4th_plague_sheep_location.png",
+      "url": "https://classic.runescape.wiki/images/4th_plague_sheep_location.png?d5626",
+      "width": 156,
+      "height": 162,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "ah-za-rhoon",
+      "displayName": "Ah Za Rhoon",
+      "fileTitle": "File:Ah Za Rhoon entrance.png",
+      "filename": "Ah_Za_Rhoon_entrance.png",
+      "url": "https://classic.runescape.wiki/images/Ah_Za_Rhoon_entrance.png?526df",
+      "width": 155,
+      "height": 153,
+      "subLabel": "Entrance"
+    },
+    {
+      "type": "mines",
+      "locationId": "al-kharid-mine",
+      "displayName": "Al-Kharid mine",
+      "fileTitle": "File:Al-Kharid mine map.png",
+      "filename": "Al-Kharid_mine_map.png",
+      "url": "https://classic.runescape.wiki/images/Al-Kharid_mine_map.png?9a8c3",
+      "width": 312,
+      "height": 302,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "ardougne-sewers",
+      "displayName": "Ardougne sewers",
+      "fileTitle": "File:Ardougne sewers entrances map.png",
+      "filename": "Ardougne_sewers_entrances_map.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne_sewers_entrances_map.png?519c5",
+      "width": 570,
+      "height": 417,
+      "subLabel": "Entrances"
+    },
+    {
+      "type": "regions",
+      "locationId": "ardougne-zoo",
+      "displayName": "Ardougne Zoo",
+      "fileTitle": "File:Ardougne Zoo map.png",
+      "filename": "Ardougne_Zoo_map.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne_Zoo_map.png?59082",
+      "width": 248,
+      "height": 129,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "ardougne",
+      "displayName": "Ardougne",
+      "fileTitle": "File:Ardougne.png",
+      "filename": "Ardougne.png",
+      "url": "https://classic.runescape.wiki/images/Ardougne.png?9dbf0",
+      "width": 576,
+      "height": 212,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "asgarnia-inaccessible-area",
+      "displayName": "Asgarnia (Inaccessible Area)",
+      "fileTitle": "File:Asgarnia (Inaccessible Area).png",
+      "filename": "Asgarnia_(Inaccessible_Area).png",
+      "url": "https://classic.runescape.wiki/images/Asgarnia_%28Inaccessible_Area%29.png?16460",
+      "width": 867,
+      "height": 610,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "backa",
+      "displayName": "Backa",
+      "fileTitle": "File:Backa.jpg",
+      "filename": "Backa.jpg",
+      "url": "https://classic.runescape.wiki/images/Backa.jpg?938ca",
+      "width": 1000,
+      "height": 800,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "bandit-camp",
+      "displayName": "Bandit Camp",
+      "fileTitle": "File:Bandit Camp.png",
+      "filename": "Bandit_Camp.png",
+      "url": "https://classic.runescape.wiki/images/Bandit_Camp.png?6334a",
+      "width": 378,
+      "height": 370,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "baxtorian-falls",
+      "displayName": "Baxtorian Falls",
+      "fileTitle": "File:Baxtorian Falls map.png",
+      "filename": "Baxtorian_Falls_map.png",
+      "url": "https://classic.runescape.wiki/images/Baxtorian_Falls_map.png?a5ee1",
+      "width": 240,
+      "height": 359,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "black-arm-gang-hideout",
+      "displayName": "Black Arm Gang Hideout",
+      "fileTitle": "File:Black Arm Gang Hideout map 1.png",
+      "filename": "Black_Arm_Gang_Hideout_map_1.png",
+      "url": "https://classic.runescape.wiki/images/Black_Arm_Gang_Hideout_map_1.png?54234",
+      "width": 156,
+      "height": 151,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "buildings",
+      "locationId": "black-arm-gang-hideout",
+      "displayName": "Black Arm Gang Hideout",
+      "fileTitle": "File:Black Arm Gang Hideout map 2.png",
+      "filename": "Black_Arm_Gang_Hideout_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Black_Arm_Gang_Hideout_map_2.png?326dd",
+      "width": 101,
+      "height": 133,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "regions",
+      "locationId": "black-knight-s-fortress",
+      "displayName": "Black Knight's Fortress",
+      "fileTitle": "File:Black Knight's Fortress.png",
+      "filename": "Black_Knight's_Fortress.png",
+      "url": "https://classic.runescape.wiki/images/Black_Knight%27s_Fortress.png?ff042",
+      "width": 688,
+      "height": 831,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "brimhaven-west",
+      "displayName": "Brimhaven west",
+      "fileTitle": "File:Brimhaven west.png",
+      "filename": "Brimhaven_west.png",
+      "url": "https://classic.runescape.wiki/images/Brimhaven_west.png?f7012",
+      "width": 414,
+      "height": 460,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "brimstails-cave",
+      "displayName": "Brimstails cave",
+      "fileTitle": "File:Brimstails cave map.png",
+      "filename": "Brimstails_cave_map.png",
+      "url": "https://classic.runescape.wiki/images/Brimstails_cave_map.png?17352",
+      "width": 150,
+      "height": 129,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "clues",
+      "displayName": "Clues",
+      "fileTitle": "File:Clues.png",
+      "filename": "Clues.png",
+      "url": "https://classic.runescape.wiki/images/Clues.png?5e1e6",
+      "width": 156,
+      "height": 162,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "combat-training-camp",
+      "displayName": "Combat Training Camp -",
+      "fileTitle": "File:Combat Training Camp - Map.png",
+      "filename": "Combat_Training_Camp_-_Map.png",
+      "url": "https://classic.runescape.wiki/images/Combat_Training_Camp_-_Map.png?d290b",
+      "width": 107,
+      "height": 117,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "crandor-mine",
+      "displayName": "Crandor mine",
+      "fileTitle": "File:Crandor mine map.png",
+      "filename": "Crandor_mine_map.png",
+      "url": "https://classic.runescape.wiki/images/Crandor_mine_map.png?a8359",
+      "width": 298,
+      "height": 472,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "crandorview",
+      "displayName": "CrandorView",
+      "fileTitle": "File:CrandorView.png",
+      "filename": "CrandorView.png",
+      "url": "https://classic.runescape.wiki/images/CrandorView.png?cda05",
+      "width": 545,
+      "height": 826,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "desert-mining-camp-mine-1",
+      "displayName": "Desert Mining Camp mine 1",
+      "fileTitle": "File:Desert Mining Camp mine 1.png",
+      "filename": "Desert_Mining_Camp_mine_1.png",
+      "url": "https://classic.runescape.wiki/images/Desert_Mining_Camp_mine_1.png?40b6d",
+      "width": 188,
+      "height": 306,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "desert-mining-camp-mine-2",
+      "displayName": "Desert Mining Camp mine 2",
+      "fileTitle": "File:Desert Mining Camp mine 2.png",
+      "filename": "Desert_Mining_Camp_mine_2.png",
+      "url": "https://classic.runescape.wiki/images/Desert_Mining_Camp_mine_2.png?c54a6",
+      "width": 296,
+      "height": 302,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "deviousmud",
+      "displayName": "DeviousMUD",
+      "fileTitle": "File:DeviousMUD Map.jpg",
+      "filename": "DeviousMUD_Map.jpg",
+      "url": "https://classic.runescape.wiki/images/DeviousMUD_Map.jpg?64394",
+      "width": 513,
+      "height": 550,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "digsite",
+      "displayName": "Digsite",
+      "fileTitle": "File:Digsite.png",
+      "filename": "Digsite.png",
+      "url": "https://classic.runescape.wiki/images/Digsite.png?b29d7",
+      "width": 133,
+      "height": 186,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "doric-squestmap",
+      "displayName": "Doric'sQuestMap",
+      "fileTitle": "File:Doric'sQuestMap.png",
+      "filename": "Doric'sQuestMap.png",
+      "url": "https://classic.runescape.wiki/images/Doric%27sQuestMap.png?14264",
+      "width": 272,
+      "height": 310,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "drain-location",
+      "displayName": "Drain location",
+      "fileTitle": "File:Drain location.png",
+      "filename": "Drain_location.png",
+      "url": "https://classic.runescape.wiki/images/Drain_location.png?98b57",
+      "width": 129,
+      "height": 184,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "draynor-manor",
+      "displayName": "Draynor Manor",
+      "fileTitle": "File:Draynor Manor basement.png",
+      "filename": "Draynor_Manor_basement.png",
+      "url": "https://classic.runescape.wiki/images/Draynor_Manor_basement.png?dc240",
+      "width": 255,
+      "height": 119,
+      "subLabel": "Basement"
+    },
+    {
+      "type": "buildings",
+      "locationId": "draynor-manor",
+      "displayName": "Draynor Manor",
+      "fileTitle": "File:Draynor Manor map 2.png",
+      "filename": "Draynor_Manor_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Draynor_Manor_map_2.png?e9b2e",
+      "width": 135,
+      "height": 79,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "buildings",
+      "locationId": "draynor-manor",
+      "displayName": "Draynor Manor",
+      "fileTitle": "File:Draynor Manor map 3.png",
+      "filename": "Draynor_Manor_map_3.png",
+      "url": "https://classic.runescape.wiki/images/Draynor_Manor_map_3.png?0b12d",
+      "width": 95,
+      "height": 68,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "mines",
+      "locationId": "dwarven-mine",
+      "displayName": "Dwarven mine",
+      "fileTitle": "File:Dwarven mine.png",
+      "filename": "Dwarven_mine.png",
+      "url": "https://classic.runescape.wiki/images/Dwarven_mine.png?e6e55",
+      "width": 849,
+      "height": 806,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "edgeville",
+      "displayName": "Edgeville",
+      "fileTitle": "File:Edgeville.png",
+      "filename": "Edgeville.png",
+      "url": "https://classic.runescape.wiki/images/Edgeville.png?ef1a0",
+      "width": 1159,
+      "height": 636,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "falador-park",
+      "displayName": "Falador park",
+      "fileTitle": "File:Falador park.PNG",
+      "filename": "Falador_park.PNG",
+      "url": "https://classic.runescape.wiki/images/Falador_park.PNG?9a10d",
+      "width": 1298,
+      "height": 614,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "feldip-hills",
+      "displayName": "Feldip Hills",
+      "fileTitle": "File:Feldip Hills.png",
+      "filename": "Feldip_Hills.png",
+      "url": "https://classic.runescape.wiki/images/Feldip_Hills.png?9f432",
+      "width": 613,
+      "height": 683,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "fishing-guild",
+      "displayName": "Fishing Guild",
+      "fileTitle": "File:Fishing Guild map.png",
+      "filename": "Fishing_Guild_map.png",
+      "url": "https://classic.runescape.wiki/images/Fishing_Guild_map.png?decd6",
+      "width": 231,
+      "height": 287,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "freekarjama",
+      "displayName": "Freekarjama",
+      "fileTitle": "File:Freekarjama.png",
+      "filename": "Freekarjama.png",
+      "url": "https://classic.runescape.wiki/images/Freekarjama.png?e2664",
+      "width": 367,
+      "height": 180,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "ghost-town",
+      "displayName": "Ghost Town",
+      "fileTitle": "File:Ghost Town map.png",
+      "filename": "Ghost_Town_map.png",
+      "url": "https://classic.runescape.wiki/images/Ghost_Town_map.png?7ced4",
+      "width": 142,
+      "height": 129,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "gnome-ball",
+      "displayName": "Gnome ball",
+      "fileTitle": "File:Gnome ball map.png",
+      "filename": "Gnome_ball_map.png",
+      "url": "https://classic.runescape.wiki/images/Gnome_ball_map.png?13d1b",
+      "width": 1288,
+      "height": 512,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "gnomelocations",
+      "displayName": "Gnomelocations",
+      "fileTitle": "File:Gnomelocations.png",
+      "filename": "Gnomelocations.png",
+      "url": "https://classic.runescape.wiki/images/Gnomelocations.png?bd68a",
+      "width": 157,
+      "height": 305,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "goblin-village",
+      "displayName": "Goblin Village",
+      "fileTitle": "File:Goblin Village map.png",
+      "filename": "Goblin_Village_map.png",
+      "url": "https://classic.runescape.wiki/images/Goblin_Village_map.png?3fb20",
+      "width": 156,
+      "height": 151,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "gorad-s-isle",
+      "displayName": "Gorad's isle",
+      "fileTitle": "File:Gorad's isle.png",
+      "filename": "Gorad's_isle.png",
+      "url": "https://classic.runescape.wiki/images/Gorad%27s_isle.png?4abd7",
+      "width": 109,
+      "height": 116,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "grew-s-island",
+      "displayName": "Grew's Island",
+      "fileTitle": "File:Grew's Island.png",
+      "filename": "Grew's_Island.png",
+      "url": "https://classic.runescape.wiki/images/Grew%27s_Island.png?6c697",
+      "width": 113,
+      "height": 110,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "gu-tanoth",
+      "displayName": "Gu'Tanoth",
+      "fileTitle": "File:Gu'Tanoth map.png",
+      "filename": "Gu'Tanoth_map.png",
+      "url": "https://classic.runescape.wiki/images/Gu%27Tanoth_map.png?6c3e5",
+      "width": 389,
+      "height": 419,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "hobgoblin-mine",
+      "displayName": "Hobgoblin mine",
+      "fileTitle": "File:Hobgoblin mine map.png",
+      "filename": "Hobgoblin_mine_map.png",
+      "url": "https://classic.runescape.wiki/images/Hobgoblin_mine_map.png?72102",
+      "width": 312,
+      "height": 308,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "ingredientlocationsforcooksquest",
+      "displayName": "IngredientLocationsForCooksQuest",
+      "fileTitle": "File:IngredientLocationsForCooksQuest.png",
+      "filename": "IngredientLocationsForCooksQuest.png",
+      "url": "https://classic.runescape.wiki/images/IngredientLocationsForCooksQuest.png?58604",
+      "width": 318,
+      "height": 328,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "keep-lefaye",
+      "displayName": "Keep LeFaye",
+      "fileTitle": "File:Keep LeFaye map 2.png",
+      "filename": "Keep_LeFaye_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Keep_LeFaye_map_2.png?369d9",
+      "width": 91,
+      "height": 83,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "regions",
+      "locationId": "kingdom-of-asgarnia-final",
+      "displayName": "Kingdom of asgarnia final",
+      "fileTitle": "File:Kingdom of asgarnia final.png",
+      "filename": "Kingdom_of_asgarnia_final.png",
+      "url": "https://classic.runescape.wiki/images/Kingdom_of_asgarnia_final.png?69c16",
+      "width": 414,
+      "height": 871,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "lava-maze",
+      "displayName": "Lava Maze",
+      "fileTitle": "File:Lava Maze map.png",
+      "filename": "Lava_Maze_map.png",
+      "url": "https://classic.runescape.wiki/images/Lava_Maze_map.png?38cd4",
+      "width": 332,
+      "height": 280,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "legends-guild",
+      "displayName": "Legends' Guild",
+      "fileTitle": "File:Legends' Guild map 2.png",
+      "filename": "Legends'_Guild_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Legends%27_Guild_map_2.png?2e912",
+      "width": 145,
+      "height": 147,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "buildings",
+      "locationId": "legends-guild",
+      "displayName": "Legends' Guild",
+      "fileTitle": "File:Legends' Guild map 3.png",
+      "filename": "Legends'_Guild_map_3.png",
+      "url": "https://classic.runescape.wiki/images/Legends%27_Guild_map_3.png?c56f0",
+      "width": 140,
+      "height": 134,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "regions",
+      "locationId": "lumber-mill",
+      "displayName": "Lumber Mill",
+      "fileTitle": "File:Lumber Mill map.png",
+      "filename": "Lumber_Mill_map.png",
+      "url": "https://classic.runescape.wiki/images/Lumber_Mill_map.png?2d1a5",
+      "width": 154,
+      "height": 200,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "lumbridge-swamp",
+      "displayName": "Lumbridge Swamp",
+      "fileTitle": "File:Lumbridge Swamp map.png",
+      "filename": "Lumbridge_Swamp_map.png",
+      "url": "https://classic.runescape.wiki/images/Lumbridge_Swamp_map.png?c7c32",
+      "width": 259,
+      "height": 166,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "lumbridge",
+      "displayName": "Lumbridge",
+      "fileTitle": "File:Lumbridge.png",
+      "filename": "Lumbridge.png",
+      "url": "https://classic.runescape.wiki/images/Lumbridge.png?650c3",
+      "width": 1424,
+      "height": 733,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "map-for-fish",
+      "displayName": "Map for fish",
+      "fileTitle": "File:Map for fish.png",
+      "filename": "Map_for_fish.png",
+      "url": "https://classic.runescape.wiki/images/Map_for_fish.png?218df",
+      "width": 959,
+      "height": 472,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "map-of-varrock-west-mine",
+      "displayName": "Map of Varrock west mine",
+      "fileTitle": "File:Map of Varrock west mine.png",
+      "filename": "Map_of_Varrock_west_mine.png",
+      "url": "https://classic.runescape.wiki/images/Map_of_Varrock_west_mine.png?6ca28",
+      "width": 616,
+      "height": 536,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "mapkey",
+      "displayName": "Mapkey",
+      "fileTitle": "File:Mapkey.gif",
+      "filename": "Mapkey.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey.gif?f66e5",
+      "width": 311,
+      "height": 359,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "mapkey4",
+      "displayName": "Mapkey4",
+      "fileTitle": "File:Mapkey4.gif",
+      "filename": "Mapkey4.gif",
+      "url": "https://classic.runescape.wiki/images/Mapkey4.gif?539bd",
+      "width": 699,
+      "height": 140,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "mapmaze",
+      "displayName": "Mapmaze",
+      "fileTitle": "File:Mapmaze.png",
+      "filename": "Mapmaze.png",
+      "url": "https://classic.runescape.wiki/images/Mapmaze.png?ae99e",
+      "width": 196,
+      "height": 174,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "melzar-s-maze",
+      "displayName": "Melzar's Maze",
+      "fileTitle": "File:Melzar's Maze basement map.jpg",
+      "filename": "Melzar's_Maze_basement_map.jpg",
+      "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_basement_map.jpg?87146",
+      "width": 310,
+      "height": 350,
+      "subLabel": "Basement"
+    },
+    {
+      "type": "buildings",
+      "locationId": "melzar-s-maze",
+      "displayName": "Melzar's Maze",
+      "fileTitle": "File:Melzar's Maze first floor map.jpg",
+      "filename": "Melzar's_Maze_first_floor_map.jpg",
+      "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_first_floor_map.jpg?da6ce",
+      "width": 295,
+      "height": 310,
+      "subLabel": "First floor"
+    },
+    {
+      "type": "buildings",
+      "locationId": "melzar-s-maze",
+      "displayName": "Melzar's Maze",
+      "fileTitle": "File:Melzar's Maze ground floor map.png",
+      "filename": "Melzar's_Maze_ground_floor_map.png",
+      "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_ground_floor_map.png?65fb6",
+      "width": 366,
+      "height": 402,
+      "subLabel": "Ground floor"
+    },
+    {
+      "type": "buildings",
+      "locationId": "melzar-s-maze",
+      "displayName": "Melzar's Maze",
+      "fileTitle": "File:Melzar's Maze second floor map.jpg",
+      "filename": "Melzar's_Maze_second_floor_map.jpg",
+      "url": "https://classic.runescape.wiki/images/Melzar%27s_Maze_second_floor_map.jpg?13e90",
+      "width": 290,
+      "height": 315,
+      "subLabel": "Second floor"
+    },
+    {
+      "type": "mines",
+      "locationId": "mining-guild-map-edited1",
+      "displayName": "Mining Guild Map Edited1",
+      "fileTitle": "File:Mining Guild Map Edited1.png",
+      "filename": "Mining_Guild_Map_Edited1.png",
+      "url": "https://classic.runescape.wiki/images/Mining_Guild_Map_Edited1.png?97b33",
+      "width": 178,
+      "height": 103,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "morgan-location",
+      "displayName": "Morgan location",
+      "fileTitle": "File:Morgan location.png",
+      "filename": "Morgan_location.png",
+      "url": "https://classic.runescape.wiki/images/Morgan_location.png?bf107",
+      "width": 197,
+      "height": 201,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "path-to-jolly-boar-inn",
+      "displayName": "Path to Jolly boar inn",
+      "fileTitle": "File:Path to Jolly boar inn.png",
+      "filename": "Path_to_Jolly_boar_inn.png",
+      "url": "https://classic.runescape.wiki/images/Path_to_Jolly_boar_inn.png?9c15e",
+      "width": 261,
+      "height": 316,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "phoenix-gang-hideout",
+      "displayName": "Phoenix Gang Hideout",
+      "fileTitle": "File:Phoenix Gang Hideout entrance map.png",
+      "filename": "Phoenix_Gang_Hideout_entrance_map.png",
+      "url": "https://classic.runescape.wiki/images/Phoenix_Gang_Hideout_entrance_map.png?1da12",
+      "width": 154,
+      "height": 150,
+      "subLabel": "Entrance"
+    },
+    {
+      "type": "buildings",
+      "locationId": "phoenix-gang-hideout",
+      "displayName": "Phoenix Gang Hideout",
+      "fileTitle": "File:Phoenix Gang Hideout map.png",
+      "filename": "Phoenix_Gang_Hideout_map.png",
+      "url": "https://classic.runescape.wiki/images/Phoenix_Gang_Hideout_map.png?e9128",
+      "width": 134,
+      "height": 120,
+      "subLabel": "Map"
+    },
+    {
+      "type": "regions",
+      "locationId": "piratetreasure",
+      "displayName": "Piratetreasure",
+      "fileTitle": "File:Piratetreasure.png",
+      "filename": "Piratetreasure.png",
+      "url": "https://classic.runescape.wiki/images/Piratetreasure.png?afcc6",
+      "width": 240,
+      "height": 161,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "port-khazard",
+      "displayName": "Port khazard",
+      "fileTitle": "File:Port khazard.png",
+      "filename": "Port_khazard.png",
+      "url": "https://classic.runescape.wiki/images/Port_khazard.png?a4610",
+      "width": 130,
+      "height": 114,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "race",
+      "displayName": "Race",
+      "fileTitle": "File:Race.png",
+      "filename": "Race.png",
+      "url": "https://classic.runescape.wiki/images/Race.png?1709b",
+      "width": 885,
+      "height": 565,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "red-dragon-isle",
+      "displayName": "Red Dragon Isle",
+      "fileTitle": "File:Red Dragon Isle map.png",
+      "filename": "Red_Dragon_Isle_map.png",
+      "url": "https://classic.runescape.wiki/images/Red_Dragon_Isle_map.png?bbe7f",
+      "width": 525,
+      "height": 409,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "redvine",
+      "displayName": "RedVine",
+      "fileTitle": "File:RedVine.png",
+      "filename": "RedVine.png",
+      "url": "https://classic.runescape.wiki/images/RedVine.png?1f625",
+      "width": 158,
+      "height": 153,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "rimmingston-mine",
+      "displayName": "Rimmingston.mine",
+      "fileTitle": "File:Rimmingston.mine.png",
+      "filename": "Rimmingston.mine.png",
+      "url": "https://classic.runescape.wiki/images/Rimmingston.mine.png?a4a52",
+      "width": 780,
+      "height": 810,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "rimmington",
+      "displayName": "Rimmington",
+      "fileTitle": "File:Rimmington.png",
+      "filename": "Rimmington.png",
+      "url": "https://classic.runescape.wiki/images/Rimmington.png?1b6ef",
+      "width": 1060,
+      "height": 721,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "romeo-juliet",
+      "displayName": "Romeo & Juliet",
+      "fileTitle": "File:Romeo & Juliet map.png",
+      "filename": "Romeo_&_Juliet_map.png",
+      "url": "https://classic.runescape.wiki/images/Romeo_%26_Juliet_map.png?f7f11",
+      "width": 535,
+      "height": 391,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "rs-developers",
+      "displayName": "RS Developers",
+      "fileTitle": "File:RS Developers Map.png",
+      "filename": "RS_Developers_Map.png",
+      "url": "https://classic.runescape.wiki/images/RS_Developers_Map.png?624e2",
+      "width": 2304,
+      "height": 2448,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "runescape-overview-lined",
+      "displayName": "RuneScape overview lined",
+      "fileTitle": "File:RuneScape overview lined.gif",
+      "filename": "RuneScape_overview_lined.gif",
+      "url": "https://classic.runescape.wiki/images/RuneScape_overview_lined.gif?03712",
+      "width": 384,
+      "height": 576,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "seers-village",
+      "displayName": "Seers' village",
+      "fileTitle": "File:Seers' village map.png",
+      "filename": "Seers'_village_map.png",
+      "url": "https://classic.runescape.wiki/images/Seers%27_village_map.png?c83c6",
+      "width": 175,
+      "height": 184,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "sheep-shearer",
+      "displayName": "Sheep shearer",
+      "fileTitle": "File:Sheep shearer map.png",
+      "filename": "Sheep_shearer_map.png",
+      "url": "https://classic.runescape.wiki/images/Sheep_shearer_map.png?94136",
+      "width": 200,
+      "height": 173,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "ship-yard",
+      "displayName": "Ship yard",
+      "fileTitle": "File:Ship yard map.png",
+      "filename": "Ship_yard_map.png",
+      "url": "https://classic.runescape.wiki/images/Ship_yard_map.png?1dee3",
+      "width": 163,
+      "height": 134,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "sinclair-mansion",
+      "displayName": "Sinclair Mansion",
+      "fileTitle": "File:Sinclair Mansion map 1.png",
+      "filename": "Sinclair_Mansion_map_1.png",
+      "url": "https://classic.runescape.wiki/images/Sinclair_Mansion_map_1.png?13a2e",
+      "width": 347,
+      "height": 227,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "buildings",
+      "locationId": "sinclair-mansion",
+      "displayName": "Sinclair Mansion",
+      "fileTitle": "File:Sinclair Mansion map 2.png",
+      "filename": "Sinclair_Mansion_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Sinclair_Mansion_map_2.png?df861",
+      "width": 179,
+      "height": 101,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "regions",
+      "locationId": "sir-prysin-s-location",
+      "displayName": "Sir Prysin's location",
+      "fileTitle": "File:Sir Prysin's location.png",
+      "filename": "Sir_Prysin's_location.png",
+      "url": "https://classic.runescape.wiki/images/Sir_Prysin%27s_location.png?27fb4",
+      "width": 128,
+      "height": 183,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "sorcerors-tower",
+      "displayName": "Sorcerors' Tower",
+      "fileTitle": "File:Sorcerors' Tower map 1.png",
+      "filename": "Sorcerors'_Tower_map_1.png",
+      "url": "https://classic.runescape.wiki/images/Sorcerors%27_Tower_map_1.png?87444",
+      "width": 61,
+      "height": 56,
+      "subLabel": "Map 1"
+    },
+    {
+      "type": "buildings",
+      "locationId": "sorcerors-tower",
+      "displayName": "Sorcerors' Tower",
+      "fileTitle": "File:Sorcerors' Tower map 2.png",
+      "filename": "Sorcerors'_Tower_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Sorcerors%27_Tower_map_2.png?33eef",
+      "width": 63,
+      "height": 66,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "regions",
+      "locationId": "spirit-tree-battle-field",
+      "displayName": "Spirit Tree battle field",
+      "fileTitle": "File:Spirit Tree battle field map.png",
+      "filename": "Spirit_Tree_battle_field_map.png",
+      "url": "https://classic.runescape.wiki/images/Spirit_Tree_battle_field_map.png?c533a",
+      "width": 156,
+      "height": 152,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "spirit-tree-stronghold",
+      "displayName": "Spirit Tree stronghold",
+      "fileTitle": "File:Spirit Tree stronghold map.png",
+      "filename": "Spirit_Tree_stronghold_map.png",
+      "url": "https://classic.runescape.wiki/images/Spirit_Tree_stronghold_map.png?96717",
+      "width": 156,
+      "height": 152,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "spirit-tree-varrock",
+      "displayName": "Spirit Tree varrock",
+      "fileTitle": "File:Spirit Tree varrock map.png",
+      "filename": "Spirit_Tree_varrock_map.png",
+      "url": "https://classic.runescape.wiki/images/Spirit_Tree_varrock_map.png?905d6",
+      "width": 156,
+      "height": 152,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "startq-goblin-diplomacy",
+      "displayName": "Startq goblin diplomacy",
+      "fileTitle": "File:Startq goblin diplomacy.png",
+      "filename": "Startq_goblin_diplomacy.png",
+      "url": "https://classic.runescape.wiki/images/Startq_goblin_diplomacy.png?f3daf",
+      "width": 208,
+      "height": 223,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "tai-bwo-wannai",
+      "displayName": "Tai Bwo Wannai",
+      "fileTitle": "File:Tai Bwo Wannai map.png",
+      "filename": "Tai_Bwo_Wannai_map.png",
+      "url": "https://classic.runescape.wiki/images/Tai_Bwo_Wannai_map.png?0d1ea",
+      "width": 286,
+      "height": 470,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "teleport-house-map-ardougne",
+      "displayName": "Teleport House map (Ardougne)",
+      "fileTitle": "File:Teleport House map (Ardougne).png",
+      "filename": "Teleport_House_map_(Ardougne).png",
+      "url": "https://classic.runescape.wiki/images/Teleport_House_map_%28Ardougne%29.png?b66e9",
+      "width": 278,
+      "height": 235,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "the-grand-tree",
+      "displayName": "The Grand Tree",
+      "fileTitle": "File:The Grand Tree map 2.png",
+      "filename": "The_Grand_Tree_map_2.png",
+      "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_2.png?d925b",
+      "width": 225,
+      "height": 172,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "buildings",
+      "locationId": "the-grand-tree",
+      "displayName": "The Grand Tree",
+      "fileTitle": "File:The Grand Tree map 3.png",
+      "filename": "The_Grand_Tree_map_3.png",
+      "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_3.png?87f4c",
+      "width": 126,
+      "height": 133,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "buildings",
+      "locationId": "the-grand-tree",
+      "displayName": "The Grand Tree",
+      "fileTitle": "File:The Grand Tree map 4.png",
+      "filename": "The_Grand_Tree_map_4.png",
+      "url": "https://classic.runescape.wiki/images/The_Grand_Tree_map_4.png?5b3cc",
+      "width": 78,
+      "height": 89,
+      "subLabel": "Map 4"
+    },
+    {
+      "type": "regions",
+      "locationId": "thurgo-s-location",
+      "displayName": "Thurgo's location",
+      "fileTitle": "File:Thurgo's location.png",
+      "filename": "Thurgo's_location.png",
+      "url": "https://classic.runescape.wiki/images/Thurgo%27s_location.png?0e480",
+      "width": 141,
+      "height": 132,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "tree-gnome-stronghold-mine",
+      "displayName": "Tree Gnome Stronghold mine",
+      "fileTitle": "File:Tree Gnome Stronghold mine map.png",
+      "filename": "Tree_Gnome_Stronghold_mine_map.png",
+      "url": "https://classic.runescape.wiki/images/Tree_Gnome_Stronghold_mine_map.png?38173",
+      "width": 396,
+      "height": 155,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "tree-gnome-stronghold",
+      "displayName": "Tree gnome stronghold",
+      "fileTitle": "File:Tree gnome stronghold.png",
+      "filename": "Tree_gnome_stronghold.png",
+      "url": "https://classic.runescape.wiki/images/Tree_gnome_stronghold.png?93ce2",
+      "width": 250,
+      "height": 304,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "tree-gnome-village",
+      "displayName": "Tree gnome village",
+      "fileTitle": "File:Tree gnome village.png",
+      "filename": "Tree_gnome_village.png",
+      "url": "https://classic.runescape.wiki/images/Tree_gnome_village.png?785fc",
+      "width": 152,
+      "height": 150,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "urhneymap",
+      "displayName": "UrhneyMap",
+      "fileTitle": "File:UrhneyMap.png",
+      "filename": "UrhneyMap.png",
+      "url": "https://classic.runescape.wiki/images/UrhneyMap.png?09594",
+      "width": 153,
+      "height": 152,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "varrock-palace",
+      "displayName": "Varrock Palace",
+      "fileTitle": "File:Varrock Palace first floor map.png",
+      "filename": "Varrock_Palace_first_floor_map.png",
+      "url": "https://classic.runescape.wiki/images/Varrock_Palace_first_floor_map.png?b109e",
+      "width": 205,
+      "height": 190,
+      "subLabel": "First floor"
+    },
+    {
+      "type": "buildings",
+      "locationId": "varrock-palace",
+      "displayName": "Varrock Palace",
+      "fileTitle": "File:Varrock Palace ground floor map.png",
+      "filename": "Varrock_Palace_ground_floor_map.png",
+      "url": "https://classic.runescape.wiki/images/Varrock_Palace_ground_floor_map.png?56005",
+      "width": 194,
+      "height": 275,
+      "subLabel": "Ground floor"
+    },
+    {
+      "type": "regions",
+      "locationId": "varrock",
+      "displayName": "Varrock",
+      "fileTitle": "File:Varrock.png",
+      "filename": "Varrock.png",
+      "url": "https://classic.runescape.wiki/images/Varrock.png?28e6b",
+      "width": 1268,
+      "height": 540,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "varrok-square",
+      "displayName": "Varrok square",
+      "fileTitle": "File:Varrok square.png",
+      "filename": "Varrok_square.png",
+      "url": "https://classic.runescape.wiki/images/Varrok_square.png?f6c2e",
+      "width": 262,
+      "height": 143,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "way-to-manhole",
+      "displayName": "Way to manhole",
+      "fileTitle": "File:Way to manhole.png",
+      "filename": "Way_to_manhole.png",
+      "url": "https://classic.runescape.wiki/images/Way_to_manhole.png?e4a42",
+      "width": 201,
+      "height": 246,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "west-ardougne",
+      "displayName": "West Ardougne",
+      "fileTitle": "File:West Ardougne.png",
+      "filename": "West_Ardougne.png",
+      "url": "https://classic.runescape.wiki/images/West_Ardougne.png?b46d3",
+      "width": 319,
+      "height": 192,
+      "subLabel": null
+    },
+    {
+      "type": "mines",
+      "locationId": "wilderness-lava-maze-mine",
+      "displayName": "Wilderness Lava Maze mine",
+      "fileTitle": "File:Wilderness Lava Maze mine map.png",
+      "filename": "Wilderness_Lava_Maze_mine_map.png",
+      "url": "https://classic.runescape.wiki/images/Wilderness_Lava_Maze_mine_map.png?35aa1",
+      "width": 312,
+      "height": 306,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "wilderness",
+      "displayName": "Wilderness",
+      "fileTitle": "File:Wilderness.png",
+      "filename": "Wilderness.png",
+      "url": "https://classic.runescape.wiki/images/Wilderness.png?eeff3",
+      "width": 1320,
+      "height": 1518,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "wizards-tower",
+      "displayName": "Wizards tower",
+      "fileTitle": "File:Wizards tower.png",
+      "filename": "Wizards_tower.png",
+      "url": "https://classic.runescape.wiki/images/Wizards_tower.png?1d299",
+      "width": 110,
+      "height": 123,
+      "subLabel": null
+    },
+    {
+      "type": "buildings",
+      "locationId": "wizards-guild",
+      "displayName": "Wizards' Guild",
+      "fileTitle": "File:Wizards' Guild map 2.png",
+      "filename": "Wizards'_Guild_map_2.png",
+      "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_map_2.png?b6429",
+      "width": 65,
+      "height": 63,
+      "subLabel": "Map 2"
+    },
+    {
+      "type": "buildings",
+      "locationId": "wizards-guild",
+      "displayName": "Wizards' Guild",
+      "fileTitle": "File:Wizards' Guild map 3.png",
+      "filename": "Wizards'_Guild_map_3.png",
+      "url": "https://classic.runescape.wiki/images/Wizards%27_Guild_map_3.png?d22eb",
+      "width": 63,
+      "height": 59,
+      "subLabel": "Map 3"
+    },
+    {
+      "type": "regions",
+      "locationId": "woodsenter",
+      "displayName": "WoodsEnter",
+      "fileTitle": "File:WoodsEnter.png",
+      "filename": "WoodsEnter.png",
+      "url": "https://classic.runescape.wiki/images/WoodsEnter.png?31c00",
+      "width": 158,
+      "height": 154,
+      "subLabel": null
+    },
+    {
+      "type": "regions",
+      "locationId": "zanaris",
+      "displayName": "Zanaris",
+      "fileTitle": "File:Zanaris.png",
+      "filename": "Zanaris.png",
+      "url": "https://classic.runescape.wiki/images/Zanaris.png?379e4",
+      "width": 923,
+      "height": 463,
+      "subLabel": null
+    }
+  ]
+}

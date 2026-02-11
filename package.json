@@ -1,0 +1,8 @@
+{
+  "name": "idlersc_manager",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-manifest": "node scripts/build-map-manifest.js"
+  }
+}

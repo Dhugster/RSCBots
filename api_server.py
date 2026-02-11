@@ -8,6 +8,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 # Ensure we run from project root so config paths resolve
@@ -32,6 +33,19 @@ _controller: BotController | None = None
 
 # In-memory position store for map markers: bot_id -> { tile_x, tile_y, layer }
 _position_store: dict[str, dict] = {}
+
+# Debug session log (workspace path for Cursor debug mode)
+_DEBUG_LOG_PATH = Path(r"c:\Users\Owner\.cursor\plans\RSC\.cursor\debug.log")
+
+
+def _write_debug_log(payload: dict) -> None:
+    try:
+        _DEBUG_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_DEBUG_LOG_PATH, "a", encoding="utf-8") as f:
+            import json
+            f.write(json.dumps(payload, default=str) + "\n")
+    except Exception:
+        pass
 
 
 def get_controller() -> BotController:
@@ -176,9 +190,25 @@ def stop_bot(bot_id: str):
         raise HTTPException(status_code=400, detail=str(e))
 
 
+@app.post("/api/debug-log")
+def debug_log(payload: dict):
+    """Append one NDJSON line to the session debug log (Cursor debug mode)."""
+    _write_debug_log(payload)
+    return {"ok": True}
+
+
 @app.get("/api/bots/positions")
 def get_bot_positions():
     """Return all known bot positions for map markers and layer grouping."""
+    # #region agent log
+    _write_debug_log({
+        "location": "api_server:get_bot_positions",
+        "message": "positions requested",
+        "data": {"positionsCount": len(_position_store), "keys": list(_position_store.keys())},
+        "hypothesisId": "H3",
+        "timestamp": __import__("time").time() * 1000,
+    })
+    # #endregion
     return dict(_position_store)
 
 
@@ -349,4 +379,17 @@ def get_analytics_summary():
 # Serve built frontend when present (standalone)
 _dist = ROOT / "web" / "dist"
 if _dist.exists():
+    _maps_dir = _dist / "maps"
+    if _maps_dir.exists():
+        _MAP_MEDIA_TYPES = {".png": "image/png", ".svg": "image/svg+xml", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif"}
+
+        @app.get("/maps/{filename:path}")
+        def serve_map_file(filename: str):
+            path = (_maps_dir / filename).resolve()
+            base = _maps_dir.resolve()
+            if not path.is_file() or not str(path).startswith(str(base)):
+                raise HTTPException(status_code=404, detail="Not found")
+            suffix = path.suffix.lower()
+            media_type = _MAP_MEDIA_TYPES.get(suffix, "application/octet-stream")
+            return FileResponse(path, media_type=media_type)
     app.mount("/", StaticFiles(directory=str(_dist), html=True), name="app")

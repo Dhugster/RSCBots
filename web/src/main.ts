@@ -2,6 +2,16 @@ import './style.css'
 
 const API = '/api'
 
+// #region agent log
+function debugLog(location: string, message: string, data: Record<string, unknown>, hypothesisId: string) {
+  fetch(API + '/debug-log', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ location, message, data, timestamp: Date.now(), hypothesisId }),
+  }).catch(() => {})
+}
+// #endregion
+
 type Bot = {
   bot_id: string
   account_name: string
@@ -28,6 +38,15 @@ type AnalyticsSummary = {
 
 type Preset = { name: string; script: string; args: string[] }
 
+type WikiMapEntry = { url: string; width: number; height: number; subLabel: string | null; filename: string }
+type WikiLocation = { id: string; displayName: string; type: string; mapCount: number; maps: WikiMapEntry[] }
+type MapManifest = {
+  generated?: string
+  source?: string
+  categories: Record<string, WikiLocation[]>
+  flatEntries?: unknown[]
+}
+
 let bots: Bot[] = []
 let positions: Positions = {}
 let presets: Preset[] = []
@@ -37,6 +56,14 @@ let logViewCleared = false
 let mapPollTimer: number | null = null
 let lastMapBotsJson = ''
 let lastMapPositionsJson = ''
+let mapManifest: MapManifest | null = null
+let mapMode: 'game' | 'wiki' = 'game'
+let wikiCategoryId: string = 'world'
+let wikiLocationId: string = 'world-map-2017'
+let wikiMapIndex: number = 0
+let rscWorldMapInstance: { setPlaneLevel: (n: number) => void } | null = null
+const RSC_MAP_IMAGE_SIZE = { w: 2448, h: 2736 }
+const RSC_PLANE_BY_LAYER: Record<string, number> = { surface: 0, floor1: 1, floor2: 2, dungeon: 3 }
 
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
   const r = await fetch(API + path, { ...opts, headers: { 'Content-Type': 'application/json', ...opts?.headers } })
@@ -373,9 +400,18 @@ function renderNav(container: HTMLElement) {
 }
 
 async function loadPositions(): Promise<Positions> {
+  // #region agent log
+  debugLog('main.ts:loadPositions', 'loadPositions called', {}, 'H3')
+  // #endregion
   try {
     positions = await api<Positions>('/bots/positions')
-  } catch {
+    // #region agent log
+    debugLog('main.ts:loadPositions', 'positions loaded', { positionsCount: Object.keys(positions).length, keys: Object.keys(positions) }, 'H3')
+    // #endregion
+  } catch (e) {
+    // #region agent log
+    debugLog('main.ts:loadPositions', 'positions API failed', { error: String((e as Error).message) }, 'H3')
+    // #endregion
     positions = {}
   }
   return positions
@@ -383,17 +419,117 @@ async function loadPositions(): Promise<Positions> {
 
 // --- Map view ---
 const MAP_LAYERS = [
-  { id: 'surface', label: 'Surface', file: '/maps/surface.svg' },
+  { id: 'surface', label: 'Surface', file: '/maps/surface.png' },
   { id: 'floor1', label: '1st Floor', file: '/maps/floor1.svg' },
   { id: 'floor2', label: '2nd Floor', file: '/maps/floor2.svg' },
   { id: 'dungeon', label: 'Dungeon', file: '/maps/dungeon.svg' },
 ]
+
+const WIKI_CATEGORY_ORDER = ['world', 'dungeons', 'buildings', 'mines', 'regions'] as const
+const WIKI_CATEGORY_LABELS: Record<string, string> = {
+  world: 'World',
+  dungeons: 'Dungeons',
+  buildings: 'Buildings & houses',
+  mines: 'Mines',
+  regions: 'Regions',
+}
+
+async function loadMapManifest(): Promise<MapManifest | null> {
+  if (mapManifest) return mapManifest
+  try {
+    const r = await fetch('/map-manifest.json')
+    if (!r.ok) return null
+    mapManifest = await r.json() as MapManifest
+    return mapManifest
+  } catch {
+    return null
+  }
+}
+
+function getCurrentWikiLocation(): WikiLocation | null {
+  if (!mapManifest?.categories) return null
+  const list = mapManifest.categories[wikiCategoryId]
+  return list?.find(loc => loc.id === wikiLocationId) ?? null
+}
+
+/** Map wiki category to game layer so we show bots that are on the matching layer. */
+function wikiCategoryToGameLayer(catId: string): 'surface' | 'floor1' | 'floor2' | 'dungeon' {
+  if (catId === 'world' || catId === 'regions') return 'surface'
+  if (catId === 'dungeons' || catId === 'mines') return 'dungeon'
+  if (catId === 'buildings') return 'floor1'
+  return 'surface'
+}
+
+/** Tile extent for proportional positioning (RSC-style). */
+const WIKI_MAP_EXTENT: Record<string, { w: number; h: number }> = {
+  world: { w: 4032, h: 4032 },
+  regions: { w: 4032, h: 4032 },
+  dungeons: { w: 512, h: 512 },
+  mines: { w: 512, h: 512 },
+  buildings: { w: 256, h: 256 },
+}
+
+function updateWikiMarkerPositions(mapContainer: HTMLElement, mapImg: HTMLImageElement) {
+  const containerRect = mapContainer.getBoundingClientRect()
+  const imgRect = mapImg.getBoundingClientRect()
+  if (imgRect.width <= 0 || imgRect.height <= 0) return
+  const extent = WIKI_MAP_EXTENT[wikiCategoryId] ?? WIKI_MAP_EXTENT.world
+  const markers = mapContainer.querySelectorAll('.map-marker[data-wiki-layer]')
+  markers.forEach((m) => {
+    const botId = (m as HTMLElement).dataset.botId
+    const pos = botId ? positions[botId] : null
+    if (!pos) return
+    const px = (pos.tile_x / extent.w) * imgRect.width
+    const py = (pos.tile_y / extent.h) * imgRect.height
+    const left = imgRect.left - containerRect.left + px
+    const top = imgRect.top - containerRect.top + py
+    ;(m as HTMLElement).style.left = `${left}px`
+    ;(m as HTMLElement).style.top = `${top}px`
+  })
+}
+
+function renderWikiMapSidebar(wikiNav: HTMLElement) {
+  if (!mapManifest?.categories) {
+    wikiNav.innerHTML = '<p class="dim">No map data.</p>'
+    return
+  }
+  wikiNav.innerHTML = ''
+  for (const catId of WIKI_CATEGORY_ORDER) {
+    const list = mapManifest.categories[catId]
+    if (!list?.length) continue
+    const title = document.createElement('div')
+    title.className = 'map-wiki-cat-title'
+    title.textContent = WIKI_CATEGORY_LABELS[catId] ?? catId
+    wikiNav.appendChild(title)
+    for (const loc of list) {
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'map-wiki-loc-btn'
+      btn.textContent = loc.displayName
+      if (wikiCategoryId === catId && wikiLocationId === loc.id) btn.classList.add('active')
+      btn.onclick = () => {
+        wikiCategoryId = catId
+        wikiLocationId = loc.id
+        wikiMapIndex = 0
+        renderMapView()
+      }
+      wikiNav.appendChild(btn)
+    }
+  }
+  const attribution = document.createElement('p')
+  attribution.className = 'map-wiki-attribution'
+  attribution.innerHTML = 'Maps from <a href="https://classic.runescape.wiki" target="_blank" rel="noopener">RuneScape Classic Wiki</a> (CC BY-NC-SA 3.0). RuneScape ® Jagex Ltd.'
+  wikiNav.appendChild(attribution)
+}
 
 function renderMapView() {
   lastMapBotsJson = JSON.stringify(bots.map(b => ({ id: b.bot_id, status: b.status, xp: b.xp_per_hour })))
   lastMapPositionsJson = JSON.stringify(positions)
 
   const root = document.querySelector<HTMLDivElement>('#app')!
+  // #region agent log
+  debugLog('main.ts:renderMapView', 'renderMapView entry', { rootExists: !!root, positionsCount: Object.keys(positions).length }, 'H2')
+  // #endregion
   root.innerHTML = ''
   const el = document.createElement('div')
   el.className = 'map-page'
@@ -417,23 +553,70 @@ function renderMapView() {
   header.className = 'map-header'
   header.innerHTML = `
     <h1>World Map</h1>
+    <div class="map-mode-toggle">
+      <button type="button" class="layer-btn map-mode-btn ${mapMode === 'game' ? 'active' : ''}" data-mode="game">Game layers</button>
+      <button type="button" class="layer-btn map-mode-btn ${mapMode === 'wiki' ? 'active' : ''}" data-mode="wiki">Wiki maps</button>
+    </div>
     <a href="#/analytics" class="map-totals">Total: ${formatXp(totalsXp)}/hr | ${totalsItems} items | ${formatProfit(totalsProfit)} gp</a>
   `
   el.appendChild(header)
+  header.querySelectorAll('.map-mode-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      mapMode = (btn as HTMLElement).dataset.mode as 'game' | 'wiki'
+      renderMapView()
+    })
+  })
 
   const mapWrap = document.createElement('div')
   mapWrap.className = 'map-wrap'
+  if (mapMode === 'wiki') {
+    const wikiNav = document.createElement('aside')
+    wikiNav.className = 'map-wiki-nav'
+    wikiNav.id = 'map-wiki-nav'
+    wikiNav.innerHTML = '<p class="dim">Loading…</p>'
+    mapWrap.appendChild(wikiNav)
+    loadMapManifest().then((manifest) => {
+      if (!manifest || !el.isConnected) return
+      renderWikiMapSidebar(wikiNav)
+      const img = el.querySelector('.map-image') as HTMLImageElement | null
+      const loc = getCurrentWikiLocation()
+      if (img && loc?.maps?.length) {
+        const mapEntry = loc.maps[wikiMapIndex] ?? loc.maps[0]
+        img.src = mapEntry.url
+        img.alt = `${loc.displayName}${mapEntry.subLabel ? ' – ' + mapEntry.subLabel : ''}`
+      }
+    })
+  }
   const mapContainer = document.createElement('div')
-  mapContainer.className = 'map-container'
+  mapContainer.className = 'map-container' + (mapMode === 'wiki' ? ' wiki-map' : '')
+  let mapZoom = 1
   const mapImg = document.createElement('img')
   mapImg.alt = 'Map'
   mapImg.className = 'map-image'
+  let rscMapDiv: HTMLDivElement | null = null
+  let rscOverlay: HTMLDivElement | null = null
+  function setZoom(delta: number) {
+    mapZoom = Math.max(0.25, Math.min(2, mapZoom + delta))
+    if (mapMode === 'wiki') {
+      mapImg.style.transform = `scale(${mapZoom})`
+      mapImg.style.transformOrigin = 'center center'
+    } else if (rscMapDiv) {
+      rscMapDiv.style.transform = `scale(${mapZoom})`
+      rscMapDiv.style.transformOrigin = 'center center'
+    }
+  }
   function setLayer(layer: string) {
-    if (currentLayer === layer) return
+    if (mapMode === 'game' && rscWorldMapInstance != null) {
+      const plane = RSC_PLANE_BY_LAYER[layer] ?? 0
+      rscWorldMapInstance.setPlaneLevel(plane)
+    } else if (mapMode === 'wiki') {
+      const spec = MAP_LAYERS.find(l => l.id === layer) || MAP_LAYERS[0]
+      const pathOnly = spec.file
+      if (!mapImg.src.endsWith(pathOnly)) mapImg.src = pathOnly
+    }
+    if (currentLayer === layer && mapMode === 'wiki') return
     currentLayer = layer
-    const spec = MAP_LAYERS.find(l => l.id === layer) || MAP_LAYERS[0]
-    if (mapImg.src !== spec.file) mapImg.src = spec.file
-    mapContainer.querySelectorAll('.layer-btn').forEach((btn) => {
+    mapContainer.querySelectorAll('.layer-btn[data-layer]').forEach((btn) => {
       (btn as HTMLElement).classList.toggle('active', (btn as HTMLElement).dataset.layer === layer)
     })
     mapContainer.querySelectorAll('.map-marker').forEach((m) => {
@@ -441,40 +624,177 @@ function renderMapView() {
       ;(m as HTMLElement).style.display = layerMatch ? '' : 'none'
     })
   }
-  setLayer('surface')
-  mapContainer.appendChild(mapImg)
+  function setWikiMap(loc: WikiLocation | null, index: number) {
+    if (!loc?.maps?.length) return
+    const mapEntry = loc.maps[index] ?? loc.maps[0]
+    mapImg.src = mapEntry.url
+    mapImg.alt = `${loc.displayName}${mapEntry.subLabel ? ' – ' + mapEntry.subLabel : ''}`
+  }
+  if (mapMode === 'wiki') {
+    const loc = getCurrentWikiLocation()
+    setWikiMap(loc, wikiMapIndex)
+    mapContainer.appendChild(mapImg)
+  } else {
+    rscMapDiv = document.createElement('div')
+    rscMapDiv.className = 'map-rsc-wrap'
+    rscMapDiv.style.minHeight = '400px'
+    rscMapDiv.style.width = '100%'
+    rscMapDiv.style.position = 'relative'
+    mapContainer.appendChild(rscMapDiv)
+    const WorldMapCtor = (window as unknown as { rscWorldMap?: { new (opts: { container: HTMLElement }): { init: () => Promise<void>; setPlaneLevel: (n: number) => void } } }).rscWorldMap
+    if (WorldMapCtor) {
+      rscWorldMapInstance = null
+      const wm = new WorldMapCtor({ container: rscMapDiv })
+      wm.init().then(() => {
+        if (!rscMapDiv?.isConnected) return
+        rscWorldMapInstance = wm
+        setLayer('surface')
+        rscOverlay = document.createElement('div')
+        rscOverlay.className = 'map-rsc-overlay'
+        Object.assign(rscOverlay.style, {
+          position: 'absolute',
+          left: '0',
+          top: '0',
+          width: `${RSC_MAP_IMAGE_SIZE.w}px`,
+          height: `${RSC_MAP_IMAGE_SIZE.h}px`,
+          pointerEvents: 'none',
+        })
+        rscMapDiv.appendChild(rscOverlay)
+        const scaleX = RSC_MAP_IMAGE_SIZE.w / 4032
+        const scaleY = RSC_MAP_IMAGE_SIZE.h / 4032
+        Object.entries(positions).forEach(([bid, pos]) => {
+          const bot = bots.find(b => b.bot_id === bid)
+          const marker = document.createElement('div')
+          marker.className = 'map-marker'
+          marker.dataset.botId = bid
+          marker.dataset.layer = pos.layer
+          marker.style.pointerEvents = 'auto'
+          marker.style.left = `${pos.tile_x * scaleX}px`
+          marker.style.top = `${pos.tile_y * scaleY}px`
+          marker.style.display = pos.layer === currentLayer ? '' : 'none'
+          marker.title = bot?.username || bid
+          marker.textContent = bot?.username || bid
+          marker.onclick = (e) => {
+            e.stopPropagation()
+            renderMapPopup(el, bot || undefined)
+          }
+          rscOverlay!.appendChild(marker)
+        })
+        const planeWrap = rscMapDiv.querySelector('[style*="position"]') as HTMLElement | null
+        const updateTileInfo = (e: MouseEvent) => {
+          const target = planeWrap || rscMapDiv!
+          const tr = target.getBoundingClientRect()
+          const x = (e.clientX - tr.left) / tr.width * RSC_MAP_IMAGE_SIZE.w
+          const y = (e.clientY - tr.top) / tr.height * RSC_MAP_IMAGE_SIZE.h
+          const tx = Math.floor(x)
+          const ty = Math.floor(y)
+          if (tx >= 0 && tx < RSC_MAP_IMAGE_SIZE.w && ty >= 0 && ty < RSC_MAP_IMAGE_SIZE.h) {
+            tileInfo.textContent = `Tile: ${tx}, ${ty}`
+          }
+        }
+        mapContainer.addEventListener('mousemove', updateTileInfo)
+        mapContainer.addEventListener('mouseleave', () => { tileInfo.textContent = 'Tile: —' })
+      }).catch(() => {
+        rscMapDiv!.innerHTML = '<p class="dim">Failed to load RSC World Map.</p>'
+      })
+    } else {
+      rscMapDiv.innerHTML = '<p class="dim">RSC World Map script not loaded.</p>'
+    }
+    setLayer('surface')
+  }
+  // #region agent log
+  if (mapMode === 'wiki') {
+    mapImg.onload = () => {
+      const r = mapImg.getBoundingClientRect()
+      const cr = mapContainer.getBoundingClientRect()
+      const style = window.getComputedStyle(mapImg)
+      debugLog('main.ts:renderMapView', 'map image loaded', {
+        src: mapImg.src,
+        imgRect: { w: r.width, h: r.height, top: r.top, left: r.left },
+        containerRect: { w: cr.width, h: cr.height },
+        display: style.display,
+        visibility: style.visibility,
+        opacity: style.opacity,
+      }, 'H1')
+      debugLog('main.ts:renderMapView', 'map image dimensions', { imgRect: r, containerRect: cr }, 'H2')
+      debugLog('main.ts:renderMapView', 'map image visibility', { display: style.display, visibility: style.visibility, opacity: style.opacity }, 'H3')
+    }
+    mapImg.onerror = () => { debugLog('main.ts:renderMapView', 'map image error', { src: mapImg.src }, 'H1') }
+    debugLog('main.ts:renderMapView', 'map image src set', { src: mapImg.src || '(empty)' }, 'H4')
+  }
+  // #endregion
 
   const layerBtns = document.createElement('div')
   layerBtns.className = 'layer-btns'
-  MAP_LAYERS.forEach((l) => {
-    const count = byLayer[l.id as keyof typeof byLayer]?.length ?? 0
-    const btn = document.createElement('button')
-    btn.type = 'button'
-    btn.className = 'layer-btn'
-    btn.dataset.layer = l.id
-    btn.textContent = count > 0 ? `${l.label} (${count})` : l.label
-    if (l.id === currentLayer) btn.classList.add('active')
-    btn.onclick = () => setLayer(l.id)
-    layerBtns.appendChild(btn)
-  })
+  if (mapMode === 'game') {
+    MAP_LAYERS.forEach((l) => {
+      const count = byLayer[l.id as keyof typeof byLayer]?.length ?? 0
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'layer-btn'
+      btn.dataset.layer = l.id
+      btn.textContent = count > 0 ? `${l.label} (${count})` : l.label
+      if (l.id === currentLayer) btn.classList.add('active')
+      btn.onclick = () => setLayer(l.id)
+      layerBtns.appendChild(btn)
+    })
+  } else {
+    const loc = getCurrentWikiLocation()
+    if (loc && loc.maps.length > 1) {
+      loc.maps.forEach((m, i) => {
+        const btn = document.createElement('button')
+        btn.type = 'button'
+        btn.className = 'layer-btn'
+        btn.textContent = m.subLabel || `Map ${i + 1}`
+        if (i === wikiMapIndex) btn.classList.add('active')
+        btn.onclick = () => {
+          wikiMapIndex = i
+          setWikiMap(loc, i)
+          layerBtns.querySelectorAll('.layer-btn').forEach((b, j) => (b as HTMLElement).classList.toggle('active', j === i))
+        }
+        layerBtns.appendChild(btn)
+      })
+    }
+  }
   mapContainer.appendChild(layerBtns)
+
+  const zoomBtns = document.createElement('div')
+  zoomBtns.className = 'map-zoom-btns'
+  const zoomIn = document.createElement('button')
+  zoomIn.type = 'button'
+  zoomIn.className = 'layer-btn'
+  zoomIn.textContent = '+'
+  zoomIn.title = 'Zoom in'
+  zoomIn.onclick = () => setZoom(0.25)
+  const zoomOut = document.createElement('button')
+  zoomOut.type = 'button'
+  zoomOut.className = 'layer-btn'
+  zoomOut.textContent = '−'
+  zoomOut.title = 'Zoom out'
+  zoomOut.onclick = () => setZoom(-0.25)
+  zoomBtns.appendChild(zoomIn)
+  zoomBtns.appendChild(zoomOut)
+  mapContainer.appendChild(zoomBtns)
 
   const tileInfo = document.createElement('div')
   tileInfo.className = 'map-tile-info'
   tileInfo.textContent = 'Tile: —'
   mapContainer.appendChild(tileInfo)
 
-  // Markers (placeholder positions if no position store: use index for demo)
+  // Markers: game mode = added inside rsc init callback; wiki mode = here, positioned by tile extents (updated on img load/resize)
+  if (mapMode === 'wiki') {
   const scale = 0.4
+  const effectiveLayer = wikiCategoryToGameLayer(wikiCategoryId)
   Object.entries(positions).forEach(([bid, pos]) => {
-    if (pos.layer !== currentLayer) return
+    if (pos.layer !== effectiveLayer) return
     const bot = bots.find(b => b.bot_id === bid)
-    const mx = 100 + (pos.tile_x % 700) * scale
-    const my = 80 + (pos.tile_y % 500) * scale
     const marker = document.createElement('div')
     marker.className = 'map-marker'
     marker.dataset.botId = bid
     marker.dataset.layer = pos.layer
+    marker.dataset.wikiLayer = '1'
+    const mx = 100 + (pos.tile_x % 700) * scale
+    const my = 80 + (pos.tile_y % 500) * scale
     marker.style.left = `${mx}px`
     marker.style.top = `${my}px`
     marker.title = bot?.username || bid
@@ -485,14 +805,79 @@ function renderMapView() {
     }
     mapContainer.appendChild(marker)
   })
+  }
+  if (mapMode === 'wiki') {
+    const doUpdate = () => updateWikiMarkerPositions(mapContainer, mapImg)
+    const prevOnload = mapImg.onload
+    mapImg.onload = (ev) => {
+      prevOnload?.call(mapImg, ev)
+      doUpdate()
+    }
+    if (mapImg.complete && mapImg.naturalWidth) requestAnimationFrame(doUpdate)
+    const ro = new ResizeObserver(() => doUpdate())
+    ro.observe(mapContainer)
+  }
 
   mapWrap.appendChild(mapContainer)
 
   const sidebar = document.createElement('aside')
   sidebar.className = 'map-sidebar'
-  sidebar.innerHTML = '<h3>World Map</h3><div class="sidebar-tabs"><span class="tab active">Players</span></div>'
+  sidebar.innerHTML = '<h3>World Map - Coleslaw</h3><div class="sidebar-tabs"><span class="tab active" data-tab="players">Players</span><span class="tab" data-tab="locations">Locations</span></div><p class="map-attribution dim">Map © <a href="https://github.com/2003scape/rsc-world-map" target="_blank" rel="noopener">2003scape/rsc-world-map</a> (AGPL-3.0)</p>'
   const playerList = document.createElement('div')
   playerList.className = 'player-list'
+  playerList.dataset.tabPanel = 'players'
+  const locationsPanel = document.createElement('div')
+  locationsPanel.className = 'locations-panel'
+  locationsPanel.dataset.tabPanel = 'locations'
+  locationsPanel.style.display = 'none'
+  const locationsSearch = document.createElement('input')
+  locationsSearch.type = 'search'
+  locationsSearch.placeholder = 'Search locations…'
+  locationsSearch.className = 'locations-search'
+  const locationsList = document.createElement('div')
+  locationsList.className = 'locations-list'
+  locationsPanel.appendChild(locationsSearch)
+  locationsPanel.appendChild(locationsList)
+  sidebar.querySelector('.sidebar-tabs')?.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest('.tab[data-tab]')
+    if (!t) return
+    const tab = (t as HTMLElement).dataset.tab
+    sidebar.querySelectorAll('.tab[data-tab]').forEach((tb) => (tb as HTMLElement).classList.toggle('active', (tb as HTMLElement).dataset.tab === tab))
+    sidebar.querySelectorAll('[data-tab-panel]').forEach((p) => {
+      const panel = p as HTMLElement
+      panel.style.display = panel.dataset.tabPanel === tab ? '' : 'none'
+    })
+  })
+  fetch('/locations.json').then(r => r.ok ? r.json() : []).then((list: { name: string; x: number; y: number; category?: string }[]) => {
+    const categories = [...new Set(list.map(l => l.category).filter(Boolean))].sort() as string[]
+    const catSelect = document.createElement('select')
+    catSelect.className = 'locations-category'
+    catSelect.innerHTML = '<option value="">All categories</option>' + categories.map(c => `<option value="${c}">${c}</option>`).join('')
+    locationsPanel.insertBefore(catSelect, locationsList)
+    const render = () => {
+      const q = (locationsSearch.value || '').toLowerCase()
+      const cat = (catSelect.value || '').toLowerCase()
+      let filtered = list
+      if (q) filtered = filtered.filter(l => l.name.toLowerCase().includes(q))
+      if (cat) filtered = filtered.filter(l => (l.category || '').toLowerCase() === cat)
+      locationsList.innerHTML = ''
+      filtered.slice(0, 200).forEach((loc) => {
+        const row = document.createElement('div')
+        row.className = 'location-row'
+        row.textContent = `${loc.name} (${loc.x}, ${loc.y})`
+        locationsList.appendChild(row)
+      })
+      if (filtered.length > 200) {
+        const more = document.createElement('div')
+        more.className = 'dim'
+        more.textContent = `+ ${filtered.length - 200} more`
+        locationsList.appendChild(more)
+      }
+    }
+    locationsSearch.addEventListener('input', render)
+    catSelect.addEventListener('change', render)
+    render()
+  }).catch(() => { locationsList.innerHTML = '<p class="dim">No locations data.</p>' })
   const groups = [
     { label: 'SURFACE', layer: 'surface' },
     { label: 'DUNGEON', layer: 'dungeon' },
@@ -526,10 +911,28 @@ function renderMapView() {
     playerList.innerHTML = '<p class="dim">No running bots. Start bots from Dashboard.</p>'
   }
   sidebar.appendChild(playerList)
+  sidebar.appendChild(locationsPanel)
   mapWrap.appendChild(sidebar)
   el.appendChild(mapWrap)
 
   root.appendChild(el)
+  // #region agent log
+  requestAnimationFrame(() => {
+    const container = el.querySelector('.map-container')
+    const img = el.querySelector('.map-image')
+    if (container && img) {
+      const cr = (container as HTMLElement).getBoundingClientRect()
+      const ir = (img as HTMLElement).getBoundingClientRect()
+      const style = window.getComputedStyle(img as Element)
+      debugLog('main.ts:renderMapView', 'after attach: layout', {
+        containerRect: { w: cr.width, h: cr.height },
+        imgRect: { w: ir.width, h: ir.height },
+        display: style.display,
+        visibility: style.visibility,
+      }, 'H5')
+    }
+  })
+  // #endregion
 }
 
 function renderMapPopup(parent: HTMLElement, bot: Bot | undefined) {
@@ -691,7 +1094,15 @@ async function init() {
     if (route === 'dashboard') {
       render()
     } else if (route === 'map') {
-      loadPositions().then(() => renderMapView())
+      // #region agent log
+      debugLog('main.ts:renderCurrent', 'map route: loading positions then renderMapView', { route }, 'H1')
+      // #endregion
+      loadPositions().then(() => {
+        // #region agent log
+        debugLog('main.ts:renderCurrent', 'map: about to call renderMapView', {}, 'H5')
+        // #endregion
+        renderMapView()
+      })
       mapPollTimer = window.setInterval(async () => {
         await loadBots()
         await loadPositions()
@@ -704,7 +1115,7 @@ async function init() {
         renderMapView()
       }, 8000) as unknown as number
     } else if (route === 'analytics') {
-      renderAnalyticsView()
+      loadBots().then(() => renderAnalyticsView())
       mapPollTimer = window.setInterval(async () => {
         await loadBots()
         if (getRoute() === 'analytics') {
