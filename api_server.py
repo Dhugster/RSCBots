@@ -98,6 +98,9 @@ def _bot_to_summary(bot) -> BotSummary:
 @app.get("/api/bots")
 def list_bots():
     c = get_controller()
+    for b in c.bots.values():
+        if getattr(b, "update_runtime", None):
+            b.update_runtime()  # refresh runtime and xp_per_hour for dashboard
     return [_bot_to_summary(b) for b in c.bots.values()]
 
 

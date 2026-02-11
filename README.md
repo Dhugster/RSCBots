@@ -2,6 +2,8 @@
 
 **IdleRSC Dashboard** – A persistent Dashboard for managing multiple [IdleRSC](https://gitlab.com/openrsc/idlersc) (Coleslaw/Uranium) bots: add and edit accounts, assign scripts or presets, start/stop bots, and view logs in one place.
 
+**Open source** – Anyone can download, use, modify, and redistribute this software. Licensed under [GPL v3](LICENSE); see [LICENSE](LICENSE) for full terms.
+
 This project is **unofficial and community-made**. It is not part of the official IdleRSC project. Credit to the [IdleRSC team](https://gitlab.com/openrsc/idlersc) for the client and game integration.
 
 ---
@@ -131,7 +133,7 @@ This usually means the terminal is using a different Python than the one where y
 
 ## License
 
-GPL v3 – same as IdleRSC where applicable. See [LICENSE](LICENSE).
+This project is free and open source. You may download, use, modify, and redistribute it under the terms of the **GNU General Public License v3**. See [LICENSE](LICENSE) for the full text. No permission or payment is required to use this software.
 
 ## Contributing
 

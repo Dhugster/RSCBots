@@ -94,18 +94,25 @@ class LogAggregator:
     def _parse_log_line(self, bot: "BotInstance", line: str) -> None:
         """Parse log line for metrics (XP, items, profit). Updates BotMetrics."""
         line_lower = line.lower()
-        # XP: e.g. "gained 50 xp", "+50 xp", "50 xp gained"
-        if "xp" in line_lower and ("gained" in line_lower or "+" in line):
-            m = re.search(r"(\d+)\s*xp|xp[:\s]*(\d+)", line_lower, re.I)
-            if m:
-                n = int(m.group(1) or m.group(2) or 0)
-                if n > 0:
-                    bot.metrics.total_xp_gained += n
-                    if bot.start_time and bot.is_running:
-                        rt = int((datetime.now() - bot.start_time).total_seconds())
-                        bot.metrics.update_xp_rate(rt)
+        xp_updated = False
+        # XP: "gained N xp", "+N xp", "N xp", "gained N experience", "N experience", "experience gained"
+        if "xp" in line_lower or "experience" in line_lower:
+            if "gained" in line_lower or "+" in line or "experience" in line_lower:
+                m = re.search(
+                    r"(\d+)\s*(?:xp|experience)|(?:xp|experience)[:\s]*(\d+)|gained\s+(\d+)|[\+](\d+)\s*(?:xp|experience)?",
+                    line_lower,
+                    re.I,
+                )
+                if m:
+                    n = int(next((g for g in m.groups() if g), "0"))
+                    if n > 0:
+                        bot.metrics.total_xp_gained += n
+                        xp_updated = True
+        if xp_updated and bot.start_time and bot.is_running:
+            rt = int((datetime.now() - bot.start_time).total_seconds())
+            bot.metrics.update_xp_rate(rt)
         # Items: "collected", "picked up", "loot"
-        if any(k in line_lower for k in ("collected", "picked up", "loot", "picked up")):
+        if any(k in line_lower for k in ("collected", "picked up", "loot")):
             bot.metrics.items_collected += 1
         # Profit: "coins", "gold", "gp", "profit" with a number
         if any(k in line_lower for k in ("coins", "gold", "gp", "profit")):

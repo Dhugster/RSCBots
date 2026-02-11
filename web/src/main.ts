@@ -35,6 +35,8 @@ let scriptsList: string[] = []
 let selectedIds = new Set<string>()
 let logViewCleared = false
 let mapPollTimer: number | null = null
+let lastMapBotsJson = ''
+let lastMapPositionsJson = ''
 
 async function api<T>(path: string, opts?: RequestInit): Promise<T> {
   const r = await fetch(API + path, { ...opts, headers: { 'Content-Type': 'application/json', ...opts?.headers } })
@@ -65,7 +67,7 @@ async function loadBots(forceRender = false) {
   const next = await api<Bot[]>('/bots')
   if (!forceRender && botsEqual(bots, next)) return
   bots = next
-  render()
+  if (getRoute() === 'dashboard') render()
 }
 
 async function loadPresets() {
@@ -173,7 +175,7 @@ function render() {
     const currentScript = b.script_name || ''
     card.innerHTML = `
       <div class="bot-card-header">
-        <input type="checkbox" ${isSelected ? 'checked' : ''} data-bot-id="${b.bot_id}" class="bot-select" />
+        <input type="checkbox" ${isSelected ? 'checked' : ''} data-bot-id="${b.bot_id}" class="bot-select" autocomplete="off" />
         <span class="bot-id">${escapeHtml(b.bot_id)}</span>
         <span class="bot-status" style="color:${statusColor(b.status)}">${escapeHtml(b.status)}</span>
       </div>
@@ -181,7 +183,7 @@ function render() {
         <div class="bot-row"><span class="label">User</span> ${escapeHtml(b.username)}</div>
         <div class="bot-row bot-row-script">
           <span class="label">Script</span>
-          <select class="script-select" data-bot-id="${b.bot_id}" data-action="script-change">
+          <select class="script-select" data-bot-id="${b.bot_id}" data-action="script-change" autocomplete="off">
             ${scriptsList.map(s => `<option value="${escapeHtml(s)}" ${s === currentScript ? 'selected' : ''}>${escapeHtml(s || '(none)')}</option>`).join('')}
           </select>
         </div>
@@ -205,7 +207,7 @@ function render() {
   applyScriptRow.className = 'preset-row'
   applyScriptRow.innerHTML = `
     <span class="label">Script for selected or all:</span>
-    <select class="apply-script-select" id="apply-script-select">
+    <select class="apply-script-select" id="apply-script-select" autocomplete="off">
       ${scriptSelectOptions()}
     </select>
     <button type="button" class="btn btn-sm" id="btn-apply-selected">To selected</button>
@@ -253,13 +255,13 @@ function render() {
   addSection.innerHTML = `
     <h2>Add account</h2>
     <form id="form-add-bot" class="form-add">
-      <input name="bot_id" placeholder="Bot ID" required />
-      <input name="username" placeholder="Username" required />
-      <input name="password" type="password" placeholder="Password" required />
-      <select name="script_name">
+      <input name="bot_id" placeholder="Bot ID" required autocomplete="off" />
+      <input name="username" placeholder="Username" required autocomplete="username" />
+      <input name="password" type="password" placeholder="Password" required autocomplete="current-password" />
+      <select name="script_name" autocomplete="off">
         ${scriptSelectOptions()}
       </select>
-      <input name="script_args" placeholder="Args (optional, comma-separated)" />
+      <input name="script_args" placeholder="Args (optional, comma-separated)" autocomplete="off" />
       <button type="submit" class="btn btn-primary">Add</button>
     </form>
   `
@@ -388,6 +390,9 @@ const MAP_LAYERS = [
 ]
 
 function renderMapView() {
+  lastMapBotsJson = JSON.stringify(bots.map(b => ({ id: b.bot_id, status: b.status, xp: b.xp_per_hour })))
+  lastMapPositionsJson = JSON.stringify(positions)
+
   const root = document.querySelector<HTMLDivElement>('#app')!
   root.innerHTML = ''
   const el = document.createElement('div')
@@ -424,9 +429,10 @@ function renderMapView() {
   mapImg.alt = 'Map'
   mapImg.className = 'map-image'
   function setLayer(layer: string) {
+    if (currentLayer === layer) return
     currentLayer = layer
     const spec = MAP_LAYERS.find(l => l.id === layer) || MAP_LAYERS[0]
-    mapImg.src = spec.file
+    if (mapImg.src !== spec.file) mapImg.src = spec.file
     mapContainer.querySelectorAll('.layer-btn').forEach((btn) => {
       (btn as HTMLElement).classList.toggle('active', (btn as HTMLElement).dataset.layer === layer)
     })
@@ -689,7 +695,13 @@ async function init() {
       mapPollTimer = window.setInterval(async () => {
         await loadBots()
         await loadPositions()
-        if (getRoute() === 'map') renderMapView()
+        if (getRoute() !== 'map') return
+        const botsJson = JSON.stringify(bots.map(b => ({ id: b.bot_id, status: b.status, xp: b.xp_per_hour })))
+        const posJson = JSON.stringify(positions)
+        if (botsJson === lastMapBotsJson && posJson === lastMapPositionsJson) return
+        lastMapBotsJson = botsJson
+        lastMapPositionsJson = posJson
+        renderMapView()
       }, 8000) as unknown as number
     } else if (route === 'analytics') {
       renderAnalyticsView()
