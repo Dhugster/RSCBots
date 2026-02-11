@@ -4,7 +4,7 @@
 theme: runescape
 
 # Java and IdleRSC configuration
-idlersc_jar_path: "C:/Users/Owner/Desktop/IdleRSC.jar"
+idlersc_jar_path: "D:/IdleRSC/IdleRSC.jar"
 java_path: "java"
 
 # Logging

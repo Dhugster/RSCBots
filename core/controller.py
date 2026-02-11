@@ -113,7 +113,7 @@ class BotController:
             password=config["password"],
             script_name=config.get("script") or "",
             script_args=config.get("args", []),
-            auto_restart=config.get("auto_restart", True),
+            auto_restart=config.get("auto_restart", False),
             max_runtime_hours=config.get("max_runtime"),
             health_check_interval=config.get("health_check_interval", 30),
         )

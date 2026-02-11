@@ -7,7 +7,7 @@ bots:
     password: your_password_here
     script: MiningBot
     args: ["iron", "al_kharid", "powermine"]
-    auto_restart: true
+    auto_restart: false   # no automatic restart on crash; set true only if you want manual "recover" to restart this bot
     max_runtime: 4
 
   - id: fisher_001
@@ -16,4 +16,4 @@ bots:
     password: your_password_here
     script: FishingBot
     args: ["lobster", "karamja"]
-    auto_restart: true
+    auto_restart: false

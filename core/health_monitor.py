@@ -40,12 +40,13 @@ class HealthMonitor:
                     health = self.check_bot_health(bot)
                     bot.health_status = health
                     bot.last_health_check = datetime.now()
-                    # Auto-restart ONLY on actual process crash (process died).
-                    # DISCONNECTED / ERROR_SPAM are logged and marked ERROR but do not restart.
+                    # No automatic restarts. Only record status; user restarts manually if desired.
                     if health == HealthStatus.CRASHED:
-                        self.controller.recovery_system.handle_crash(bot)
+                        bot.record_crash()
+                        bot.add_log("Process crashed (no auto-restart)", "HEALTH")
                     elif health == HealthStatus.STUCK:
-                        self.controller.recovery_system.handle_stuck(bot)
+                        bot.status = BotStatus.ERROR
+                        bot.add_log("Stuck detected (no auto-restart)", "HEALTH")
                     elif health == HealthStatus.DISCONNECTED:
                         bot.status = BotStatus.DISCONNECTED
                         bot.add_log("Disconnect detected (no auto-restart)", "HEALTH")

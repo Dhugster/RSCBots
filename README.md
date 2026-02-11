@@ -38,7 +38,24 @@ pip install -r requirements.txt
 
 ## Usage
 
-**Primary:** Run with no arguments to open the Dashboard (IdleRSC-style flow):
+### Web app (standalone, with graphics)
+
+One command builds the web UI and starts the API; open the URL in your browser:
+
+**Windows:** `run_app.bat`  
+**Linux/macOS:** `./run_app.sh` (or `bash run_app.sh`)
+
+Then open **http://127.0.0.1:8000** (the script may open it for you). You get a graphical dashboard: bot cards (start/stop, delete), presets, logs, and an “Add account” form.
+
+**Dev mode (API + frontend separate):**
+- Terminal 1: `uvicorn api_server:app --reload --host 127.0.0.1 --port 8000`
+- Terminal 2: `cd web && npm run dev` → open http://localhost:5173 (Vite proxies `/api` to the API)
+
+---
+
+### Terminal TUI
+
+Run with no arguments to open the terminal Dashboard:
 
 ```bash
 python bot_manager.py

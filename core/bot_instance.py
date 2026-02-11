@@ -75,7 +75,7 @@ class BotInstance:
     restart_count: int = 0
 
     # Configuration
-    auto_restart: bool = True
+    auto_restart: bool = False
     max_runtime_hours: Optional[float] = None
     health_check_interval: int = 30
     restart_cooldown: int = 60

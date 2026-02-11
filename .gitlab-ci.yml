@@ -1,0 +1,50 @@
+# RSC Bot Manager – GitLab CI
+# https://docs.gitlab.com/ee/ci/yaml/
+
+default:
+  interruptible: true
+
+stages:
+  - test
+  - build
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  npm_config_cache: "$CI_PROJECT_DIR/.cache/npm"
+
+# -----------------------------------------------------------------------------
+# Python: install deps and verify app loads (no config/jar required)
+# -----------------------------------------------------------------------------
+python:check:
+  stage: test
+  image: python:3.12-slim
+  cache:
+    key: pip-${CI_COMMIT_REF_SLUG}
+    paths: [.cache/pip]
+  before_script:
+    - pip install --quiet -r requirements.txt
+  script:
+    - python -c "from core.controller import BotController; from core.bot_instance import BotInstance; print('Python OK')"
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+# -----------------------------------------------------------------------------
+# Web: install deps and build TypeScript/Vite bundle
+# -----------------------------------------------------------------------------
+web:build:
+  stage: build
+  image: node:20-alpine
+  cache:
+    key: npm-${CI_COMMIT_REF_SLUG}
+    paths: [.cache/npm, web/node_modules]
+  before_script:
+    - cd web
+    - npm ci
+  script:
+    - npm run build
+  artifacts:
+    paths: [web/dist]
+    expire_in: 1 day
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == "master"

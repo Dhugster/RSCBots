@@ -12,9 +12,11 @@ class RecoverySystem:
         self.controller = controller
 
     def handle_crash(self, bot: "BotInstance") -> None:
-        """Log crash, optionally restart after cooldown."""
+        """Log crash. No automatic restart; only manual restart (e.g. recover_all) if auto_restart is True."""
         bot.record_crash()
         bot.add_log("Crash recorded", "RECOVERY")
+        if not bot.auto_restart:
+            return
         if not bot.should_restart():
             bot.add_log("Restart skipped (cooldown or max attempts)", "RECOVERY")
             return
@@ -25,10 +27,11 @@ class RecoverySystem:
             bot.add_log("Restarted after crash", "RECOVERY")
 
     def handle_stuck(self, bot: "BotInstance") -> None:
-        """Restart bot that appears stuck (e.g. no XP for long time). Respects cooldown and max attempts."""
-        bot.add_log("Stuck detected, scheduling restart", "RECOVERY")
+        """Log stuck. No automatic restart; only manual restart if auto_restart is True."""
+        bot.add_log("Stuck detected", "RECOVERY")
+        if not bot.auto_restart:
+            return
         if not bot.should_restart():
-            bot.add_log("Stuck restart skipped (cooldown or max attempts)", "RECOVERY")
             return
         cooldown = self.controller.settings.get("restart_cooldown", 60)
         time.sleep(cooldown)
@@ -37,7 +40,7 @@ class RecoverySystem:
             bot.add_log("Restarted after stuck", "RECOVERY")
 
     def recover_all(self) -> int:
-        """Attempt to restart all crashed/error bots that should_restart()."""
+        """Manually restart crashed/error bots that have auto_restart True and should_restart()."""
         # #region agent log
         try:
             import json
@@ -60,7 +63,7 @@ class RecoverySystem:
             except Exception:
                 pass
             # #endregion
-            if bot.should_restart():
+            if bot.auto_restart and bot.should_restart():
                 if self.controller.restart_bot(bot_id):
                     recovered += 1
         return recovered
